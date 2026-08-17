@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../DVLD.Data/DVLD.Data.csproj" Id="ca15683e-1650-4905-9389-24dcd95caf6d" />
+  <Project Path="../DVLD.Logic/DVLD.Logic.csproj" Id="13a9d93b-39f9-42e6-ad4a-908121e1b027" />
+  <Project Path="DVLD.UI.csproj" Id="a20c8a39-5a40-4b53-a0d6-38fe48eba858" />
+</Solution>
