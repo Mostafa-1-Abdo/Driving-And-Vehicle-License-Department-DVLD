@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A20C8A39-5A40-4B53-A0D6-38FE48EBA858}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DVLD.UI</RootNamespace>
+    <AssemblyName>DVLD.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManagePeople.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManagePeople.Designer.cs">
+      <DependentUpon>frmManagePeople.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ctrlManageData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctrlManageData.Designer.cs">
+      <DependentUpon>ctrlManageData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManagePeople.resx">
+      <DependentUpon>frmManagePeople.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctrlManageData.resx">
+      <DependentUpon>ctrlManageData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Applications.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Drivers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\People.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DVLD.Logic\DVLD.Logic.csproj">
+      <Project>{13a9d93b-39f9-42e6-ad4a-908121e1b027}</Project>
+      <Name>DVLD.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AccountSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SignOut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChangePassword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CurrentUserInfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DetainLicenses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DriverLicenseServices.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ManageApplications.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ManageApplicationTypes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ManageTestTypes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewDrivingLicense.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RenewDrivingLicense.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReplacementForLostOrDamagedLicense.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReplacementForLostOrDamagedLicense1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReleaseDetainedDrivingLicense.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RetakeTest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MainBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\InternationalLicense.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LocalLicense.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LocalDrivingLicenseApplications.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ManageDetainedLicenses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReleaseDetainedLicense.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
