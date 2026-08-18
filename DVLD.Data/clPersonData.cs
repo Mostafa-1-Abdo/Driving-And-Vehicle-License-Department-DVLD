@@ -12,7 +12,7 @@ using static DVLD.Data.clDataAccessSettings;
 
 namespace DVLD.Data
 {
-    public class clPersonData
+    public static class clPersonData
     {
         public static clPersonDTO Find(int ID)
         {
@@ -23,7 +23,7 @@ namespace DVLD.Data
                 using (SqlConnection Connection = new SqlConnection(ConnectionString))
                 {
                     string SQL = @"select * from People
-                               where ID = @ID";
+                                   where ID = @ID";
 
                     using (SqlCommand Command = new SqlCommand(SQL, Connection))
                     {
@@ -185,16 +185,22 @@ namespace DVLD.Data
             {
                 using (SqlConnection Connection = new SqlConnection(ConnectionString))
                 {
-                    string SQL = "select * from People";
+                    string SQL = @"select p.ID,Gender = 
+                                    case
+                                   	    when p.Gender = 0 then 'Male'
+                                   	    when p.Gender = 1 then 'Female'
+                                    end,
+                                   p.FirstName,p.SecondName,p.ThirdName,p.LastName,p.DateOfBirth,Country = c.Name,p.NationalNumber,p.Address,p.Phone,p.Email,p.ImagePath from People p
+                                   join Countries c on p.CountryID = c.ID";
 
-                    using(SqlCommand Command = new SqlCommand(SQL,Connection))
+
+                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
                     {
                         Connection.Open();
 
-                        using(SqlDataReader Reader = Command.ExecuteReader())
+                        using (SqlDataReader Reader = Command.ExecuteReader())
                         {
-                            if (Reader.HasRows)
-                                PeopleTable.Load(Reader);
+                            PeopleTable.Load(Reader);
                         }
                     }
                 }
@@ -207,5 +213,49 @@ namespace DVLD.Data
 
             return PeopleTable;
         }
+        //public static DataTable FindAccording(string ColumnName, string Value, bool IsExactMatch)
+        //{
+        //    DataTable PeopleTable = new DataTable();
+        //    string Operator = IsExactMatch ? "=" : "like";
+
+        //    try
+        //    {
+        //        using (SqlConnection Connection = new SqlConnection(ConnectionString))
+        //        {
+        //            string SQL = $@"select p.ID,Gender = 
+        //                            case
+        //                           	    when p.Gender = 0 then 'Male'
+        //                           	    when p.Gender = 1 then 'Female'
+        //                            end,
+        //                           p.FirstName,p.SecondName,p.ThirdName,p.LastName,p.DateOfBirth,Country = c.Name,p.NationalNumber,p.Address,p.Phone,p.Email,p.ImagePath from People p
+        //                           join Countries c on p.CountryID = c.ID
+        //                           where {ColumnName} {Operator} @Value";
+
+        //            using (SqlCommand Command = new SqlCommand(SQL, Connection))
+        //            {
+        //                if (ColumnName == "p.ID")
+        //                    Command.Parameters.AddWithValue("@Value", int.TryParse(Value, out int ID) ? ID : -1);
+        //                else
+        //                    Command.Parameters.AddWithValue("@Value", IsExactMatch ? Value : $"%{Value}%");
+
+
+        //                Connection.Open();
+
+        //                using (SqlDataReader Reader = Command.ExecuteReader())
+        //                {
+        //                    PeopleTable.Load(Reader);
+        //                }
+        //            }
+        //        }
+
+        //    }
+        //    catch
+        //    {
+
+        //    }
+
+        //    return PeopleTable;
+
+        //}
     }
 }

@@ -122,6 +122,38 @@ namespace DVLD.Data
             return clPersonData.Delete(ID);
         }
 
+        //public static DataTable FindAccording(string Filter, string Search)
+        //{
+        //    string CleanFilter = Filter.Replace(" ", "");
+        //    string ColumnName;
+        //    bool IsExactMatch = false;
+
+        //    switch (CleanFilter)
+        //    {
+        //        case "ID":
+        //            if (!int.TryParse(Search, out _))
+        //                return new DataTable();
+        //            ColumnName = "p.ID";
+        //            IsExactMatch = true;
+        //            break;
+
+        //        case "NationlNumber":
+        //            ColumnName = "p.NationlNumber";
+        //            IsExactMatch = true;
+        //            break;
+
+        //        case "Country":
+        //            ColumnName = "c.Name";
+        //            break;
+
+        //        default:
+        //            ColumnName = $"p.{CleanFilter}";
+        //            break;
+
+        //    }
+
+        //    return clPersonData.FindAccording(ColumnName, Search.Trim(), IsExactMatch);
+        //}
         public static DataTable GetAllPeople()
         {
             return clPersonData.GetAllPeople();

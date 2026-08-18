@@ -8,19 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DVLD.UI
+namespace DVLD.UI.People
 {
-    public partial class frmMain : Form
+    public partial class frmShowDetails : Form
     {
-        public frmMain()
+        public frmShowDetails()
         {
             InitializeComponent();
-        }
-
-        private void msi_People_Click(object sender, EventArgs e)
-        {
-            frmManagePeople frm = new frmManagePeople();
-            frm.Show();
         }
     }
 }
