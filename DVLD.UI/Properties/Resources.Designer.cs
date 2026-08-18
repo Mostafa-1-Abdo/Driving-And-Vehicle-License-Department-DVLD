@@ -73,6 +73,16 @@ namespace DVLD.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddNewPerson {
+            get {
+                object obj = ResourceManager.GetObject("AddNewPerson", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Applications {
             get {
                 object obj = ResourceManager.GetObject("Applications", resourceCulture);
@@ -113,6 +123,16 @@ namespace DVLD.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Delete {
+            get {
+                object obj = ResourceManager.GetObject("Delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DetainLicenses {
             get {
                 object obj = ResourceManager.GetObject("DetainLicenses", resourceCulture);
@@ -136,6 +156,16 @@ namespace DVLD.UI.Properties {
         internal static System.Drawing.Bitmap Drivers {
             get {
                 object obj = ResourceManager.GetObject("Drivers", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Edit {
+            get {
+                object obj = ResourceManager.GetObject("Edit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,6 +243,16 @@ namespace DVLD.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ManagePeople {
+            get {
+                object obj = ResourceManager.GetObject("ManagePeople", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ManageTestTypes {
             get {
                 object obj = ResourceManager.GetObject("ManageTestTypes", resourceCulture);
@@ -236,6 +276,16 @@ namespace DVLD.UI.Properties {
         internal static System.Drawing.Bitmap People {
             get {
                 object obj = ResourceManager.GetObject("People", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PhoneCall {
+            get {
+                object obj = ResourceManager.GetObject("PhoneCall", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -296,6 +346,16 @@ namespace DVLD.UI.Properties {
         internal static System.Drawing.Bitmap RetakeTest {
             get {
                 object obj = ResourceManager.GetObject("RetakeTest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SendEmail {
+            get {
+                object obj = ResourceManager.GetObject("SendEmail", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
