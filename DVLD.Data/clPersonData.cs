@@ -63,6 +63,35 @@ namespace DVLD.Data
 
             return PersonDTO;
         }
+        public static bool IsExist(string NationalNumber)
+        {
+           bool IsFound = false;
+
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                {
+                    string SQL = @"select 1 from People
+                                   where NationalNumber = @NationalNumber";
+
+                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    {
+                        Command.Parameters.AddWithValue("@NationalNumber", NationalNumber);
+
+                        Connection.Open();
+
+                        if (Command.ExecuteScalar() != null)
+                            IsFound = true;
+                    }
+                }
+            }
+            catch
+            {
+               IsFound  = false;
+            }
+
+            return IsFound;
+        }
 
         public static int AddNew(clPersonDTO PersonDTO)
         {
@@ -95,7 +124,6 @@ namespace DVLD.Data
                         Connection.Open();
 
                         object Result = Command.ExecuteScalar();
-
                         if (Result != null && int.TryParse(Result.ToString(), out int InsertedID))
                         {
                             ID = InsertedID;

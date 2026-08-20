@@ -36,20 +36,14 @@ namespace DVLD.UI
             set => btn_Add.Image = value;
         }
 
-        public object dgv_RecordsDataSource
-        {
-            get => dgv_Records.DataSource;
-            set => dgv_Records.DataSource = value;
-        }
-        public DataGridViewRow CurrentRow
+        public DataGridViewRow dgv_CurrentRow
         {
             get => dgv_Records.CurrentRow;
         }
 
-        public ContextMenuStrip cms_dgv
+        public ToolStripItemCollection cms_dgvItems
         {
-            get => ContectMenuStrip;
-            set => ContectMenuStrip = value;
+            get => ContectMenuStrip.Items;
         }
 
         public ctrlManageData()
@@ -62,10 +56,14 @@ namespace DVLD.UI
             cb_Filter.SelectedIndex = 0;
         }
        
-        public void RefreshData(DataView View)
+        public void RefreshRecords(DataView View)
         {
             dgv_Records.DataSource = View;
-            lb_NumberOfRecords.Text = dgv_Records.Rows.Count. ToString();
+            RefreshNumberOfRecords();
+        }
+        public void RefreshNumberOfRecords()
+        {
+            lb_NumberOfRecords.Text = dgv_Records.Rows.Count.ToString();
         }
 
         public event Action CloseClicked;
@@ -90,12 +88,6 @@ namespace DVLD.UI
         private void tb_Search_TextChanged(object sender, EventArgs e)
         {
             SearchTextChanged?.Invoke(cb_Filter.Text,tb_Search.Text);
-        }
-
-        public event Action MenuStripItemCliked;
-        private void ContectMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            MenuStripItemCliked?.Invoke();
         }
     }
 }

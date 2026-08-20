@@ -10,7 +10,7 @@ namespace DVLD.Data
 {
     public class clPerson
     {
-        public enum enMode : byte
+        private enum enMode : byte
         {
             AddNew, Update
         }
@@ -19,7 +19,7 @@ namespace DVLD.Data
             Male, Female
         }
 
-        public enMode _Mode;
+        private enMode _Mode;
 
         public int ID { get; set; }
         public enGender Gender { get; set; }
@@ -37,10 +37,7 @@ namespace DVLD.Data
 
         public clPersonDTO PersonDTO
         {
-            get
-            {
-                return new clPersonDTO(ID, (byte)Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth, CountryID, NationalNumber, Address, Phone, Email, ImagePath);
-            }
+            get => new clPersonDTO(ID, (byte)Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth, CountryID, NationalNumber, Address, Phone, Email, ImagePath);
         }
 
         private clPerson(clPersonDTO PersonDTO)
@@ -80,11 +77,16 @@ namespace DVLD.Data
             ImagePath = string.Empty;
         }
 
-        static public clPerson Find(int ID)
+         public static clPerson Find(int ID)
         {
             clPersonDTO PersonDTO = clPersonData.Find(ID);
 
             return PersonDTO != null ? new clPerson(PersonDTO) : null;
+        }
+
+       public static bool IsExist(string NationalNumber)
+        {
+            return clPersonData.IsExist(NationalNumber);
         }
 
         private bool _AddNew()
