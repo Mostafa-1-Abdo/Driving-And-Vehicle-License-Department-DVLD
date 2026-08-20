@@ -14,6 +14,7 @@ using static System.Net.Mime.MediaTypeNames;
 using DVLD.UI.Util;
 using System.Runtime.Versioning;
 using DVLD.UI.Properties;
+using System.Text.RegularExpressions;
 
 namespace DVLD.UI.People
 {
@@ -140,20 +141,25 @@ namespace DVLD.UI.People
             if (_Mode == enMode.Edit)
                 return;
 
-            Control control = (Control)sender;
+            if (string.IsNullOrWhiteSpace(tb_NationalNumber.Text))
+                errorProvider1.SetError(tb_NationalNumber, "National number is required.");
 
-            if (string.IsNullOrWhiteSpace(control.Text))
-                errorProvider1.SetError(control, "National number is required.");
-
-            else if (clPerson.IsExist(control.Text))
-                errorProvider1.SetError(control, "National Number is already used by another person.");
+            else if (clPerson.IsExist(tb_NationalNumber.Text))
+                errorProvider1.SetError(tb_NationalNumber, "National Number is already used by another person.");
 
             else
-                errorProvider1.SetError(control, null);
+                errorProvider1.SetError(tb_NationalNumber, null);
         }
         private void tb_Email_Validating(object sender, CancelEventArgs e)
         {
-            //
+            if (string.IsNullOrWhiteSpace(tb_Email.Text))
+                return;
+
+            if (!clUtil.IsValidEmail(tb_Email.Text))
+                errorProvider1.SetError(tb_Email, $"Invalid Email Address format! (e.g., user@example.com)");
+
+            else
+                errorProvider1.SetError(tb_Email, null);
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
