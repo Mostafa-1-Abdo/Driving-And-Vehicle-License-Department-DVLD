@@ -48,12 +48,16 @@
             // 
             this.dgv_Records.AllowUserToAddRows = false;
             this.dgv_Records.AllowUserToDeleteRows = false;
+            this.dgv_Records.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Records.BackgroundColor = System.Drawing.Color.White;
             this.dgv_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Records.ContextMenuStrip = this.ContectMenuStrip;
             this.dgv_Records.Location = new System.Drawing.Point(13, 280);
             this.dgv_Records.MultiSelect = false;
             this.dgv_Records.Name = "dgv_Records";
+            this.dgv_Records.ReadOnly = true;
+            this.dgv_Records.RowHeadersVisible = false;
+            this.dgv_Records.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Records.Size = new System.Drawing.Size(1165, 278);
             this.dgv_Records.TabIndex = 0;
             // 

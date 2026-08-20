@@ -88,8 +88,10 @@ namespace DVLD.UI
         //Context Menu Strip Items Events
         private void ShowDetails_Click(object sender, EventArgs e)
         {
-            frmShowDetails Form = new frmShowDetails();
+            frmShowDetails Form = new frmShowDetails((int)ctrlManageData.dgv_CurrentRow.Cells["ID"].Value);
             Form.ShowDialog();
+
+            ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }
         private void EditPerson_Click(object sender, EventArgs e)
         {

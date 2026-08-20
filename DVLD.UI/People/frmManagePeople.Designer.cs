@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.ctrlManageData = new DVLD.UI.ctrlManageData();
-            this.components = new System.ComponentModel.Container();
-            this.ctrlManageData = new DVLD.UI.ctrlManageData();
             this.SuspendLayout();
             // 
             // ctrlManageData
@@ -53,6 +51,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1188, 604);
             this.Controls.Add(this.ctrlManageData);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmManagePeople";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

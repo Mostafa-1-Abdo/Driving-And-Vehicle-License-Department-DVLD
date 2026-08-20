@@ -1,4 +1,5 @@
-﻿using DVLD.Data.DTOs;
+﻿using Contacts.Logic.Countries;
+using DVLD.Data.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -28,16 +29,20 @@ namespace DVLD.Data
         public string ThirdName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public int CountryID { get; set; }
+        public clCountry Country { get; set; }
         public string NationalNumber { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string ImagePath { get; set; }
 
+        public string FullName
+        {
+            get => !string.IsNullOrEmpty(ThirdName)? $"{FirstName} {SecondName} {ThirdName} {LastName}" : $"{FirstName} {SecondName} {LastName}";
+        }
         public clPersonDTO PersonDTO
         {
-            get => new clPersonDTO(ID, (byte)Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth, CountryID, NationalNumber, Address, Phone, Email, ImagePath);
+            get => new clPersonDTO(ID, (byte)Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth, Country.ID, Country.Name, NationalNumber, Address, Phone, Email, ImagePath);
         }
 
         private clPerson(clPersonDTO PersonDTO)
@@ -51,7 +56,11 @@ namespace DVLD.Data
             ThirdName = PersonDTO.ThirdName;
             LastName = PersonDTO.LastName;
             DateOfBirth = PersonDTO.DateOfBirth;
-            CountryID = PersonDTO.CountryID;
+            Country = new clCountry
+            {
+                ID = PersonDTO.CountryDTO.ID,
+                Name = PersonDTO.CountryDTO.Name
+            };
             NationalNumber = PersonDTO.NationalNumber;
             Address = PersonDTO.Address;
             Phone = PersonDTO.Phone;
@@ -69,7 +78,11 @@ namespace DVLD.Data
             ThirdName = string.Empty;
             LastName = string.Empty;
             DateOfBirth = DateTime.MinValue;
-            CountryID = -1;
+            Country = new clCountry
+            {
+                ID = -1,
+                Name = string.Empty
+            };
             NationalNumber = string.Empty;
             Address = string.Empty;
             Phone = string.Empty;
@@ -77,14 +90,14 @@ namespace DVLD.Data
             ImagePath = string.Empty;
         }
 
-         public static clPerson Find(int ID)
+        public static clPerson Find(int ID)
         {
             clPersonDTO PersonDTO = clPersonData.Find(ID);
 
             return PersonDTO != null ? new clPerson(PersonDTO) : null;
         }
 
-       public static bool IsExist(string NationalNumber)
+        public static bool IsExist(string NationalNumber)
         {
             return clPersonData.IsExist(NationalNumber);
         }
@@ -124,41 +137,9 @@ namespace DVLD.Data
             return clPersonData.Delete(ID);
         }
 
-        //public static DataTable FindAccording(string Filter, string Search)
-        //{
-        //    string CleanFilter = Filter.Replace(" ", "");
-        //    string ColumnName;
-        //    bool IsExactMatch = false;
-
-        //    switch (CleanFilter)
-        //    {
-        //        case "ID":
-        //            if (!int.TryParse(Search, out _))
-        //                return new DataTable();
-        //            ColumnName = "p.ID";
-        //            IsExactMatch = true;
-        //            break;
-
-        //        case "NationlNumber":
-        //            ColumnName = "p.NationlNumber";
-        //            IsExactMatch = true;
-        //            break;
-
-        //        case "Country":
-        //            ColumnName = "c.Name";
-        //            break;
-
-        //        default:
-        //            ColumnName = $"p.{CleanFilter}";
-        //            break;
-
-        //    }
-
-        //    return clPersonData.FindAccording(ColumnName, Search.Trim(), IsExactMatch);
-        //}
         public static DataTable GetAllPeople()
         {
-            return clPersonData.GetAllPeople();
+            return clPersonData.GetManagePeopleList();
         }
     }
 }

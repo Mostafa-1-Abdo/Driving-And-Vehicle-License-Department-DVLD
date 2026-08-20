@@ -11,14 +11,14 @@ namespace DVLD.Data.DTOs
         public string ThirdName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public int CountryID { get; set; }
+        public clCountryDTO CountryDTO { get; set; }
         public string NationalNumber { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string ImagePath { get; set; }
 
-        public clPersonDTO(int id, byte gender, string firstName, string secondName, string thirdName, string lastName, DateTime dateOfBirth, int countryID,string nationalNumber, string address, string phone, string email, string imagePath)
+        public clPersonDTO(int id, byte gender, string firstName, string secondName, string thirdName, string lastName, DateTime dateOfBirth,int countryID,string countryName, string nationalNumber, string address, string phone, string email, string imagePath)
         {
             ID = id;
             Gender = gender;
@@ -27,7 +27,11 @@ namespace DVLD.Data.DTOs
             ThirdName = thirdName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;
-            CountryID = countryID;
+            CountryDTO = new clCountryDTO
+            {
+                ID = countryID,
+                Name = countryName
+            };
             NationalNumber = nationalNumber;
             Address = address;
             Phone = phone;
@@ -36,14 +40,18 @@ namespace DVLD.Data.DTOs
         }
         public clPersonDTO()
         {
-            ID = 0;
+            ID = -1;
             Gender = 0;
             FirstName = string.Empty;
             SecondName = string.Empty;
             ThirdName = string.Empty;
             LastName = string.Empty;
             DateOfBirth = DateTime.MinValue;
-            CountryID = 0;
+            CountryDTO = new clCountryDTO
+            {
+                ID = 0,
+                Name = string.Empty
+            };
             NationalNumber = string.Empty;
             Address = string.Empty;
             Phone = string.Empty;
