@@ -62,7 +62,6 @@
             this.ContectMenuStrip.ImageScalingSize = new System.Drawing.Size(25, 25);
             this.ContectMenuStrip.Name = "ContectMenuStrip";
             this.ContectMenuStrip.Size = new System.Drawing.Size(61, 4);
-            this.ContectMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ContectMenuStrip_ItemClicked);
             // 
             // label1
             // 
@@ -129,9 +128,9 @@
             // btn_Add
             // 
             this.btn_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Add.Location = new System.Drawing.Point(1105, 227);
+            this.btn_Add.Location = new System.Drawing.Point(1109, 231);
             this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(73, 47);
+            this.btn_Add.Size = new System.Drawing.Size(69, 43);
             this.btn_Add.TabIndex = 9;
             this.btn_Add.UseVisualStyleBackColor = true;
             this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
@@ -139,10 +138,11 @@
             // btn_Close
             // 
             this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Close.Image = global::DVLD.UI.Properties.Resources.Close;
             this.btn_Close.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Close.Location = new System.Drawing.Point(1043, 563);
+            this.btn_Close.Location = new System.Drawing.Point(1057, 563);
             this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(135, 36);
+            this.btn_Close.Size = new System.Drawing.Size(121, 36);
             this.btn_Close.TabIndex = 6;
             this.btn_Close.Text = "Close";
             this.btn_Close.UseVisualStyleBackColor = true;

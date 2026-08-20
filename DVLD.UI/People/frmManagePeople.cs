@@ -11,7 +11,7 @@ namespace DVLD.UI
 {
     public partial class frmManagePeople : Form
     {
-        private DataTable PeopleTable = new DataTable();
+        private DataTable PeopleTable = null;
 
         public frmManagePeople()
         {
@@ -20,14 +20,13 @@ namespace DVLD.UI
 
         private void _Initialize_cms_dgv()
         {
-            ctrlManageData.cms_dgv.Items.Add("Show Details", Resources.CurrentUserInfo,ShowDetails_Click);
-            ctrlManageData.cms_dgv.Items.Add("-");
-            ctrlManageData.cms_dgv.Items.Add("Add New Person", Resources.AddNewPerson, AddEditPerson_Click);
-            ctrlManageData.cms_dgv.Items.Add("Edit", Resources.Edit, AddEditPerson_Click);
-            ctrlManageData.cms_dgv.Items.Add("Delete", Resources.Delete, DeletePerson_Click);
-            ctrlManageData.cms_dgv.Items.Add("-");
-            ctrlManageData.cms_dgv.Items.Add("Send Email", Resources.SendEmail, SendEmail_Click);
-            ctrlManageData.cms_dgv.Items.Add("Phone Call", Resources.PhoneCall, PhoneCall_Click);
+            ctrlManageData.cms_dgvItems.Add("Show Details", Resources.CurrentUserInfo, ShowDetails_Click);
+            ctrlManageData.cms_dgvItems.Add("-");
+            ctrlManageData.cms_dgvItems.Add("Edit", Resources.Edit, EditPerson_Click);
+            ctrlManageData.cms_dgvItems.Add("Delete", Resources.Delete, DeletePerson_Click);
+            ctrlManageData.cms_dgvItems.Add("-");
+            ctrlManageData.cms_dgvItems.Add("Send Email", Resources.SendEmail, SendEmail_Click);
+            ctrlManageData.cms_dgvItems.Add("Phone Call", Resources.PhoneCall, PhoneCall_Click);
         }
         private void _Initialize_cb_Filter()
         {
@@ -44,7 +43,7 @@ namespace DVLD.UI
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
             PeopleTable = clPerson.GetAllPeople();
-            ctrlManageData.RefreshData(PeopleTable.DefaultView);
+            ctrlManageData.RefreshRecords(PeopleTable.DefaultView);
             _Initialize_cms_dgv();
             _Initialize_cb_Filter();
         }
@@ -59,7 +58,7 @@ namespace DVLD.UI
             frmAddEditPerson Form = new frmAddEditPerson();
             Form.ShowDialog();
 
-            ctrlManageData.RefreshData(clPerson.GetAllPeople().DefaultView);
+            ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }
 
         private void ctrlManageData_SearchTextChanged(string Filter, string Search)
@@ -67,37 +66,43 @@ namespace DVLD.UI
             if (Filter == "None" || string.IsNullOrEmpty(Search))
             {
                 PeopleTable.DefaultView.RowFilter = "";
-                return;
-            }
-
-            string ColumnName = Filter.Replace(" ", "");
-
-            if (ColumnName == "ID")
-            {
-                if (int.TryParse(Search, out int ID))
-                    PeopleTable.DefaultView.RowFilter = $"[ID] = {ID}";
-                else
-                    PeopleTable.DefaultView.RowFilter = $"[ID] = {-1}";
             }
             else
-                PeopleTable.DefaultView.RowFilter = $"[{ColumnName}] like '%{Search}%'";
+            {
+                string ColumnName = Filter.Replace(" ", "");
+
+                if (ColumnName == "ID")
+                {
+                    if (int.TryParse(Search, out int ID))
+                        PeopleTable.DefaultView.RowFilter = $"[ID] = {ID}";
+                    else
+                        PeopleTable.DefaultView.RowFilter = $"[ID] = {-1}";
+                }
+                else
+                    PeopleTable.DefaultView.RowFilter = $"[{ColumnName}] like '%{Search}%'";
+            }
+
+            ctrlManageData.RefreshNumberOfRecords();
         }
 
+        //Context Menu Strip Items Events
         private void ShowDetails_Click(object sender, EventArgs e)
         {
             frmShowDetails Form = new frmShowDetails();
             Form.ShowDialog();
         }
-        private void AddEditPerson_Click(object sender, EventArgs e)
+        private void EditPerson_Click(object sender, EventArgs e)
         {
-            ctrlManageData_OnAddClick();
-            ctrlManageData.RefreshData(clPerson.GetAllPeople().DefaultView);
+            frmAddEditPerson Form = new frmAddEditPerson((int)ctrlManageData.dgv_CurrentRow.Cells["ID"].Value);
+            Form.ShowDialog();
+
+            ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }
         private void DeletePerson_Click(object sender, EventArgs e)
         {
-            clPerson.Delete((int)ctrlManageData.CurrentRow.Cells["ID"].Value);
+            clPerson.Delete((int)ctrlManageData.dgv_CurrentRow.Cells["ID"].Value);
 
-            ctrlManageData.RefreshData(clPerson.GetAllPeople().DefaultView);
+            ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }
         private void SendEmail_Click(object sender, EventArgs e)
         {
