@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD.UI.People
 {
     public partial class frmShowDetails : Form
     {
-        public frmShowDetails()
+        private int _ID;
+
+        public frmShowDetails(int ID)
         {
             InitializeComponent();
+
+            _ID = ID;
+        } 
+       
+        private void frmShowDetails_Load(object sender, EventArgs e)
+        {
+            ctrlPersonCard1.LoadPersonInfo(_ID);
         }
     }
 }

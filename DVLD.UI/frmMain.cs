@@ -19,8 +19,8 @@ namespace DVLD.UI
 
         private void msi_People_Click(object sender, EventArgs e)
         {
-            frmManagePeople frm = new frmManagePeople();
-            frm.Show();
+            frmManagePeople Form = new frmManagePeople();
+            Form.ShowDialog() ;
         }
     }
 }

@@ -429,6 +429,7 @@
             this.tb_Email.Name = "tb_Email";
             this.tb_Email.Size = new System.Drawing.Size(167, 20);
             this.tb_Email.TabIndex = 10;
+            this.tb_Email.Validating += new System.ComponentModel.CancelEventHandler(this.tb_Email_Validating);
             // 
             // label6
             // 
@@ -617,6 +618,7 @@
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lb_Title);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAddEditPerson";
             this.ShowIcon = false;
             this.Text = "Add / Update Peron";

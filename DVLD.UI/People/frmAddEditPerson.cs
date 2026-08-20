@@ -50,7 +50,7 @@ namespace DVLD.UI.People
 
             cb_Country.SelectedIndex = -1;
         }
-        private void _FillFormWithData()
+        private void _LoadPersonInfo()
         {
             lb_ID.Text = _Person.ID.ToString();
             tb_FirstName.Text = _Person.FirstName;
@@ -65,7 +65,7 @@ namespace DVLD.UI.People
                 rb_Female.Checked = true;
             tb_Phone.Text = _Person.Phone;
             tb_Email.Text = _Person.Email;
-            cb_Country.SelectedValue = _Person.CountryID;
+            cb_Country.SelectedValue = _Person.Country.ID;
             tb_Address.Text = _Person.Address;
             pb_PersonImage.ImageLocation = _Person.ImagePath;
         }
@@ -85,12 +85,12 @@ namespace DVLD.UI.People
 
                 if (_Person == null)
                 {
-                    MessageBox.Show($"No Person with ID = [{_ID}] was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show($"No Person with ID = {_ID} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     Close();
                     return;
                 }
 
-                _FillFormWithData();
+                _LoadPersonInfo();
 
                 llb_RemoveImage.Visible = !string.IsNullOrEmpty(_Person.ImagePath);
                 tb_NationalNumber.Enabled = false;
@@ -151,6 +151,10 @@ namespace DVLD.UI.People
             else
                 errorProvider1.SetError(control, null);
         }
+        private void tb_Email_Validating(object sender, CancelEventArgs e)
+        {
+            //
+        }
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
@@ -166,7 +170,7 @@ namespace DVLD.UI.People
             _Person.ThirdName = tb_ThirdName.Text.Trim();
             _Person.LastName = tb_LastName.Text.Trim();
             _Person.DateOfBirth = dtp_DateOfBirth.Value;
-            _Person.CountryID = (int)cb_Country.SelectedValue;
+            _Person.Country.ID = (int)cb_Country.SelectedValue;
             _Person.NationalNumber = tb_NationalNumber.Text.Trim();
             _Person.Phone = tb_Phone.Text.Trim();
             _Person.Email = tb_Email.Text.Trim();
@@ -218,6 +222,6 @@ namespace DVLD.UI.People
         private void rb_Gender_CheckedChanged(object sender, EventArgs e)
         {
             _ChangePersonImageAccordingToGender();
-        }
+        }    
     }
 }

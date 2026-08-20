@@ -39,15 +39,6 @@ namespace Contacts.Logic.Countries
             return CountryDTO != null ? new clCountry(CountryDTO) : null;
         }
 
-        static public bool IsExist(int ID)
-        {
-            return clCountryData.IsCountryExist(ID);
-        }
-        static public bool IsExist(string Name)
-        {
-            return clCountryData.IsCountryExist(Name);
-        }
-
         static public DataTable GetAllCountries()
         {
             return clCountryData.GetAllCountries();
