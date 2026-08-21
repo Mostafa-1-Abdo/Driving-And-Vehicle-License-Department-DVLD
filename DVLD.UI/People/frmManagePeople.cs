@@ -1,11 +1,9 @@
-﻿using DVLD.Data;
-using System;
-using System.Runtime.Versioning;
+﻿using System;
 using System.Windows.Forms;
 using DVLD.UI.Properties;
 using DVLD.UI.People;
 using System.Data;
-using System.Diagnostics;
+using DVLD.Logic;
 
 namespace DVLD.UI
 {
@@ -20,34 +18,36 @@ namespace DVLD.UI
 
         private void _Initialize_cms_dgv()
         {
-            ctrlManageData.cms_dgvItems.Add("Show Details", Resources.CurrentUserInfo, ShowDetails_Click);
-            ctrlManageData.cms_dgvItems.Add("-");
-            ctrlManageData.cms_dgvItems.Add("Edit", Resources.Edit, EditPerson_Click);
-            ctrlManageData.cms_dgvItems.Add("Delete", Resources.Delete, DeletePerson_Click);
-            ctrlManageData.cms_dgvItems.Add("-");
-            ctrlManageData.cms_dgvItems.Add("Send Email", Resources.SendEmail, SendEmail_Click);
-            ctrlManageData.cms_dgvItems.Add("Phone Call", Resources.PhoneCall, PhoneCall_Click);
+            ctrlManageData1.cms_dgvItems.Add("Show Details", Resources.CurrentUserInfo, ShowDetails_Click);
+            ctrlManageData1.cms_dgvItems.Add("-");
+            ctrlManageData1.cms_dgvItems.Add("Edit", Resources.Edit, EditPerson_Click);
+            ctrlManageData1.cms_dgvItems.Add("Delete", Resources.Delete, DeletePerson_Click);
+            ctrlManageData1.cms_dgvItems.Add("-");
+            ctrlManageData1.cms_dgvItems.Add("Send Email", Resources.SendEmail, SendEmail_Click);
+            ctrlManageData1.cms_dgvItems.Add("Phone Call", Resources.PhoneCall, PhoneCall_Click);
         }
         private void _Initialize_cb_Filter()
         {
-            ctrlManageData.cb_FilterItems.Add("ID");
-            ctrlManageData.cb_FilterItems.Add("Gender");
-            ctrlManageData.cb_FilterItems.Add("First Name");
-            ctrlManageData.cb_FilterItems.Add("Second Name");
-            ctrlManageData.cb_FilterItems.Add("Third Name");
-            ctrlManageData.cb_FilterItems.Add("Last Name");
-            ctrlManageData.cb_FilterItems.Add("Country");
-            ctrlManageData.cb_FilterItems.Add("National Number");
-            ctrlManageData.cb_FilterItems.Add("Phone");
-            ctrlManageData.cb_FilterItems.Add("Email");
+            ctrlManageData1.cb_FilterItems.Add("ID");
+            ctrlManageData1.cb_FilterItems.Add("Gender");
+            ctrlManageData1.cb_FilterItems.Add("First Name");
+            ctrlManageData1.cb_FilterItems.Add("Second Name");
+            ctrlManageData1.cb_FilterItems.Add("Third Name");
+            ctrlManageData1.cb_FilterItems.Add("Last Name");
+            ctrlManageData1.cb_FilterItems.Add("Country");
+            ctrlManageData1.cb_FilterItems.Add("National Number");
+            ctrlManageData1.cb_FilterItems.Add("Phone");
+            ctrlManageData1.cb_FilterItems.Add("Email");
         }
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
             PeopleTable = clPerson.GetAllPeople();
-            ctrlManageData.RefreshRecords(PeopleTable.DefaultView);
+            ctrlManageData1.RefreshRecords(PeopleTable.DefaultView);
 
             _Initialize_cms_dgv();
+
             _Initialize_cb_Filter();
+            ctrlManageData1.SetNumericColumns("ID", "Phone");
         }
 
         private void ctrlManageData_OnCloseClick()
@@ -60,11 +60,13 @@ namespace DVLD.UI
             frmAddEditPerson Form = new frmAddEditPerson();
             Form.ShowDialog();
 
-            ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
+            ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }
 
         private void ctrlManageData_SearchTextChanged(string Filter, string Search)
         {
+            Search = Search.Trim();
+
             if (Filter == "None" || string.IsNullOrEmpty(Search))
             {
                 PeopleTable.DefaultView.RowFilter = string.Empty;
@@ -89,27 +91,27 @@ namespace DVLD.UI
                     PeopleTable.DefaultView.RowFilter = $"[{ColumnName}] like '%{Search}%'";
             }
 
-            ctrlManageData.RefreshNumberOfRecords();
+            ctrlManageData1.RefreshNumberOfRecords();
         }
 
         //Context Menu Strip Items Events
         private void ShowDetails_Click(object sender, EventArgs e)
         {
-            frmShowDetails Form = new frmShowDetails((int)ctrlManageData.dgv_RecordsCurrentRow.Cells["ID"].Value);
+            frmShowDetails Form = new frmShowDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value);
             Form.ShowDialog();
 
-            ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
+            ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }
         private void EditPerson_Click(object sender, EventArgs e)
         {
-            frmAddEditPerson Form = new frmAddEditPerson((int)ctrlManageData.dgv_RecordsCurrentRow.Cells["ID"].Value);
+            frmAddEditPerson Form = new frmAddEditPerson((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value);
             Form.ShowDialog();
 
-            ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
+            ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }
         private void DeletePerson_Click(object sender, EventArgs e)
         {
-            int ID = (int)ctrlManageData.dgv_RecordsCurrentRow.Cells["ID"].Value;
+            int ID = (int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value;
 
             if (MessageBox.Show($"Are you sure you want to delete Person {ID}?","Confirm Delete",MessageBoxButtons.OKCancel,MessageBoxIcon.Question,MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
@@ -117,7 +119,7 @@ namespace DVLD.UI
                 {
                     MessageBox.Show("Person Deleted Successfully.","Successful",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
-                    ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
+                    ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
                 }
                 else
                     MessageBox.Show("Person was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -1,7 +1,4 @@
-﻿using DVLD.Data.DTOs;
-using DVLD.Data;
-using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 using static DVLD.Data.clDataAccessSettings;
 
@@ -16,7 +13,7 @@ namespace DVLD.Data
 
             try
             {
-                Connection = new SqlConnection(clDataAccessSettings.ConnectionString);
+                Connection = new SqlConnection(ConnectionString);
                 Connection.Open();
 
                 string SQL = "select * from Countries";

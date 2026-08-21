@@ -451,6 +451,7 @@
             this.tb_Phone.Size = new System.Drawing.Size(167, 20);
             this.tb_Phone.TabIndex = 9;
             this.tb_Phone.Tag = "Phone";
+            this.tb_Phone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Phone_KeyPress);
             this.tb_Phone.Validating += new System.ComponentModel.CancelEventHandler(this.Controls_Validating);
             // 
             // label4

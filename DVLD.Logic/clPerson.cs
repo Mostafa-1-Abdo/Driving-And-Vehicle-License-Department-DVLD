@@ -1,14 +1,9 @@
-﻿using Contacts.Logic.Countries;
+﻿using DVLD.Data;
 using DVLD.Data.DTOs;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DVLD.Data
+namespace DVLD.Logic
 {
     public class clPerson
     {

@@ -44,6 +44,7 @@
     <Compile Include="clCountryData.cs" />
     <Compile Include="clDataAccessSettings.cs" />
     <Compile Include="clPersonData.cs" />
+    <Compile Include="clUser.cs" />
     <Compile Include="DTOs\clCountryDTO.cs" />
     <Compile Include="DTOs\clPersonDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

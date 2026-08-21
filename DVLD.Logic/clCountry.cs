@@ -1,9 +1,8 @@
 ﻿using DVLD.Data;
 using DVLD.Data.DTOs;
-using System;
 using System.Data;
 
-namespace Contacts.Logic.Countries
+namespace DVLD.Logic
 {
     public class clCountry
     {
