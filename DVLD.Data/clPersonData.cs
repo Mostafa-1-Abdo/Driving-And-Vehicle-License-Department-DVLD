@@ -39,11 +39,7 @@ namespace DVLD.Data
                                     ThirdName = Reader["ThirdName"] != DBNull.Value ? (string)Reader["ThirdName"] : null,
                                     LastName = (string)Reader["LastName"],
                                     DateOfBirth = (DateTime)Reader["DateOfBirth"],
-                                    CountryDTO = new clCountryDTO
-                                    {
-                                        ID = (int)Reader["CountryID"],
-                                        Name = (string)Reader["Country"],
-                                    },
+                                    CountryDTO = new clCountryDTO((int)Reader["CountryID"], (string)Reader["Country"]),
                                     NationalNumber = (string)Reader["NationalNumber"],
                                     Address = (string)Reader["Address"],
                                     Phone = (string)Reader["Phone"],

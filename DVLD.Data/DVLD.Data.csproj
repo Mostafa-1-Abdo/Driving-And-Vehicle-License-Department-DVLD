@@ -44,9 +44,10 @@
     <Compile Include="clCountryData.cs" />
     <Compile Include="clDataAccessSettings.cs" />
     <Compile Include="clPersonData.cs" />
-    <Compile Include="clUser.cs" />
+    <Compile Include="clUserData.cs" />
     <Compile Include="DTOs\clCountryDTO.cs" />
     <Compile Include="DTOs\clPersonDTO.cs" />
+    <Compile Include="DTOs\clUserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

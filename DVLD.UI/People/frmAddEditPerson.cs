@@ -60,14 +60,14 @@ namespace DVLD.UI.People
         {
             if (_Mode == enMode.AddNew)
             {
-                Text = "Add New Person";
-                lb_Title.Text = "Add New Person";
+                Text = lb_Title.Text = "Add New Person";
+
                 _Person = new clPerson();
             }
             else
             {
-                Text = "Update Person";
-                lb_Title.Text = "Update Person";
+                Text = lb_Title.Text = "Update Person";
+
                 _Person = clPerson.Find(_ID);
 
                 if (_Person == null)
@@ -149,13 +149,10 @@ namespace DVLD.UI.People
         private void tb_Email_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tb_Email.Text))
-                return;
-
-            if (!clUtil.IsValidEmail(tb_Email.Text))
-                errorProvider1.SetError(tb_Email, $"Invalid Email Address format! (e.g., user@example.com)");
+                errorProvider1.SetError(tb_Email, null);
 
             else
-                errorProvider1.SetError(tb_Email, null);
+                errorProvider1.SetError(tb_Email, $"Invalid Email Address format! (e.g., user@example.com)");
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
@@ -199,8 +196,7 @@ namespace DVLD.UI.People
                     clFileHandler.HandleFileDelete(OldImagePath);
                 }
 
-                Text = "Edit Person";
-                lb_Title.Text = "Edit Person";
+                Text = lb_Title.Text = "Edit Person";
                 _Mode = enMode.Edit;
                 tb_NationalNumber.Enabled = false;
             }

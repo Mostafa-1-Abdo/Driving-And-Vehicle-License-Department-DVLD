@@ -9,7 +9,7 @@ namespace DVLD.UI
 {
     public partial class frmManagePeople : Form
     {
-        private DataTable PeopleTable = null;
+        private DataTable PeopleTable;
 
         public frmManagePeople()
         {
@@ -30,19 +30,23 @@ namespace DVLD.UI
         {
             ctrlManageData1.cb_FilterItems.Add("ID");
             ctrlManageData1.cb_FilterItems.Add("Gender");
-            ctrlManageData1.cb_FilterItems.Add("First Name");
-            ctrlManageData1.cb_FilterItems.Add("Second Name");
-            ctrlManageData1.cb_FilterItems.Add("Third Name");
-            ctrlManageData1.cb_FilterItems.Add("Last Name");
+            ctrlManageData1.cb_FilterItems.Add("Full Name");
             ctrlManageData1.cb_FilterItems.Add("Country");
             ctrlManageData1.cb_FilterItems.Add("National Number");
             ctrlManageData1.cb_FilterItems.Add("Phone");
             ctrlManageData1.cb_FilterItems.Add("Email");
         }
+        private void _Initialize_dgv_RecordsColumns()
+        {
+            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ctrlManageData1.dgv_RecordsColumns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ctrlManageData1.dgv_RecordsColumns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill; ;
+        }
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
             PeopleTable = clPerson.GetAllPeople();
             ctrlManageData1.RefreshRecords(PeopleTable.DefaultView);
+            _Initialize_dgv_RecordsColumns();
 
             _Initialize_cms_dgv();
 
@@ -68,15 +72,11 @@ namespace DVLD.UI
             Search = Search.Trim();
 
             if (Filter == "None" || string.IsNullOrEmpty(Search))
-            {
                 PeopleTable.DefaultView.RowFilter = string.Empty;
-            }
 
             else
             {
-                string ColumnName = Filter.Replace(" ", "");
-
-                if (ColumnName == "ID")
+                if (Filter == "ID")
                 {
                     if (int.TryParse(Search, out int ID))
                         PeopleTable.DefaultView.RowFilter = $"[ID] = {ID}";
@@ -84,11 +84,11 @@ namespace DVLD.UI
                         PeopleTable.DefaultView.RowFilter = $"[ID] = {-1}";
                 }
 
-                else if (ColumnName == "Gender")
+                else if (Filter == "Gender")
                     PeopleTable.DefaultView.RowFilter = $"Gender like '{Search}%'";
 
                 else
-                    PeopleTable.DefaultView.RowFilter = $"[{ColumnName}] like '%{Search}%'";
+                    PeopleTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
             }
 
             ctrlManageData1.RefreshNumberOfRecords();
@@ -97,7 +97,7 @@ namespace DVLD.UI
         //Context Menu Strip Items Events
         private void ShowDetails_Click(object sender, EventArgs e)
         {
-            frmShowDetails Form = new frmShowDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value);
+            frmShowPersonDetails Form = new frmShowPersonDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value);
             Form.ShowDialog();
 
             ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
@@ -125,6 +125,7 @@ namespace DVLD.UI
                     MessageBox.Show("Person was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void SendEmail_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
