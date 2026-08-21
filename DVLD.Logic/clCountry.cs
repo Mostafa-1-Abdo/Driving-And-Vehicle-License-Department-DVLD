@@ -26,19 +26,6 @@ namespace Contacts.Logic.Countries
             Name = string.Empty;
         }
 
-        static public clCountry Find(int ID)
-        {
-            clCountryDTO CountryDTO = clCountryData.FindCountry(ID);
-
-            return CountryDTO != null ? new clCountry(CountryDTO) : null;
-        }
-        static public clCountry Find(string Name)
-        {
-            clCountryDTO CountryDTO = clCountryData.FindCountry(Name);
-
-            return CountryDTO != null ? new clCountry(CountryDTO) : null;
-        }
-
         static public DataTable GetAllCountries()
         {
             return clCountryData.GetAllCountries();

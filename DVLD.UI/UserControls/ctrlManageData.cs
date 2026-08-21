@@ -36,7 +36,11 @@ namespace DVLD.UI
             set => btn_Add.Image = value;
         }
 
-        public DataGridViewRow dgv_CurrentRow
+        public DataGridViewColumnCollection dgv_RecordsColumns
+        {
+            get => dgv_Records.Columns;
+        }
+        public DataGridViewRow dgv_RecordsCurrentRow
         {
             get => dgv_Records.CurrentRow;
         }

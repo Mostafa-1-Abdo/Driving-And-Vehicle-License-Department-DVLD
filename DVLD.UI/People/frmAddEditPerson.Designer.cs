@@ -597,6 +597,8 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Image Files | *.jpg;*.jpeg;*.png;*.gif;*.bmp";
+            this.openFileDialog1.RestoreDirectory = true;
             // 
             // pictureBox10
             // 
@@ -610,8 +612,10 @@
             // 
             // frmAddEditPerson
             // 
+            this.AcceptButton = this.btn_Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btn_Close;
             this.ClientSize = new System.Drawing.Size(952, 434);
             this.Controls.Add(this.lb_ID);
             this.Controls.Add(this.label22);

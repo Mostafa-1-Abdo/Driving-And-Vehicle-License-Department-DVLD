@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,14 +12,8 @@ namespace DVLD.Data
 {
     public class clPerson
     {
-        private enum enMode : byte
-        {
-            AddNew, Update
-        }
-        public enum enGender : byte
-        {
-            Male, Female
-        }
+        private enum enMode : byte { AddNew, Update }
+        public enum enGender : byte { Male, Female }
 
         private enMode _Mode;
 
@@ -38,7 +33,7 @@ namespace DVLD.Data
 
         public string FullName
         {
-            get => !string.IsNullOrEmpty(ThirdName)? $"{FirstName} {SecondName} {ThirdName} {LastName}" : $"{FirstName} {SecondName} {LastName}";
+            get => !string.IsNullOrEmpty(ThirdName) ? $"{FirstName} {SecondName} {ThirdName} {LastName}" : $"{FirstName} {SecondName} {LastName}";
         }
         public clPersonDTO PersonDTO
         {
@@ -96,7 +91,17 @@ namespace DVLD.Data
 
             return PersonDTO != null ? new clPerson(PersonDTO) : null;
         }
+        public static clPerson Find(string NationalNumber)
+        {
+            clPersonDTO PersonDTO = clPersonData.Find(NationalNumber);
 
+            return PersonDTO != null ? new clPerson(PersonDTO) : null;
+        }
+
+        public static bool IsExist(int ID)
+        {
+            return clPersonData.IsExist(ID);
+        }
         public static bool IsExist(string NationalNumber)
         {
             return clPersonData.IsExist(NationalNumber);

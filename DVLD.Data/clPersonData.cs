@@ -68,7 +68,90 @@ namespace DVLD.Data
 
             return PersonDTO;
         }
+        public static clPersonDTO Find(string NationalNumber)
+        {
+            clPersonDTO PersonDTO = null;
 
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                {
+                    string SQL = @"select p.*,c.Name as Country from People p
+                                   join Countries c on p.CountryID = c.ID
+                                   where p.NationalNumber = @NationalNumber";
+
+                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    {
+                        Command.Parameters.AddWithValue("@NationalNumber", NationalNumber);
+
+                        Connection.Open();
+
+                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        {
+                            if (Reader.Read())
+                            {
+                                PersonDTO = new clPersonDTO
+                                {
+                                    ID = (int)Reader["ID"],
+                                    Gender = (byte)Reader["Gender"],
+                                    FirstName = (string)Reader["FirstName"],
+                                    SecondName = (string)Reader["SecondName"],
+                                    ThirdName = Reader["ThirdName"] != DBNull.Value ? (string)Reader["ThirdName"] : null,
+                                    LastName = (string)Reader["LastName"],
+                                    DateOfBirth = (DateTime)Reader["DateOfBirth"],
+                                    CountryDTO = new clCountryDTO
+                                    {
+                                        ID = (int)Reader["CountryID"],
+                                        Name = (string)Reader["Country"],
+                                    },
+                                    NationalNumber = (string)Reader["NationalNumber"],
+                                    Address = (string)Reader["Address"],
+                                    Phone = (string)Reader["Phone"],
+                                    Email = Reader["Email"] != DBNull.Value ? (string)Reader["Email"] : null,
+                                    ImagePath = Reader["ImagePath"] != DBNull.Value ? (string)Reader["ImagePath"] : null,
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                PersonDTO = null;
+            }
+
+            return PersonDTO;
+        }
+
+        public static bool IsExist(int ID)
+        {
+            bool IsFound = false;
+
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                {
+                    string SQL = @"select 1 from People
+                                   where ID = @ID";
+
+                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    {
+                        Command.Parameters.AddWithValue("@ID", ID);
+
+                        Connection.Open();
+
+                        if (Command.ExecuteScalar() != null)
+                            IsFound = true;
+                    }
+                }
+            }
+            catch
+            {
+                IsFound = false;
+            }
+
+            return IsFound;
+        }
         public static bool IsExist(string NationalNumber)
         {
            bool IsFound = false;

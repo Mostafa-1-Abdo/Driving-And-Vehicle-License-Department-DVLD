@@ -53,6 +53,7 @@
             this.btn_Close.TabIndex = 16;
             this.btn_Close.Text = "Close";
             this.btn_Close.UseVisualStyleBackColor = true;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // lb_Title
             // 

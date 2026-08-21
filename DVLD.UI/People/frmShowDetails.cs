@@ -18,5 +18,10 @@ namespace DVLD.UI.People
         {
             ctrlPersonCard1.LoadPersonInfo(_ID);
         }
+
+        private void btn_Close_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
