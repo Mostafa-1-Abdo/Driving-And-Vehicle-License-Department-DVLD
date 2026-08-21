@@ -31,6 +31,7 @@ namespace DVLD.UI
         private void _Initialize_cb_Filter()
         {
             ctrlManageData.cb_FilterItems.Add("ID");
+            ctrlManageData.cb_FilterItems.Add("Gender");
             ctrlManageData.cb_FilterItems.Add("First Name");
             ctrlManageData.cb_FilterItems.Add("Second Name");
             ctrlManageData.cb_FilterItems.Add("Third Name");
@@ -44,6 +45,7 @@ namespace DVLD.UI
         {
             PeopleTable = clPerson.GetAllPeople();
             ctrlManageData.RefreshRecords(PeopleTable.DefaultView);
+
             _Initialize_cms_dgv();
             _Initialize_cb_Filter();
         }
@@ -65,8 +67,9 @@ namespace DVLD.UI
         {
             if (Filter == "None" || string.IsNullOrEmpty(Search))
             {
-                PeopleTable.DefaultView.RowFilter = "";
+                PeopleTable.DefaultView.RowFilter = string.Empty;
             }
+
             else
             {
                 string ColumnName = Filter.Replace(" ", "");
@@ -78,6 +81,10 @@ namespace DVLD.UI
                     else
                         PeopleTable.DefaultView.RowFilter = $"[ID] = {-1}";
                 }
+
+                else if (ColumnName == "Gender")
+                    PeopleTable.DefaultView.RowFilter = $"Gender like '{Search}%'";
+
                 else
                     PeopleTable.DefaultView.RowFilter = $"[{ColumnName}] like '%{Search}%'";
             }
@@ -88,23 +95,33 @@ namespace DVLD.UI
         //Context Menu Strip Items Events
         private void ShowDetails_Click(object sender, EventArgs e)
         {
-            frmShowDetails Form = new frmShowDetails((int)ctrlManageData.dgv_CurrentRow.Cells["ID"].Value);
+            frmShowDetails Form = new frmShowDetails((int)ctrlManageData.dgv_RecordsCurrentRow.Cells["ID"].Value);
             Form.ShowDialog();
 
             ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }
         private void EditPerson_Click(object sender, EventArgs e)
         {
-            frmAddEditPerson Form = new frmAddEditPerson((int)ctrlManageData.dgv_CurrentRow.Cells["ID"].Value);
+            frmAddEditPerson Form = new frmAddEditPerson((int)ctrlManageData.dgv_RecordsCurrentRow.Cells["ID"].Value);
             Form.ShowDialog();
 
             ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }
         private void DeletePerson_Click(object sender, EventArgs e)
         {
-            clPerson.Delete((int)ctrlManageData.dgv_CurrentRow.Cells["ID"].Value);
+            int ID = (int)ctrlManageData.dgv_RecordsCurrentRow.Cells["ID"].Value;
 
-            ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
+            if (MessageBox.Show($"Are you sure you want to delete Person {ID}?","Confirm Delete",MessageBoxButtons.OKCancel,MessageBoxIcon.Question,MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                if(clPerson.Delete(ID))
+                {
+                    MessageBox.Show("Person Deleted Successfully.","Successful",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+                    ctrlManageData.RefreshRecords(clPerson.GetAllPeople().DefaultView);
+                }
+                else
+                    MessageBox.Show("Person was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void SendEmail_Click(object sender, EventArgs e)
         {

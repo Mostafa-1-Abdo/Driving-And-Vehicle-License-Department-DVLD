@@ -20,10 +20,7 @@ namespace DVLD.UI.People
 {
     public partial class frmAddEditPerson : Form
     {
-        enum enMode : byte
-        {
-            AddNew, Edit
-        }
+        enum enMode : byte { AddNew, Edit }
 
         private clPerson _Person;
         private int _ID;
@@ -48,8 +45,6 @@ namespace DVLD.UI.People
             cb_Country.DataSource = clCountry.GetAllCountries();
             cb_Country.DisplayMember = "Name";
             cb_Country.ValueMember = "ID";
-
-            cb_Country.SelectedIndex = -1;
         }
         private void _LoadPersonInfo()
         {
@@ -68,7 +63,8 @@ namespace DVLD.UI.People
             tb_Email.Text = _Person.Email;
             cb_Country.SelectedValue = _Person.Country.ID;
             tb_Address.Text = _Person.Address;
-            pb_PersonImage.ImageLocation = _Person.ImagePath;
+            if (File.Exists(_Person.ImagePath))
+                pb_PersonImage.ImageLocation = _Person.ImagePath;
         }
         private void _DesignForm()
         {
@@ -93,18 +89,29 @@ namespace DVLD.UI.People
 
                 _LoadPersonInfo();
 
-                llb_RemoveImage.Visible = !string.IsNullOrEmpty(_Person.ImagePath);
+                llb_RemoveImage.Visible = !string.IsNullOrEmpty(pb_PersonImage.ImageLocation);
                 tb_NationalNumber.Enabled = false;
             }
         }
         private void frmAddEditPerson_Load(object sender, EventArgs e)
         {
             _FillComboBoxWithCountries();
+            cb_Country.SelectedIndex = -1;
 
             dtp_DateOfBirth.MaxDate = DateTime.Today.AddYears(-18);
             dtp_DateOfBirth.Value = dtp_DateOfBirth.MaxDate;
 
             _DesignForm();
+        }
+
+        private void _ChangePersonImageAccordingToGender()
+        {
+            if (string.IsNullOrEmpty(pb_PersonImage.ImageLocation))
+                pb_PersonImage.Image = rb_Male.Checked ? Resources.MalePersonImage : Resources.FemalePersonImage;
+        }
+        private void rb_Gender_CheckedChanged(object sender, EventArgs e)
+        {
+            _ChangePersonImageAccordingToGender();
         }
 
         private void llSetImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -119,7 +126,6 @@ namespace DVLD.UI.People
         private void llb_RemoveImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             pb_PersonImage.ImageLocation = string.Empty;
-            openFileDialog1.FileName = string.Empty;
 
             llb_RemoveImage.Visible = false;
 
@@ -170,6 +176,16 @@ namespace DVLD.UI.People
                 return;
             }
 
+            string OldImagePath = _Person.ImagePath;
+            string NewImagePath = pb_PersonImage.ImageLocation ?? string.Empty;
+
+            if (!clFileHandler.HandleImages(OldImagePath, ref NewImagePath))
+            {
+                MessageBox.Show("Failed to process person image.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            _Person.ImagePath = NewImagePath;
+
             _Person.Gender = rb_Male.Checked ? clPerson.enGender.Male : clPerson.enGender.Female;
             _Person.FirstName = tb_FirstName.Text.Trim();
             _Person.SecondName = tb_SecondName.Text.Trim();
@@ -181,17 +197,6 @@ namespace DVLD.UI.People
             _Person.Phone = tb_Phone.Text.Trim();
             _Person.Email = tb_Email.Text.Trim();
             _Person.Address = tb_Address.Text.Trim();
-
-            string OldImagePath = _Person.ImagePath;
-            string NewImagePath = pb_PersonImage.ImageLocation ?? string.Empty;
-
-            if(!clFileHandler.HandleImages(OldImagePath,ref NewImagePath))
-            {
-                MessageBox.Show("Failed to process person image.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            _Person.ImagePath = NewImagePath;
 
             if (_Person.Save())
             {
@@ -212,6 +217,12 @@ namespace DVLD.UI.People
             else
             {
                 MessageBox.Show("Error: Data was not saved successfully.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                pb_PersonImage.ImageLocation = _Person.ImagePath = OldImagePath;
+                if (!string.IsNullOrEmpty(OldImagePath) && OldImagePath != NewImagePath)
+                {
+                    clFileHandler.HandleFileDelete(OldImagePath);
+                }
             }
         }
 
@@ -219,15 +230,5 @@ namespace DVLD.UI.People
         {
             Close();
         }
-
-        private void _ChangePersonImageAccordingToGender()
-        {
-            if (string.IsNullOrEmpty(pb_PersonImage.ImageLocation))
-                pb_PersonImage.Image = rb_Male.Checked ? Resources.MalePersonImage : Resources.FemalePersonImage;
-        }
-        private void rb_Gender_CheckedChanged(object sender, EventArgs e)
-        {
-            _ChangePersonImageAccordingToGender();
-        }    
     }
 }

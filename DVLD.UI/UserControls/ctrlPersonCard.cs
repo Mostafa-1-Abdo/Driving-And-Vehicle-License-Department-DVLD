@@ -9,9 +9,8 @@ namespace DVLD.UI.UserControls
     public partial class ctrlPersonCard : UserControl
     {
         private clPerson _Person;
-        private int _ID;
 
-        public clPerson Person
+        public clPerson SelectedPerson
         {
             get => _Person;
         }
@@ -23,7 +22,7 @@ namespace DVLD.UI.UserControls
 
         private void _LoadPersonImage()
         {
-            if (_Person.Gender.ToString() == "Male")
+            if (_Person.Gender == clPerson.enGender.Male)
                 pb_Gender.Image = Resources.Male;
 
             else
@@ -40,13 +39,11 @@ namespace DVLD.UI.UserControls
         }
         public void LoadPersonInfo(int ID)
         {
-            _ID = ID;
-
-            _Person = clPerson.Find(_ID);
+            _Person = clPerson.Find(ID);
 
             if (_Person == null)
             {
-                MessageBox.Show($"No Person with ID = {_ID} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show($"No Person with ID = {ID} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -65,10 +62,10 @@ namespace DVLD.UI.UserControls
 
         private void llb_EditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frmAddEditPerson Form = new frmAddEditPerson(_ID);
+            frmAddEditPerson Form = new frmAddEditPerson(_Person.ID);
             Form.ShowDialog();
 
-            LoadPersonInfo(_ID);
+            LoadPersonInfo(_Person.ID);
         }
     }
 }

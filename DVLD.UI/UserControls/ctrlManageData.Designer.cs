@@ -48,6 +48,7 @@
             // 
             this.dgv_Records.AllowUserToAddRows = false;
             this.dgv_Records.AllowUserToDeleteRows = false;
+            this.dgv_Records.AllowUserToResizeRows = false;
             this.dgv_Records.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Records.BackgroundColor = System.Drawing.Color.White;
             this.dgv_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
