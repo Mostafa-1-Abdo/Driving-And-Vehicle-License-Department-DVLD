@@ -39,7 +39,7 @@
             this.ctrlManageData1.Location = new System.Drawing.Point(0, 0);
             this.ctrlManageData1.Name = "ctrlManageData1";
             this.ctrlManageData1.pb_HeaderImage = global::DVLD.UI.Properties.Resources.ManagePeople;
-            this.ctrlManageData1.Size = new System.Drawing.Size(1188, 604);
+            this.ctrlManageData1.Size = new System.Drawing.Size(1198, 609);
             this.ctrlManageData1.TabIndex = 0;
             this.ctrlManageData1.CloseClicked += new System.Action(this.ctrlManageData_OnCloseClick);
             this.ctrlManageData1.AddClicked += new System.Action(this.ctrlManageData_OnAddClick);
@@ -49,7 +49,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1188, 604);
+            this.ClientSize = new System.Drawing.Size(1198, 609);
             this.Controls.Add(this.ctrlManageData1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmManagePeople";

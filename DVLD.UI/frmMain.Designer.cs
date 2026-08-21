@@ -240,6 +240,7 @@
             this.msi_Drivers.Name = "msi_Drivers";
             this.msi_Drivers.Size = new System.Drawing.Size(92, 36);
             this.msi_Drivers.Text = "Drivers";
+            this.msi_Drivers.Click += new System.EventHandler(this.msi_Drivers_Click);
             // 
             // msi_Users
             // 
@@ -247,6 +248,7 @@
             this.msi_Users.Name = "msi_Users";
             this.msi_Users.Size = new System.Drawing.Size(82, 36);
             this.msi_Users.Text = "Users";
+            this.msi_Users.Click += new System.EventHandler(this.msi_Users_Click);
             // 
             // msi_AccountSettings
             // 

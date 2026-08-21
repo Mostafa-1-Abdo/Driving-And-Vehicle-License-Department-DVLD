@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using DVLD.UI.Users;
 
 namespace DVLD.UI
 {
@@ -21,6 +15,17 @@ namespace DVLD.UI
         {
             frmManagePeople Form = new frmManagePeople();
             Form.ShowDialog() ;
+        }
+
+        private void msi_Drivers_Click(object sender, EventArgs e)
+        { 
+          
+        }
+
+        private void msi_Users_Click(object sender, EventArgs e)
+        {
+            frmManageUsers Form = new frmManageUsers();
+            Form.ShowDialog();
         }
     }
 }

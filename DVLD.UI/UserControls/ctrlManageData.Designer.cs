@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_Records = new System.Windows.Forms.DataGridView();
             this.ContectMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -49,11 +50,18 @@
             this.dgv_Records.AllowUserToAddRows = false;
             this.dgv_Records.AllowUserToDeleteRows = false;
             this.dgv_Records.AllowUserToResizeRows = false;
-            this.dgv_Records.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_Records.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Records.ContextMenuStrip = this.ContectMenuStrip;
-            this.dgv_Records.Location = new System.Drawing.Point(13, 280);
+            this.dgv_Records.Location = new System.Drawing.Point(17, 285);
             this.dgv_Records.MultiSelect = false;
             this.dgv_Records.Name = "dgv_Records";
             this.dgv_Records.ReadOnly = true;
@@ -72,7 +80,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 254);
+            this.label1.Location = new System.Drawing.Point(13, 259);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 20);
             this.label1.TabIndex = 1;
@@ -82,7 +90,7 @@
             // 
             this.lb_Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_Title.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lb_Title.Location = new System.Drawing.Point(374, 194);
+            this.lb_Title.Location = new System.Drawing.Point(378, 199);
             this.lb_Title.Name = "lb_Title";
             this.lb_Title.Size = new System.Drawing.Size(333, 46);
             this.lb_Title.TabIndex = 2;
@@ -95,7 +103,7 @@
             this.cb_Filter.FormattingEnabled = true;
             this.cb_Filter.Items.AddRange(new object[] {
             "None"});
-            this.cb_Filter.Location = new System.Drawing.Point(86, 254);
+            this.cb_Filter.Location = new System.Drawing.Point(90, 259);
             this.cb_Filter.Name = "cb_Filter";
             this.cb_Filter.Size = new System.Drawing.Size(172, 21);
             this.cb_Filter.TabIndex = 3;
@@ -103,7 +111,7 @@
             // 
             // tb_Search
             // 
-            this.tb_Search.Location = new System.Drawing.Point(264, 255);
+            this.tb_Search.Location = new System.Drawing.Point(268, 260);
             this.tb_Search.Name = "tb_Search";
             this.tb_Search.Size = new System.Drawing.Size(210, 20);
             this.tb_Search.TabIndex = 4;
@@ -115,7 +123,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(9, 570);
+            this.label3.Location = new System.Drawing.Point(13, 575);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 20);
             this.label3.TabIndex = 7;
@@ -125,7 +133,7 @@
             // 
             this.lb_NumberOfRecords.AutoSize = true;
             this.lb_NumberOfRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.lb_NumberOfRecords.Location = new System.Drawing.Point(96, 575);
+            this.lb_NumberOfRecords.Location = new System.Drawing.Point(100, 580);
             this.lb_NumberOfRecords.Name = "lb_NumberOfRecords";
             this.lb_NumberOfRecords.Size = new System.Drawing.Size(13, 13);
             this.lb_NumberOfRecords.TabIndex = 8;
@@ -134,7 +142,7 @@
             // btn_Add
             // 
             this.btn_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Add.Location = new System.Drawing.Point(1109, 231);
+            this.btn_Add.Location = new System.Drawing.Point(1113, 236);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(69, 43);
             this.btn_Add.TabIndex = 9;
@@ -146,7 +154,7 @@
             this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Close.Image = global::DVLD.UI.Properties.Resources.Close;
             this.btn_Close.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Close.Location = new System.Drawing.Point(1057, 563);
+            this.btn_Close.Location = new System.Drawing.Point(1061, 568);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(121, 36);
             this.btn_Close.TabIndex = 6;
@@ -156,7 +164,7 @@
             // 
             // pb_Header
             // 
-            this.pb_Header.Location = new System.Drawing.Point(430, 3);
+            this.pb_Header.Location = new System.Drawing.Point(434, 8);
             this.pb_Header.Name = "pb_Header";
             this.pb_Header.Size = new System.Drawing.Size(220, 189);
             this.pb_Header.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -178,7 +186,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgv_Records);
             this.Name = "ctrlManageData";
-            this.Size = new System.Drawing.Size(1185, 606);
+            this.Size = new System.Drawing.Size(1185, 609);
             this.Load += new System.EventHandler(this.ctrlManageData_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Records)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Header)).EndInit();

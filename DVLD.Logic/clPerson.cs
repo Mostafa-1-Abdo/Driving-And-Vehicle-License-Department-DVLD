@@ -32,31 +32,9 @@ namespace DVLD.Logic
         }
         public clPersonDTO PersonDTO
         {
-            get => new clPersonDTO(ID, (byte)Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth, Country.ID, Country.Name, NationalNumber, Address, Phone, Email, ImagePath);
+            get => new clPersonDTO(ID, (byte)Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth,Country.CountryDTO, NationalNumber, Address, Phone, Email, ImagePath);
         }
 
-        private clPerson(clPersonDTO PersonDTO)
-        {
-            _Mode = enMode.Update;
-
-            ID = PersonDTO.ID;
-            Gender = (enGender)PersonDTO.Gender;
-            FirstName = PersonDTO.FirstName;
-            SecondName = PersonDTO.SecondName;
-            ThirdName = PersonDTO.ThirdName;
-            LastName = PersonDTO.LastName;
-            DateOfBirth = PersonDTO.DateOfBirth;
-            Country = new clCountry
-            {
-                ID = PersonDTO.CountryDTO.ID,
-                Name = PersonDTO.CountryDTO.Name
-            };
-            NationalNumber = PersonDTO.NationalNumber;
-            Address = PersonDTO.Address;
-            Phone = PersonDTO.Phone;
-            Email = PersonDTO.Email;
-            ImagePath = PersonDTO.ImagePath;
-        }
         public clPerson()
         {
             _Mode = enMode.AddNew;
@@ -68,16 +46,30 @@ namespace DVLD.Logic
             ThirdName = string.Empty;
             LastName = string.Empty;
             DateOfBirth = DateTime.MinValue;
-            Country = new clCountry
-            {
-                ID = -1,
-                Name = string.Empty
-            };
+            Country = new clCountry();
             NationalNumber = string.Empty;
             Address = string.Empty;
             Phone = string.Empty;
             Email = string.Empty;
             ImagePath = string.Empty;
+        }
+        internal clPerson(clPersonDTO PersonDTO)
+        {
+            _Mode = enMode.Update;
+
+            ID = PersonDTO.ID;
+            Gender = (enGender)PersonDTO.Gender;
+            FirstName = PersonDTO.FirstName;
+            SecondName = PersonDTO.SecondName;
+            ThirdName = PersonDTO.ThirdName;
+            LastName = PersonDTO.LastName;
+            DateOfBirth = PersonDTO.DateOfBirth;
+            Country = new clCountry(PersonDTO.CountryDTO);
+            NationalNumber = PersonDTO.NationalNumber;
+            Address = PersonDTO.Address;
+            Phone = PersonDTO.Phone;
+            Email = PersonDTO.Email;
+            ImagePath = PersonDTO.ImagePath;
         }
 
         public static clPerson Find(int ID)

@@ -28,12 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.ctrlManageData1 = new DVLD.UI.ctrlManageData();
+            this.SuspendLayout();
+            // 
+            // ctrlManageData1
+            // 
+            this.ctrlManageData1.btn_AddImage = global::DVLD.UI.Properties.Resources.AddNewUser;
+            this.ctrlManageData1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlManageData1.lb_TitleText = "Manage Users";
+            this.ctrlManageData1.Location = new System.Drawing.Point(0, 0);
+            this.ctrlManageData1.Name = "ctrlManageData1";
+            this.ctrlManageData1.pb_HeaderImage = global::DVLD.UI.Properties.Resources.ManageUsers;
+            this.ctrlManageData1.Size = new System.Drawing.Size(1188, 604);
+            this.ctrlManageData1.TabIndex = 0;
+            this.ctrlManageData1.CloseClicked += new System.Action(this.ctrlManageData_OnCloseClick);
+            this.ctrlManageData1.AddClicked += new System.Action(this.ctrlManageData_OnAddClick);
+            this.ctrlManageData1.SearchTextChanged += new System.Action<string, string>(this.ctrlManageData_SearchTextChanged);
+            // 
+            // frmManageUsers
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1188, 604);
+            this.Controls.Add(this.ctrlManageData1);
+            this.Name = "frmManageUsers";
             this.Text = "frmManageUsers";
+            this.Load += new System.EventHandler(this.frmManageUsers_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private ctrlManageData ctrlManageData1;
     }
 }

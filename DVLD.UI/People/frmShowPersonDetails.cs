@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace DVLD.UI.People
 {
-    public partial class frmShowDetails : Form
+    public partial class frmShowPersonDetails : Form
     {
         private int _ID;
 
-        public frmShowDetails(int ID)
+        public frmShowPersonDetails(int ID)
         {
             InitializeComponent();
 

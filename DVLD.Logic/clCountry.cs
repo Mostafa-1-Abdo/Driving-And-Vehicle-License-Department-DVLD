@@ -14,15 +14,15 @@ namespace DVLD.Logic
             get => new clCountryDTO(ID, Name);
         }
 
-        private clCountry(clCountryDTO CountryDTO)
-        {
-            ID = CountryDTO.ID;
-            Name = CountryDTO.Name;
-        }
         public clCountry()
         {
             ID = -1;
             Name = string.Empty;
+        }
+        internal clCountry(clCountryDTO CountryDTO)
+        {
+            ID = CountryDTO.ID;
+            Name = CountryDTO.Name;
         }
 
         static public DataTable GetAllCountries()
