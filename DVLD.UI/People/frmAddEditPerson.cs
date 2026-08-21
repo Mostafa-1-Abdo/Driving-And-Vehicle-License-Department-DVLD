@@ -1,20 +1,10 @@
-﻿using Contacts.Logic.Countries;
-using DVLD.Data;
+﻿using DVLD.Logic;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 using DVLD.UI.Util;
-using System.Runtime.Versioning;
 using DVLD.UI.Properties;
-using System.Text.RegularExpressions;
 
 namespace DVLD.UI.People
 {
@@ -229,6 +219,11 @@ namespace DVLD.UI.People
         private void btn_Close_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void tb_Phone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
     }
 }

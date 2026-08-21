@@ -1,7 +1,6 @@
-﻿using DVLD.Data;
+﻿using DVLD.Logic;
 using DVLD.UI.People;
 using DVLD.UI.Properties;
-using System;
 using System.Windows.Forms;
 
 namespace DVLD.UI.UserControls
@@ -10,10 +9,7 @@ namespace DVLD.UI.UserControls
     {
         private clPerson _Person;
 
-        public clPerson SelectedPerson
-        {
-            get => _Person;
-        }
+        public clPerson SelectedPerson { get => _Person; }
 
         public ctrlPersonCard()
         {
@@ -44,6 +40,28 @@ namespace DVLD.UI.UserControls
             if (_Person == null)
             {
                 MessageBox.Show($"No Person with ID = {ID} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            lb_ID.Text = _Person.ID.ToString();
+            lb_FullName.Text = _Person.FullName;
+            lb_NationalNumber.Text = _Person.NationalNumber;
+            lb_Gender.Text = _Person.Gender.ToString();
+            lb_Email.Text = _Person.Email;
+            lb_Address.Text = _Person.Address;
+            lb_DateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
+            lb_Phone.Text = _Person.Phone;
+            lb_Country.Text = _Person.Country.Name;
+
+            _LoadPersonImage();
+        }
+        public void LoadPersonInfo(string NationalNumber)
+        {
+            _Person = clPerson.Find(NationalNumber);
+
+            if (_Person == null)
+            {
+                MessageBox.Show($"No Person with national number = {NationalNumber} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

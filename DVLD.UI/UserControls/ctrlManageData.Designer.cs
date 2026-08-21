@@ -109,6 +109,7 @@
             this.tb_Search.TabIndex = 4;
             this.tb_Search.Visible = false;
             this.tb_Search.TextChanged += new System.EventHandler(this.tb_Search_TextChanged);
+            this.tb_Search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Search_KeyPress);
             // 
             // label3
             // 
