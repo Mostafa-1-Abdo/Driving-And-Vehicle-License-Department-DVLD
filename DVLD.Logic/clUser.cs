@@ -109,6 +109,16 @@ namespace DVLD.Logic
             }
         }
 
+        public bool UpdatePassword(string NewPassword)
+        {
+            if (clUserData.UpdatePassword(ID, NewPassword))
+            {
+                Password = NewPassword;
+                return true;
+            }
+            return false;
+        }
+
         public static bool Delete(int ID)
         {
             return clUserData.Delete(ID);

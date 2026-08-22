@@ -114,7 +114,7 @@ namespace DVLD.UI.Users
         }
         private void DeleteUser_Click(object sender, EventArgs e)
         {
-            int ID = (int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value;
+            int ID = (int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value;
 
             if (MessageBox.Show($"Are you sure you want to delete User {ID}?", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
@@ -130,7 +130,7 @@ namespace DVLD.UI.Users
         }
         private void ChangePassword_Click(object sender, EventArgs e)
         {
-            frmChangePassword Form = new frmChangePassword();
+            frmChangePassword Form = new frmChangePassword((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value);
             Form.ShowDialog();
         }
 

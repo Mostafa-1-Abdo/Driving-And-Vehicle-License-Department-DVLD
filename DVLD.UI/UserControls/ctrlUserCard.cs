@@ -15,6 +15,8 @@ namespace DVLD.UI.UserControls
     {
         private clUser _User;
 
+        public clUser User { get => _User; }
+
         public ctrlUserCard()
         {
             InitializeComponent();

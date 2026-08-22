@@ -51,8 +51,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1188, 604);
             this.Controls.Add(this.ctrlManageData1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmManageUsers";
-            this.Text = "frmManageUsers";
+            this.ShowIcon = false;
+            this.Text = "Manage Users";
             this.Load += new System.EventHandler(this.frmManageUsers_Load);
             this.ResumeLayout(false);
 

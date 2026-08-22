@@ -16,7 +16,8 @@ namespace DVLD.UI.People
        
         private void frmShowPersonDetails_Load(object sender, EventArgs e)
         {
-            ctrlPersonCard1.LoadPersonInfo(_ID);
+            if(!ctrlPersonCard1.LoadPersonInfo(_ID))
+                Close();
         }
 
         private void btn_Close_Click(object sender, EventArgs e)
