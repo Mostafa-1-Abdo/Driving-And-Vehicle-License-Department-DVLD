@@ -263,6 +263,34 @@ namespace DVLD.Data
 
             return RowsAffected > 0;
         }
+        public static bool UpdatePassword(int ID, string NewPassword)
+        {
+            int RowsAffected = 0;
+
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                {
+                    string SQL = @"update Users set Password = @Password
+                                   where ID = @ID";
+
+                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    {
+                        Command.Parameters.AddWithValue("@ID", ID);
+                        Command.Parameters.AddWithValue("@Password", NewPassword);
+
+                        Connection.Open();
+
+                        RowsAffected = Command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+            return RowsAffected > 0;
+        }
 
         public static bool Delete(int ID)
         {

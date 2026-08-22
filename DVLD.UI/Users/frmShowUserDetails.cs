@@ -24,7 +24,8 @@ namespace DVLD.UI.Users
 
         private void frmShowUserDetails_Load(object sender, EventArgs e)
         {
-            ctrlUserCard1.LoadUserInfo(_ID);
+            if(!ctrlUserCard1.LoadUserInfo(_ID))
+                Close();
         }
 
         private void btn_Close_Click(object sender, EventArgs e)
