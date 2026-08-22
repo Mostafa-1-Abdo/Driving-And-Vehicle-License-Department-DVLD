@@ -148,13 +148,14 @@ namespace DVLD.UI.People
         }
         private void tb_Email_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_Email.Text))
-                errorProvider1.SetError(tb_Email, null);
+          if (!clUtil.IsValidEmail(tb_Email.Text))
+                errorProvider1.SetError(tb_Email, $"Invalid Email Address format! (e.g., user@example.com)");
 
             else
-                errorProvider1.SetError(tb_Email, $"Invalid Email Address format! (e.g., user@example.com)");
+                errorProvider1.SetError(tb_Email, null);
         }
 
+        public event Action<clPerson> OnPersonSaved;
         private void btn_Save_Click(object sender, EventArgs e)
         {
             if (!this.IsValid(errorProvider1))
@@ -180,6 +181,7 @@ namespace DVLD.UI.People
             _Person.LastName = tb_LastName.Text.Trim();
             _Person.DateOfBirth = dtp_DateOfBirth.Value;
             _Person.Country.ID = (int)cb_Country.SelectedValue;
+            _Person.Country.Name = cb_Country.Text;
             _Person.NationalNumber = tb_NationalNumber.Text.Trim();
             _Person.Phone = tb_Phone.Text.Trim();
             _Person.Email = tb_Email.Text.Trim();
@@ -199,6 +201,8 @@ namespace DVLD.UI.People
                 Text = lb_Title.Text = "Edit Person";
                 _Mode = enMode.Edit;
                 tb_NationalNumber.Enabled = false;
+
+                OnPersonSaved?.Invoke(_Person);
             }
             else
             {
@@ -207,7 +211,7 @@ namespace DVLD.UI.People
                 pb_PersonImage.ImageLocation = _Person.ImagePath = OldImagePath;
                 if (!string.IsNullOrEmpty(OldImagePath) && OldImagePath != NewImagePath)
                 {
-                    clFileHandler.HandleFileDelete(OldImagePath);
+                    clFileHandler.HandleFileDelete(NewImagePath);
                 }
             }
         }

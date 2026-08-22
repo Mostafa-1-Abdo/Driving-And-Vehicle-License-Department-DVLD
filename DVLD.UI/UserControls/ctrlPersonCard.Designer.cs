@@ -72,6 +72,7 @@
             // llb_EditPersonInfo
             // 
             this.llb_EditPersonInfo.AutoSize = true;
+            this.llb_EditPersonInfo.Enabled = false;
             this.llb_EditPersonInfo.Location = new System.Drawing.Point(658, 37);
             this.llb_EditPersonInfo.Name = "llb_EditPersonInfo";
             this.llb_EditPersonInfo.Size = new System.Drawing.Size(123, 20);

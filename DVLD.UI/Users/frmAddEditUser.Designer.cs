@@ -34,11 +34,11 @@
             this.btn_Next = new System.Windows.Forms.Button();
             this.ctrlPersonCardWithFilter1 = new DVLD.UI.UserControls.ctrlPersonCardWithFilter();
             this.tp_LoginInformation = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Previous = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.lblUserID = new System.Windows.Forms.Label();
+            this.lb_ID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.chkIsActive = new System.Windows.Forms.CheckBox();
+            this.ckb_IsActive = new System.Windows.Forms.CheckBox();
             this.tb_Username = new System.Windows.Forms.TextBox();
             this.tb_ConfirmPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,6 +71,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(839, 444);
             this.tabControl1.TabIndex = 1;
+            this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             // 
             // tp_PersonalInformation
             // 
@@ -107,11 +108,11 @@
             // 
             // tp_LoginInformation
             // 
-            this.tp_LoginInformation.Controls.Add(this.button1);
+            this.tp_LoginInformation.Controls.Add(this.btn_Previous);
             this.tp_LoginInformation.Controls.Add(this.pictureBox2);
-            this.tp_LoginInformation.Controls.Add(this.lblUserID);
+            this.tp_LoginInformation.Controls.Add(this.lb_ID);
             this.tp_LoginInformation.Controls.Add(this.label4);
-            this.tp_LoginInformation.Controls.Add(this.chkIsActive);
+            this.tp_LoginInformation.Controls.Add(this.ckb_IsActive);
             this.tp_LoginInformation.Controls.Add(this.tb_Username);
             this.tp_LoginInformation.Controls.Add(this.tb_ConfirmPassword);
             this.tp_LoginInformation.Controls.Add(this.label1);
@@ -129,19 +130,19 @@
             this.tp_LoginInformation.Text = "Login Information";
             this.tp_LoginInformation.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btn_Previous
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Image = global::DVLD.UI.Properties.Resources.Previous;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(7, 367);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 37);
-            this.button1.TabIndex = 144;
-            this.button1.Text = "Previous";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_Previous.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_Previous.Image = global::DVLD.UI.Properties.Resources.Previous;
+            this.btn_Previous.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Previous.Location = new System.Drawing.Point(7, 367);
+            this.btn_Previous.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btn_Previous.Name = "btn_Previous";
+            this.btn_Previous.Size = new System.Drawing.Size(126, 37);
+            this.btn_Previous.TabIndex = 144;
+            this.btn_Previous.Text = "Previous";
+            this.btn_Previous.UseVisualStyleBackColor = true;
+            this.btn_Previous.Click += new System.EventHandler(this.btn_Previous_Click);
             // 
             // pictureBox2
             // 
@@ -153,16 +154,16 @@
             this.pictureBox2.TabIndex = 143;
             this.pictureBox2.TabStop = false;
             // 
-            // lblUserID
+            // lb_ID
             // 
-            this.lblUserID.AutoSize = true;
-            this.lblUserID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserID.Location = new System.Drawing.Point(234, 46);
-            this.lblUserID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblUserID.Name = "lblUserID";
-            this.lblUserID.Size = new System.Drawing.Size(39, 20);
-            this.lblUserID.TabIndex = 142;
-            this.lblUserID.Text = "???";
+            this.lb_ID.AutoSize = true;
+            this.lb_ID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_ID.Location = new System.Drawing.Point(234, 46);
+            this.lb_ID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lb_ID.Name = "lb_ID";
+            this.lb_ID.Size = new System.Drawing.Size(39, 20);
+            this.lb_ID.TabIndex = 142;
+            this.lb_ID.Text = "???";
             // 
             // label4
             // 
@@ -175,17 +176,17 @@
             this.label4.TabIndex = 141;
             this.label4.Text = "UserID:";
             // 
-            // chkIsActive
+            // ckb_IsActive
             // 
-            this.chkIsActive.AutoSize = true;
-            this.chkIsActive.Checked = true;
-            this.chkIsActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkIsActive.Location = new System.Drawing.Point(232, 202);
-            this.chkIsActive.Name = "chkIsActive";
-            this.chkIsActive.Size = new System.Drawing.Size(67, 17);
-            this.chkIsActive.TabIndex = 140;
-            this.chkIsActive.Text = "Is Active";
-            this.chkIsActive.UseVisualStyleBackColor = true;
+            this.ckb_IsActive.AutoSize = true;
+            this.ckb_IsActive.Checked = true;
+            this.ckb_IsActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckb_IsActive.Location = new System.Drawing.Point(232, 202);
+            this.ckb_IsActive.Name = "ckb_IsActive";
+            this.ckb_IsActive.Size = new System.Drawing.Size(67, 17);
+            this.ckb_IsActive.TabIndex = 140;
+            this.ckb_IsActive.Text = "Is Active";
+            this.ckb_IsActive.UseVisualStyleBackColor = true;
             // 
             // tb_Username
             // 
@@ -195,6 +196,7 @@
             this.tb_Username.Name = "tb_Username";
             this.tb_Username.Size = new System.Drawing.Size(167, 20);
             this.tb_Username.TabIndex = 131;
+            this.tb_Username.Validating += new System.ComponentModel.CancelEventHandler(this.tb_Username_Validating);
             // 
             // tb_ConfirmPassword
             // 
@@ -205,6 +207,7 @@
             this.tb_ConfirmPassword.PasswordChar = '*';
             this.tb_ConfirmPassword.Size = new System.Drawing.Size(167, 20);
             this.tb_ConfirmPassword.TabIndex = 137;
+            this.tb_ConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tb_ConfirmPassword_Validating);
             // 
             // label1
             // 
@@ -248,6 +251,7 @@
             this.tb_Password.PasswordChar = '*';
             this.tb_Password.Size = new System.Drawing.Size(167, 20);
             this.tb_Password.TabIndex = 132;
+            this.tb_Password.Validating += new System.ComponentModel.CancelEventHandler(this.tb_Password_Validating);
             // 
             // pictureBox1
             // 
@@ -307,7 +311,6 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Save.Enabled = false;
             this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Save.Image = global::DVLD.UI.Properties.Resources.Save;
@@ -319,23 +322,25 @@
             this.btn_Save.TabIndex = 114;
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = true;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // errorProvider1
             // 
+            this.errorProvider1.BlinkRate = 1000;
             this.errorProvider1.ContainerControl = this;
             // 
             // frmAddEditUser
             // 
-            this.AcceptButton = this.btn_Close;
+            this.AcceptButton = this.btn_Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btn_Save;
+            this.CancelButton = this.btn_Close;
             this.ClientSize = new System.Drawing.Size(861, 540);
             this.Controls.Add(this.lb_Title);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.tabControl1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAddEditUser";
             this.ShowIcon = false;
             this.Text = "Add / Edit User";
@@ -364,9 +369,9 @@
         private System.Windows.Forms.Label lb_Title;
         private System.Windows.Forms.Button btn_Next;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label lblUserID;
+        private System.Windows.Forms.Label lb_ID;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox chkIsActive;
+        private System.Windows.Forms.CheckBox ckb_IsActive;
         private System.Windows.Forms.TextBox tb_Username;
         private System.Windows.Forms.TextBox tb_ConfirmPassword;
         private System.Windows.Forms.Label label1;
@@ -376,7 +381,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Previous;
         private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -76,7 +76,7 @@ namespace DVLD.Logic
         }
         public static bool IsExistForPersonID(int PersonID)
         {
-            return clUserData.IsExist(PersonID);
+            return clUserData.IsExistForPersonID(PersonID);
         }
 
         private bool _AddNew()
