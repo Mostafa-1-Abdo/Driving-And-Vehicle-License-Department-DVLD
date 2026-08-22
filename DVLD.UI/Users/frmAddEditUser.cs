@@ -1,4 +1,5 @@
 ﻿using DVLD.Logic;
+using DVLD.UI.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,9 +34,20 @@ namespace DVLD.UI.Users
             _ID = ID;
         }
 
-        private void _LoadUserInfo()
+        private void _FillFormWithUserInfo()
         {
+            if (!ctrlPersonCardWithFilter1.LoadPersonInfo(_User.Person))
+                Close();
 
+            lb_ID.Text = _User.ID.ToString();
+            tb_Username.Text = _User.Username;
+            tb_Password.Text = tb_ConfirmPassword.Text = _User.Password;
+        }
+        private void _EdtitSettings()
+        {
+            Text = lb_Title.Text = "Edit User";
+            tb_Username.Enabled = false;
+            ctrlPersonCardWithFilter1.DisableFilter();
         }
         private void _DesignForm()
         {
@@ -45,27 +57,25 @@ namespace DVLD.UI.Users
 
                 _User = new clUser();
             }
+
             else
             {
-                Text = lb_Title.Text = "Update User";
-
                 _User = clUser.Find(_ID);
-
                 if (_User == null)
                 {
-                    MessageBox.Show($"No Person with ID = {_ID} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show($"No user with ID = {_ID} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     Close();
                     return;
                 }
 
-                _LoadUserInfo();
+                _EdtitSettings();
 
-                
+                _FillFormWithUserInfo();
             }
         }
         private void frmAddEditUser_Load(object sender, EventArgs e)
         {
-
+            _DesignForm();
         }
 
         private void btn_Close_Click(object sender, EventArgs e)
@@ -73,12 +83,43 @@ namespace DVLD.UI.Users
             Close();
         }
 
+        private void btn_Next_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tp_LoginInformation;
+        }
+        private void btn_Previous_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tp_PersonalInformation;
+        }
+        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage == tp_LoginInformation)
+            {
+                if (ctrlPersonCardWithFilter1.SelectedPerson == null)
+                {
+                    MessageBox.Show("Please select or add a person first before proceeding to Login Information.", "Select Person Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    e.Cancel = true;
+                }
+
+                else if (_Mode == enMode.AddNew && clUser.IsExistForPersonID(ctrlPersonCardWithFilter1.SelectedPerson.ID))
+                {
+                    MessageBox.Show("Selected person already has an associated user account. Please choose another person.", "Duplicate User", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Cancel = true;
+                }
+
+                btn_Save.Enabled = !e.Cancel;
+            }
+
+            else if (e.TabPage == tp_PersonalInformation)
+                btn_Save.Enabled = false;
+        }
+
         private void tb_Username_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tb_Username.Text))
                 errorProvider1.SetError(tb_Username, "Username is required.");
 
-            else if (clUser.IsExist(tb_Username.Text))
+            else if (_Mode == enMode.AddNew && clUser.IsExist(tb_Username.Text.Trim()))
                 errorProvider1.SetError(tb_Username, "Username is already used by another person.");
 
             else
@@ -89,7 +130,7 @@ namespace DVLD.UI.Users
             if (string.IsNullOrWhiteSpace(tb_Password.Text))
                 errorProvider1.SetError(tb_Password, "Password is required.");
 
-            else if(tb_Password.Text.Length < 6)
+            else if (tb_Password.Text.Length < 6)
                 errorProvider1.SetError(tb_Password, "Password should be at least 6 characters.");
 
             else
@@ -97,24 +138,43 @@ namespace DVLD.UI.Users
         }
         private void tb_ConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(tb_ConfirmPassword.Text))
+            if (string.IsNullOrWhiteSpace(tb_ConfirmPassword.Text))
                 errorProvider1.SetError(tb_ConfirmPassword, "Confrim password is required.");
 
-            else if (tb_Password.Text != tb_Password.Text)
-                errorProvider1.SetError(tb_ConfirmPassword, "");
+            else if (tb_ConfirmPassword.Text != tb_Password.Text)
+                errorProvider1.SetError(tb_ConfirmPassword, "Password confirmation does not match the password.");
 
             else
                 errorProvider1.SetError(tb_ConfirmPassword, null);
         }
 
-        private void btn_Next_Click(object sender, EventArgs e)
+        private void btn_Save_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tp_LoginInformation;
-        }
+            if (!this.IsValid(errorProvider1))
+            {
+                MessageBox.Show("Some fields are not valid. Please check red error icons.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tp_PersonalInformation;
+            if (_Mode == enMode.AddNew)
+                _User.Person = ctrlPersonCardWithFilter1.SelectedPerson;
+
+            _User.Username = tb_Username.Text;
+            _User.Password = tb_Password.Text;
+            _User.IsActive = ckb_IsActive.Checked;
+
+            if (_User.Save())
+            {
+                lb_ID.Text = _User.ID.ToString();
+
+                MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                _EdtitSettings();
+
+                _Mode = enMode.Edit;
+            }
+            else
+                MessageBox.Show("Error: Data was not saved successfully.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
