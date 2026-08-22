@@ -14,7 +14,7 @@ namespace DVLD.UI.People
             _ID = ID;
         } 
        
-        private void frmShowDetails_Load(object sender, EventArgs e)
+        private void frmShowPersonDetails_Load(object sender, EventArgs e)
         {
             ctrlPersonCard1.LoadPersonInfo(_ID);
         }

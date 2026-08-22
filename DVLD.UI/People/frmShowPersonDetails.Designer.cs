@@ -78,7 +78,7 @@
             this.Name = "frmShowDetails";
             this.ShowIcon = false;
             this.Text = "Person Details";
-            this.Load += new System.EventHandler(this.frmShowDetails_Load);
+            this.Load += new System.EventHandler(this.frmShowPersonDetails_Load);
             this.ResumeLayout(false);
 
         }
