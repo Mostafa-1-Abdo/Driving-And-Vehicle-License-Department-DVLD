@@ -46,7 +46,11 @@ namespace DVLD.UI.Users
         private void _EdtitSettings()
         {
             Text = lb_Title.Text = "Edit User";
+
             tb_Username.Enabled = false;
+            tb_Password.Enabled = false;
+            tb_ConfirmPassword.Enabled = false;
+
             ctrlPersonCardWithFilter1.DisableFilter();
         }
         private void _DesignForm()

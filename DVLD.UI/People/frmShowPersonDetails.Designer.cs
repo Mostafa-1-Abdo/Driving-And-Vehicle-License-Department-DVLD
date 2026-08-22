@@ -28,17 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlPersonCard1 = new DVLD.UI.UserControls.ctrlPersonCard();
             this.btn_Close = new System.Windows.Forms.Button();
             this.lb_Title = new System.Windows.Forms.Label();
+            this.ctrlPersonCard1 = new DVLD.UI.UserControls.ctrlPersonCard();
             this.SuspendLayout();
-            // 
-            // ctrlPersonCard1
-            // 
-            this.ctrlPersonCard1.Location = new System.Drawing.Point(12, 58);
-            this.ctrlPersonCard1.Name = "ctrlPersonCard1";
-            this.ctrlPersonCard1.Size = new System.Drawing.Size(816, 264);
-            this.ctrlPersonCard1.TabIndex = 0;
             // 
             // btn_Close
             // 
@@ -66,7 +59,14 @@
             this.lb_Title.Text = "Person Details";
             this.lb_Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // frmShowDetails
+            // ctrlPersonCard1
+            // 
+            this.ctrlPersonCard1.Location = new System.Drawing.Point(12, 58);
+            this.ctrlPersonCard1.Name = "ctrlPersonCard1";
+            this.ctrlPersonCard1.Size = new System.Drawing.Size(816, 264);
+            this.ctrlPersonCard1.TabIndex = 0;
+            // 
+            // frmShowPersonDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -75,8 +75,9 @@
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.ctrlPersonCard1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "frmShowDetails";
+            this.Name = "frmShowPersonDetails";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Person Details";
             this.Load += new System.EventHandler(this.frmShowPersonDetails_Load);
             this.ResumeLayout(false);

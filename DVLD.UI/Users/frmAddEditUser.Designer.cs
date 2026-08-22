@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddEditUser));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_PersonalInformation = new System.Windows.Forms.TabPage();
             this.btn_Next = new System.Windows.Forms.Button();
@@ -255,7 +256,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::DVLD.UI.Properties.Resources.Passwrod;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(194, 156);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(31, 26);
@@ -275,7 +276,7 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::DVLD.UI.Properties.Resources.Passwrod;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(194, 119);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(31, 26);
@@ -335,7 +336,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Close;
-            this.ClientSize = new System.Drawing.Size(861, 540);
+            this.ClientSize = new System.Drawing.Size(861, 543);
             this.Controls.Add(this.lb_Title);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btn_Save);
@@ -343,6 +344,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAddEditUser";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add / Edit User";
             this.Load += new System.EventHandler(this.frmAddEditUser_Load);
             this.tabControl1.ResumeLayout(false);

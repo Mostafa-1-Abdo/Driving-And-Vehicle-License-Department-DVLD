@@ -268,6 +268,7 @@
             this.msi_CurrentUserInfo.Name = "msi_CurrentUserInfo";
             this.msi_CurrentUserInfo.Size = new System.Drawing.Size(188, 38);
             this.msi_CurrentUserInfo.Text = "Current User Info";
+            this.msi_CurrentUserInfo.Click += new System.EventHandler(this.msi_CurrentUserInfo_Click);
             // 
             // changePasswordToolStripMenuItem
             // 
@@ -275,6 +276,7 @@
             this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
             this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(188, 38);
             this.changePasswordToolStripMenuItem.Text = "Change Password";
+            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 

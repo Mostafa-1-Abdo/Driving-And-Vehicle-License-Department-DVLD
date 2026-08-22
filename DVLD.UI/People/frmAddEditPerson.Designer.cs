@@ -365,7 +365,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::DVLD.UI.Properties.Resources.Phone;
-            this.pictureBox2.Location = new System.Drawing.Point(499, 132);
+            this.pictureBox2.Location = new System.Drawing.Point(500, 132);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(31, 26);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -555,7 +555,6 @@
             // 
             this.pb_PersonImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pb_PersonImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pb_PersonImage.Image = global::DVLD.UI.Properties.Resources.MalePersonImage;
             this.pb_PersonImage.InitialImage = null;
             this.pb_PersonImage.Location = new System.Drawing.Point(733, 97);
             this.pb_PersonImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -626,6 +625,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAddEditPerson";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add / Update Peron";
             this.Load += new System.EventHandler(this.frmAddEditPerson_Load);
             this.groupBox1.ResumeLayout(false);

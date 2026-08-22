@@ -18,8 +18,18 @@ namespace DVLD.UI
         }
 
         private void msi_Drivers_Click(object sender, EventArgs e)
-        { 
+        {
+
+        }
+
+        private void msi_CurrentUserInfo_Click(object sender, EventArgs e)
+        {
           
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void msi_Users_Click(object sender, EventArgs e)

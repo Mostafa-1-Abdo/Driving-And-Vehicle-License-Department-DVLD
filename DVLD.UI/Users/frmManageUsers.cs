@@ -37,8 +37,8 @@ namespace DVLD.UI.Users
         {
             ctrlManageData1.cb_FilterItems.Add("User ID");
             ctrlManageData1.cb_FilterItems.Add("Person ID");
-            ctrlManageData1.cb_FilterItems.Add("Username");
             ctrlManageData1.cb_FilterItems.Add("Full Name");
+            ctrlManageData1.cb_FilterItems.Add("Username");
             ctrlManageData1.cb_FilterItems.Add("Is Active");
         }
         private void _Initialize_dgv_RecordsColumns()

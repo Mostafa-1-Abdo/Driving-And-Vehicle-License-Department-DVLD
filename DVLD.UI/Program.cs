@@ -16,7 +16,10 @@ namespace DVLD.UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+
+            frmLogin Form = new frmLogin();
+            if (Form.ShowDialog() == DialogResult.OK)
+                Application.Run(new frmMain());
         }
     }
 }
