@@ -66,7 +66,7 @@ namespace DVLD.UI.People
             }
             else
             {
-                Text = lb_Title.Text = "Update Person";
+                Text = lb_Title.Text = "Edit Person";
 
                 _Person = clPerson.Find(_ID);
 
@@ -148,7 +148,10 @@ namespace DVLD.UI.People
         }
         private void tb_Email_Validating(object sender, CancelEventArgs e)
         {
-          if (!clUtil.IsValidEmail(tb_Email.Text))
+            if(string.IsNullOrWhiteSpace(tb_Email.Text))
+                errorProvider1.SetError(tb_Email, null);
+
+            else if (!clUtil.IsValidEmail(tb_Email.Text))
                 errorProvider1.SetError(tb_Email, $"Invalid Email Address format! (e.g., user@example.com)");
 
             else

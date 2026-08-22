@@ -53,6 +53,23 @@ namespace DVLD.Logic
             IsActive = UserDTO.IsActive;
         }
 
+        public enum enLoginResults { Success, UserNotFound,InvalidPassword,UserNotActive}
+        public static (enLoginResults Result,clUser User) Login(string Username,string Password)
+        {
+            clUserDTO UserDTO = clUserData.Find(Username);
+
+            if (UserDTO == null)
+                return (enLoginResults.UserNotFound,null);
+
+            else if (Password != UserDTO.Password)
+                return (enLoginResults.InvalidPassword,null);
+
+            else if(!UserDTO.IsActive)
+                return (enLoginResults.UserNotActive,null);
+
+            return (enLoginResults.Success,new clUser(UserDTO));
+        }
+
         public static clUser Find(int ID)
         {
             clUserDTO UserDTO = clUserData.Find(ID);
