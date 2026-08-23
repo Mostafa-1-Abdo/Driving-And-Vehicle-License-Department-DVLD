@@ -88,6 +88,7 @@
             // 
             // btn_Next
             // 
+            this.btn_Next.Enabled = false;
             this.btn_Next.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Next.Image = global::DVLD.UI.Properties.Resources.Next;
             this.btn_Next.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -102,10 +103,12 @@
             // 
             // ctrlPersonCardWithFilter1
             // 
+            this.ctrlPersonCardWithFilter1.gb_FilterEnabled = true;
             this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(3, 3);
             this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
             this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(825, 356);
             this.ctrlPersonCardWithFilter1.TabIndex = 116;
+            this.ctrlPersonCardWithFilter1.OnSelectedPerson += new System.Action<int>(this.ctrlPersonCardWithFilter1_OnSelectedPerson);
             // 
             // tp_LoginInformation
             // 
@@ -332,7 +335,6 @@
             // 
             // frmAddEditUser
             // 
-            this.AcceptButton = this.btn_Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Close;

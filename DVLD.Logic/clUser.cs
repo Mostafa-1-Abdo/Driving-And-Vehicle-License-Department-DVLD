@@ -17,7 +17,6 @@ namespace DVLD.Logic
     public class clUser
     {
         private enum enMode : byte { AddNew, Update }
-        public enum enGender : byte { Male, Female }
 
         private enMode _Mode;
 
@@ -27,10 +26,7 @@ namespace DVLD.Logic
         public string Password { get; set; }
         public bool IsActive { get; set; }
 
-        public clUserDTO UserDTO
-        {
-            get => new clUserDTO(ID, Person.PersonDTO, Username, Password, IsActive);
-        }
+        public clUserDTO UserDTO { get => new clUserDTO(ID, Person.PersonDTO, Username, Password, IsActive); }
 
         public clUser()
         {
@@ -126,9 +122,9 @@ namespace DVLD.Logic
             }
         }
 
-        public bool UpdatePassword(string NewPassword)
+        public bool ChangePassword(string NewPassword)
         {
-            if (clUserData.UpdatePassword(ID, NewPassword))
+            if (clUserData.ChangePassword(ID, NewPassword))
             {
                 Password = NewPassword;
                 return true;

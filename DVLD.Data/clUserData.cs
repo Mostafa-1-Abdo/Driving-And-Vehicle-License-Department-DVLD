@@ -263,7 +263,7 @@ namespace DVLD.Data
 
             return RowsAffected > 0;
         }
-        public static bool UpdatePassword(int ID, string NewPassword)
+        public static bool ChangePassword(int ID, string NewPassword)
         {
             int RowsAffected = 0;
 

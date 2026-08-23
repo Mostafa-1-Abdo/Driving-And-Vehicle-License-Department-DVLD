@@ -22,6 +22,8 @@ namespace DVLD.UI.UserControls
             lb_FullName.Text = "[????]";
             lb_NationalNumber.Text = "[????]";
             lb_Gender.Text = "[????]";
+            pb_Gender.Image = Resources.Male;
+            pb_PersonImage.Image = Resources.MalePersonImage;
             lb_Email.Text = "[????]";
             lb_Address.Text = "[????]";
             lb_DateOfBirth.Text = "[????]";
@@ -71,7 +73,7 @@ namespace DVLD.UI.UserControls
 
             if (_Person == null)
             {
-                MessageBox.Show($"No Person with ID = {ID} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show($"No person with ID = {ID} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 _ResetPersonCard();
                 return false;
             }

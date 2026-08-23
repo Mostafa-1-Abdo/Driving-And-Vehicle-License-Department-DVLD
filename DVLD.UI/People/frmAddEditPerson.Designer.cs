@@ -555,6 +555,7 @@
             // 
             this.pb_PersonImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pb_PersonImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_PersonImage.Image = global::DVLD.UI.Properties.Resources.MalePersonImage;
             this.pb_PersonImage.InitialImage = null;
             this.pb_PersonImage.Location = new System.Drawing.Point(733, 97);
             this.pb_PersonImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);

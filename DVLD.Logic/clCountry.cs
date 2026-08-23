@@ -9,10 +9,7 @@ namespace DVLD.Logic
         public int ID { get; set; }
         public string Name { get; set; }
 
-        public clCountryDTO CountryDTO
-        {
-            get => new clCountryDTO(ID, Name);
-        }
+        public clCountryDTO CountryDTO { get => new clCountryDTO(ID, Name); }
 
         public clCountry()
         {

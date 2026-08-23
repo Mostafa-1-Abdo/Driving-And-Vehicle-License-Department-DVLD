@@ -35,7 +35,7 @@ namespace DVLD.UI.Users
                 return;
             }
 
-            if (ctrlUserCard1.User.UpdatePassword(tb_NewPassword.Text.Trim()))
+            if (ctrlUserCard1.User.ChangePassword(tb_NewPassword.Text.Trim()))
             {
                 MessageBox.Show("Password changed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -51,7 +51,7 @@ namespace DVLD.UI.Users
             Close();
         }
 
-        private void txtCurrentPassword_Validating(object sender, CancelEventArgs e)
+        private void tb_CurrentPassword_Validating(object sender, CancelEventArgs e)
         {
             if (tb_CurrentPassword.Text != ctrlUserCard1.User.Password)
                 errorProvider1.SetError(tb_CurrentPassword, "Password is wrong.");
@@ -59,8 +59,7 @@ namespace DVLD.UI.Users
             else
                 errorProvider1.SetError(tb_CurrentPassword, null);
         }
-
-        private void txtNewPassword_Validating(object sender, CancelEventArgs e)
+        private void tb_NewPassword_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tb_NewPassword.Text))
                 errorProvider1.SetError(tb_NewPassword, "Password is required.");
@@ -71,8 +70,7 @@ namespace DVLD.UI.Users
             else
                 errorProvider1.SetError(tb_NewPassword, null);
         }
-
-        private void txtConfirmPassword_Validating(object sender, CancelEventArgs e)
+        private void tb_ConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(tb_ConfirmPassword.Text))
                 errorProvider1.SetError(tb_ConfirmPassword, "Confrim password is required.");

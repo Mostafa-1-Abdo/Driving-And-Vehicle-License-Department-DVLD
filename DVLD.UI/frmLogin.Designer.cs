@@ -35,9 +35,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Close = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.chkRememberMe = new System.Windows.Forms.CheckBox();
+            this.ckb_RememberMe = new System.Windows.Forms.CheckBox();
             this.btn_Login = new System.Windows.Forms.Button();
-            this.tb_UserName = new System.Windows.Forms.TextBox();
+            this.tb_Username = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tb_Password = new System.Windows.Forms.TextBox();
@@ -74,9 +74,9 @@
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainer1.Panel2.Controls.Add(this.btn_Close);
             this.splitContainer1.Panel2.Controls.Add(this.label7);
-            this.splitContainer1.Panel2.Controls.Add(this.chkRememberMe);
+            this.splitContainer1.Panel2.Controls.Add(this.ckb_RememberMe);
             this.splitContainer1.Panel2.Controls.Add(this.btn_Login);
-            this.splitContainer1.Panel2.Controls.Add(this.tb_UserName);
+            this.splitContainer1.Panel2.Controls.Add(this.tb_Username);
             this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.tb_Password);
@@ -160,24 +160,24 @@
             this.label7.TabIndex = 135;
             this.label7.Text = "Login to your account";
             // 
-            // chkRememberMe
+            // ckb_RememberMe
             // 
-            this.chkRememberMe.AutoSize = true;
-            this.chkRememberMe.Checked = true;
-            this.chkRememberMe.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRememberMe.Location = new System.Drawing.Point(166, 236);
-            this.chkRememberMe.Name = "chkRememberMe";
-            this.chkRememberMe.Size = new System.Drawing.Size(98, 17);
-            this.chkRememberMe.TabIndex = 134;
-            this.chkRememberMe.Text = "Remember Me.";
-            this.chkRememberMe.UseVisualStyleBackColor = true;
+            this.ckb_RememberMe.AutoSize = true;
+            this.ckb_RememberMe.Checked = true;
+            this.ckb_RememberMe.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckb_RememberMe.Location = new System.Drawing.Point(166, 250);
+            this.ckb_RememberMe.Name = "ckb_RememberMe";
+            this.ckb_RememberMe.Size = new System.Drawing.Size(95, 17);
+            this.ckb_RememberMe.TabIndex = 134;
+            this.ckb_RememberMe.Text = "Remember Me";
+            this.ckb_RememberMe.UseVisualStyleBackColor = true;
             // 
             // btn_Login
             // 
             this.btn_Login.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Login.Image = global::DVLD.UI.Properties.Resources.Login;
             this.btn_Login.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Login.Location = new System.Drawing.Point(270, 278);
+            this.btn_Login.Location = new System.Drawing.Point(270, 239);
             this.btn_Login.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_Login.Name = "btn_Login";
             this.btn_Login.Size = new System.Drawing.Size(126, 37);
@@ -186,14 +186,14 @@
             this.btn_Login.UseVisualStyleBackColor = true;
             this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
             // 
-            // tb_UserName
+            // tb_Username
             // 
-            this.tb_UserName.Location = new System.Drawing.Point(166, 166);
-            this.tb_UserName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_UserName.MaxLength = 50;
-            this.tb_UserName.Name = "tb_UserName";
-            this.tb_UserName.Size = new System.Drawing.Size(230, 20);
-            this.tb_UserName.TabIndex = 1;
+            this.tb_Username.Location = new System.Drawing.Point(166, 166);
+            this.tb_Username.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tb_Username.MaxLength = 50;
+            this.tb_Username.Name = "tb_Username";
+            this.tb_Username.Size = new System.Drawing.Size(230, 20);
+            this.tb_Username.TabIndex = 1;
             // 
             // label5
             // 
@@ -253,12 +253,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.CancelButton = this.btn_Close;
             this.ClientSize = new System.Drawing.Size(908, 531);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
@@ -278,9 +280,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox chkRememberMe;
+        private System.Windows.Forms.CheckBox ckb_RememberMe;
         private System.Windows.Forms.Button btn_Login;
-        private System.Windows.Forms.TextBox tb_UserName;
+        private System.Windows.Forms.TextBox tb_Username;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tb_Password;

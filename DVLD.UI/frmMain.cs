@@ -24,18 +24,30 @@ namespace DVLD.UI
 
         private void msi_CurrentUserInfo_Click(object sender, EventArgs e)
         {
-          
+            frmShowUserDetails Form = new frmShowUserDetails(clGlobalUser.GlobalUser.ID);
+            Form.ShowDialog();
         }
 
-        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void msi_ChangePassword_Click(object sender, EventArgs e)
         {
-
+            frmChangePassword Form = new frmChangePassword(clGlobalUser.GlobalUser.ID);
+            Form.ShowDialog();
         }
 
         private void msi_Users_Click(object sender, EventArgs e)
         {
             frmManageUsers Form = new frmManageUsers();
             Form.ShowDialog();
+        }
+
+        private void signOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            clGlobalUser.GlobalUser = null;
         }
     }
 }

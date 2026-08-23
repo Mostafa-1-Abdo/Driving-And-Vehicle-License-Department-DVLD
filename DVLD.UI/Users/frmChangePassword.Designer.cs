@@ -88,7 +88,7 @@
             this.tb_CurrentPassword.PasswordChar = '*';
             this.tb_CurrentPassword.Size = new System.Drawing.Size(167, 20);
             this.tb_CurrentPassword.TabIndex = 138;
-            this.tb_CurrentPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtCurrentPassword_Validating);
+            this.tb_CurrentPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tb_CurrentPassword_Validating);
             // 
             // pictureBox2
             // 
@@ -109,7 +109,7 @@
             this.tb_ConfirmPassword.PasswordChar = '*';
             this.tb_ConfirmPassword.Size = new System.Drawing.Size(167, 20);
             this.tb_ConfirmPassword.TabIndex = 140;
-            this.tb_ConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtConfirmPassword_Validating);
+            this.tb_ConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tb_ConfirmPassword_Validating);
             // 
             // label3
             // 
@@ -142,7 +142,7 @@
             this.tb_NewPassword.PasswordChar = '*';
             this.tb_NewPassword.Size = new System.Drawing.Size(167, 20);
             this.tb_NewPassword.TabIndex = 139;
-            this.tb_NewPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtNewPassword_Validating);
+            this.tb_NewPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tb_NewPassword_Validating);
             // 
             // pictureBox1
             // 

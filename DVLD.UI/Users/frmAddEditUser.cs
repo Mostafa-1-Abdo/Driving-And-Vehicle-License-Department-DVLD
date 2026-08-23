@@ -37,21 +37,26 @@ namespace DVLD.UI.Users
         private void _FillFormWithUserInfo()
         {
             if (!ctrlPersonCardWithFilter1.LoadPersonInfo(_User.Person))
+            {
                 Close();
+                return;
+            }
 
             lb_ID.Text = _User.ID.ToString();
             tb_Username.Text = _User.Username;
             tb_Password.Text = tb_ConfirmPassword.Text = _User.Password;
         }
-        private void _EdtitSettings()
+        private void _EditModeSettings()
         {
             Text = lb_Title.Text = "Edit User";
+
+            ctrlPersonCardWithFilter1.gb_FilterEnabled = false;
+
+            btn_Next.Enabled = true;
 
             tb_Username.Enabled = false;
             tb_Password.Enabled = false;
             tb_ConfirmPassword.Enabled = false;
-
-            ctrlPersonCardWithFilter1.DisableFilter();
         }
         private void _DesignForm()
         {
@@ -72,7 +77,7 @@ namespace DVLD.UI.Users
                     return;
                 }
 
-                _EdtitSettings();
+                _EditModeSettings();
 
                 _FillFormWithUserInfo();
             }
@@ -82,19 +87,24 @@ namespace DVLD.UI.Users
             _DesignForm();
         }
 
-        private void btn_Close_Click(object sender, EventArgs e)
+        private void ctrlPersonCardWithFilter1_OnSelectedPerson(int ID)
         {
-            Close();
+            btn_Next.Enabled = ID != -1 ? true : false;
         }
 
         private void btn_Next_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tp_LoginInformation;
+           tabControl1.SelectedTab = tp_LoginInformation;
+
+            if(tabControl1.SelectedTab == tp_PersonalInformation)
+                ctrlPersonCardWithFilter1.SearchSelect();
+
         }
         private void btn_Previous_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tp_PersonalInformation;
         }
+
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (e.TabPage == tp_LoginInformation)
@@ -103,6 +113,7 @@ namespace DVLD.UI.Users
                 {
                     MessageBox.Show("Please select or add a person first before proceeding to Login Information.", "Select Person Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     e.Cancel = true;
+
                 }
 
                 else if (_Mode == enMode.AddNew && clUser.IsExistForPersonID(ctrlPersonCardWithFilter1.SelectedPerson.ID))
@@ -111,11 +122,58 @@ namespace DVLD.UI.Users
                     e.Cancel = true;
                 }
 
-                btn_Save.Enabled = !e.Cancel;
+                if (e.Cancel)
+                {
+                    btn_Save.Enabled = false;
+                    AcceptButton = null;
+                }
+
+                else
+                {
+                    btn_Save.Enabled = true;
+                    AcceptButton = btn_Save;
+                }
             }
 
             else if (e.TabPage == tp_PersonalInformation)
+            {
                 btn_Save.Enabled = false;
+                AcceptButton = null;
+            }
+        }
+
+        private void btn_Close_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            if (!this.IsValid(errorProvider1))
+            {
+                MessageBox.Show("Some fields are not valid. Please check red error icons.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (_Mode == enMode.AddNew)
+                _User.Person = ctrlPersonCardWithFilter1.SelectedPerson;
+
+            _User.Username = tb_Username.Text;
+            _User.Password = tb_Password.Text;
+            _User.IsActive = ckb_IsActive.Checked;
+
+            if (_User.Save())
+            {
+                lb_ID.Text = _User.ID.ToString();
+
+                MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                _EditModeSettings();
+
+                _Mode = enMode.Edit;
+            }
+            else
+                MessageBox.Show("Error: Data was not saved successfully.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void tb_Username_Validating(object sender, CancelEventArgs e)
@@ -150,35 +208,6 @@ namespace DVLD.UI.Users
 
             else
                 errorProvider1.SetError(tb_ConfirmPassword, null);
-        }
-
-        private void btn_Save_Click(object sender, EventArgs e)
-        {
-            if (!this.IsValid(errorProvider1))
-            {
-                MessageBox.Show("Some fields are not valid. Please check red error icons.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (_Mode == enMode.AddNew)
-                _User.Person = ctrlPersonCardWithFilter1.SelectedPerson;
-
-            _User.Username = tb_Username.Text;
-            _User.Password = tb_Password.Text;
-            _User.IsActive = ckb_IsActive.Checked;
-
-            if (_User.Save())
-            {
-                lb_ID.Text = _User.ID.ToString();
-
-                MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                _EdtitSettings();
-
-                _Mode = enMode.Edit;
-            }
-            else
-                MessageBox.Show("Error: Data was not saved successfully.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

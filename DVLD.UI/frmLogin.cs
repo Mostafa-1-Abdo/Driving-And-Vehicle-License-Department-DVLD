@@ -1,12 +1,5 @@
 ﻿using DVLD.Logic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD.UI
@@ -18,9 +11,29 @@ namespace DVLD.UI
             InitializeComponent();
         }
 
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            tb_Username.Text = Properties.Settings.Default.Username;
+            tb_Password.Text = Properties.Settings.Default.Password;
+        }
+
+        private void ClearLoginInfo()
+        {
+            Properties.Settings.Default.Username = string.Empty;
+            Properties.Settings.Default.Password = string.Empty;
+
+            Properties.Settings.Default.Save();
+        }
+        private void SaveLoginInfo()
+        {
+            Properties.Settings.Default.Username = tb_Username.Text;
+            Properties.Settings.Default.Password = tb_Password.Text;
+
+            Properties.Settings.Default.Save();
+        }
         private void btn_Login_Click(object sender, EventArgs e)
         {
-            var (Result, User) = clUser.Login(tb_UserName.Text.Trim(), tb_Password.Text.Trim());
+            var (Result, User) = clUser.Login(tb_Username.Text.Trim(), tb_Password.Text);
 
             if (Result == clUser.enLoginResults.UserNotFound || Result == clUser.enLoginResults.InvalidPassword)
                 MessageBox.Show("Invalid username or password. Please verify your credentials and try again.", "Invalid Credentials", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -32,6 +45,12 @@ namespace DVLD.UI
             {
                 DialogResult = DialogResult.OK;
                 clGlobalUser.GlobalUser = User;
+
+                if (ckb_RememberMe.Checked)
+                    SaveLoginInfo();
+
+                else
+                    ClearLoginInfo();
 
                 Close();
             }
