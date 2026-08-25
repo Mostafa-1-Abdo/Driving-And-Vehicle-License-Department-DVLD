@@ -73,6 +73,7 @@
             // 
             this.llb_EditPersonInfo.AutoSize = true;
             this.llb_EditPersonInfo.Enabled = false;
+            this.llb_EditPersonInfo.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.llb_EditPersonInfo.Location = new System.Drawing.Point(658, 37);
             this.llb_EditPersonInfo.Name = "llb_EditPersonInfo";
             this.llb_EditPersonInfo.Size = new System.Drawing.Size(118, 21);
@@ -174,6 +175,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.Black;
             this.label22.Location = new System.Drawing.Point(8, 37);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
@@ -421,6 +423,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ctrlPersonCard";
             this.Size = new System.Drawing.Size(822, 276);
             this.groupBox1.ResumeLayout(false);

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_Records = new System.Windows.Forms.DataGridView();
             this.ContectMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -51,14 +51,14 @@
             this.dgv_Records.AllowUserToDeleteRows = false;
             this.dgv_Records.AllowUserToResizeRows = false;
             this.dgv_Records.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Records.ContextMenuStrip = this.ContectMenuStrip;
             this.dgv_Records.Location = new System.Drawing.Point(17, 285);
@@ -79,22 +79,22 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(13, 259);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 20);
+            this.label1.Size = new System.Drawing.Size(76, 21);
             this.label1.TabIndex = 1;
             this.label1.Text = "Filter By:";
             // 
             // lb_Title
             // 
-            this.lb_Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Title.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_Title.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lb_Title.Location = new System.Drawing.Point(378, 199);
             this.lb_Title.Name = "lb_Title";
             this.lb_Title.Size = new System.Drawing.Size(333, 46);
             this.lb_Title.TabIndex = 2;
-            this.lb_Title.Text = "label2";
+            this.lb_Title.Text = "Title";
             this.lb_Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cb_Filter
@@ -113,7 +113,7 @@
             // 
             this.tb_Search.Location = new System.Drawing.Point(268, 260);
             this.tb_Search.Name = "tb_Search";
-            this.tb_Search.Size = new System.Drawing.Size(210, 20);
+            this.tb_Search.Size = new System.Drawing.Size(210, 22);
             this.tb_Search.TabIndex = 4;
             this.tb_Search.Visible = false;
             this.tb_Search.TextChanged += new System.EventHandler(this.tb_Search_TextChanged);
@@ -122,17 +122,17 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(13, 575);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 20);
+            this.label3.Size = new System.Drawing.Size(74, 21);
             this.label3.TabIndex = 7;
             this.label3.Text = "Records:";
             // 
             // lb_NumberOfRecords
             // 
             this.lb_NumberOfRecords.AutoSize = true;
-            this.lb_NumberOfRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lb_NumberOfRecords.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_NumberOfRecords.Location = new System.Drawing.Point(100, 580);
             this.lb_NumberOfRecords.Name = "lb_NumberOfRecords";
             this.lb_NumberOfRecords.Size = new System.Drawing.Size(13, 13);
@@ -185,6 +185,7 @@
             this.Controls.Add(this.lb_Title);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgv_Records);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ctrlManageData";
             this.Size = new System.Drawing.Size(1185, 609);
             this.Load += new System.EventHandler(this.ctrlManageData_Load);

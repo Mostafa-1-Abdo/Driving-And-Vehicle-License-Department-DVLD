@@ -52,6 +52,7 @@
             // 
             // ctrlUserCard1
             // 
+            this.ctrlUserCard1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ctrlUserCard1.Location = new System.Drawing.Point(12, 58);
             this.ctrlUserCard1.Name = "ctrlUserCard1";
             this.ctrlUserCard1.Size = new System.Drawing.Size(816, 370);
@@ -59,7 +60,7 @@
             // 
             // lb_Title
             // 
-            this.lb_Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Title.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_Title.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lb_Title.Location = new System.Drawing.Point(238, 9);
             this.lb_Title.Name = "lb_Title";
@@ -86,7 +87,7 @@
             this.tb_CurrentPassword.MaxLength = 50;
             this.tb_CurrentPassword.Name = "tb_CurrentPassword";
             this.tb_CurrentPassword.PasswordChar = '*';
-            this.tb_CurrentPassword.Size = new System.Drawing.Size(167, 20);
+            this.tb_CurrentPassword.Size = new System.Drawing.Size(167, 22);
             this.tb_CurrentPassword.TabIndex = 138;
             this.tb_CurrentPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tb_CurrentPassword_Validating);
             // 
@@ -107,7 +108,7 @@
             this.tb_ConfirmPassword.MaxLength = 50;
             this.tb_ConfirmPassword.Name = "tb_ConfirmPassword";
             this.tb_ConfirmPassword.PasswordChar = '*';
-            this.tb_ConfirmPassword.Size = new System.Drawing.Size(167, 20);
+            this.tb_ConfirmPassword.Size = new System.Drawing.Size(167, 22);
             this.tb_ConfirmPassword.TabIndex = 140;
             this.tb_ConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tb_ConfirmPassword_Validating);
             // 
@@ -140,7 +141,7 @@
             this.tb_NewPassword.MaxLength = 50;
             this.tb_NewPassword.Name = "tb_NewPassword";
             this.tb_NewPassword.PasswordChar = '*';
-            this.tb_NewPassword.Size = new System.Drawing.Size(167, 20);
+            this.tb_NewPassword.Size = new System.Drawing.Size(167, 22);
             this.tb_NewPassword.TabIndex = 139;
             this.tb_NewPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tb_NewPassword_Validating);
             // 
@@ -167,7 +168,7 @@
             // btn_Close
             // 
             this.btn_Close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Close.Image = global::DVLD.UI.Properties.Resources.Close;
             this.btn_Close.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_Close.Location = new System.Drawing.Point(568, 546);
@@ -181,7 +182,8 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_Save.FlatAppearance.BorderSize = 0;
+            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Save.Image = global::DVLD.UI.Properties.Resources.Save;
             this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_Save.Location = new System.Drawing.Point(702, 546);
@@ -217,6 +219,7 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.lb_Title);
             this.Controls.Add(this.ctrlUserCard1);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmChangePassword";
             this.ShowIcon = false;

@@ -54,7 +54,8 @@
             // 
             // btn_AddNewPerson
             // 
-            this.btn_AddNewPerson.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_AddNewPerson.FlatAppearance.BorderSize = 0;
+            this.btn_AddNewPerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_AddNewPerson.Image = global::DVLD.UI.Properties.Resources.AddNewPerson;
             this.btn_AddNewPerson.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_AddNewPerson.Location = new System.Drawing.Point(594, 20);
@@ -67,6 +68,7 @@
             // 
             // btn_SearchPerson
             // 
+            this.btn_SearchPerson.FlatAppearance.BorderSize = 0;
             this.btn_SearchPerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_SearchPerson.Image = global::DVLD.UI.Properties.Resources.SearchPerson;
             this.btn_SearchPerson.Location = new System.Drawing.Point(543, 20);
@@ -83,7 +85,7 @@
             this.cb_Filter.Items.AddRange(new object[] {
             "ID",
             "National Number"});
-            this.cb_Filter.Location = new System.Drawing.Point(96, 25);
+            this.cb_Filter.Location = new System.Drawing.Point(96, 28);
             this.cb_Filter.Name = "cb_Filter";
             this.cb_Filter.Size = new System.Drawing.Size(210, 21);
             this.cb_Filter.TabIndex = 16;
@@ -91,10 +93,10 @@
             // tb_Search
             // 
             this.tb_Search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tb_Search.Location = new System.Drawing.Point(313, 25);
+            this.tb_Search.Location = new System.Drawing.Point(313, 27);
             this.tb_Search.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Search.Name = "tb_Search";
-            this.tb_Search.Size = new System.Drawing.Size(214, 20);
+            this.tb_Search.Size = new System.Drawing.Size(214, 22);
             this.tb_Search.TabIndex = 17;
             this.tb_Search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_Search_KeyDown);
             this.tb_Search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_Search_KeyPress);
@@ -102,15 +104,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(16, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 19);
+            this.label1.Size = new System.Drawing.Size(70, 21);
             this.label1.TabIndex = 19;
             this.label1.Text = "Find By:";
             // 
             // ctrlPersonCard1
             // 
+            this.ctrlPersonCard1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ctrlPersonCard1.Location = new System.Drawing.Point(3, 86);
             this.ctrlPersonCard1.Name = "ctrlPersonCard1";
             this.ctrlPersonCard1.Size = new System.Drawing.Size(819, 271);
@@ -122,6 +125,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gb_Filters);
             this.Controls.Add(this.ctrlPersonCard1);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ctrlPersonCardWithFilter";
             this.Size = new System.Drawing.Size(830, 364);
             this.gb_Filters.ResumeLayout(false);

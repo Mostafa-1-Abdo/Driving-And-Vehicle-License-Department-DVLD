@@ -82,6 +82,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.tb_Password);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox8);
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox3);
+            this.splitContainer1.Panel2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer1.Size = new System.Drawing.Size(908, 531);
             this.splitContainer1.SplitterDistance = 420;
@@ -167,14 +168,15 @@
             this.ckb_RememberMe.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckb_RememberMe.Location = new System.Drawing.Point(166, 250);
             this.ckb_RememberMe.Name = "ckb_RememberMe";
-            this.ckb_RememberMe.Size = new System.Drawing.Size(95, 17);
+            this.ckb_RememberMe.Size = new System.Drawing.Size(99, 17);
             this.ckb_RememberMe.TabIndex = 134;
             this.ckb_RememberMe.Text = "Remember Me";
             this.ckb_RememberMe.UseVisualStyleBackColor = true;
             // 
             // btn_Login
             // 
-            this.btn_Login.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_Login.FlatAppearance.BorderSize = 0;
+            this.btn_Login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Login.Image = global::DVLD.UI.Properties.Resources.Login;
             this.btn_Login.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_Login.Location = new System.Drawing.Point(270, 239);
@@ -192,7 +194,7 @@
             this.tb_Username.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_Username.MaxLength = 50;
             this.tb_Username.Name = "tb_Username";
-            this.tb_Username.Size = new System.Drawing.Size(230, 20);
+            this.tb_Username.Size = new System.Drawing.Size(230, 22);
             this.tb_Username.TabIndex = 1;
             // 
             // label5
@@ -224,7 +226,7 @@
             this.tb_Password.MaxLength = 50;
             this.tb_Password.Name = "tb_Password";
             this.tb_Password.PasswordChar = '*';
-            this.tb_Password.Size = new System.Drawing.Size(230, 20);
+            this.tb_Password.Size = new System.Drawing.Size(230, 22);
             this.tb_Password.TabIndex = 2;
             // 
             // pictureBox8

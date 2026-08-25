@@ -35,7 +35,7 @@
             // 
             // lb_Title
             // 
-            this.lb_Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Title.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_Title.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lb_Title.Location = new System.Drawing.Point(238, 9);
             this.lb_Title.Name = "lb_Title";
@@ -47,7 +47,7 @@
             // btn_Close
             // 
             this.btn_Close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Close.Image = global::DVLD.UI.Properties.Resources.Close;
             this.btn_Close.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_Close.Location = new System.Drawing.Point(704, 429);
@@ -61,6 +61,7 @@
             // 
             // ctrlUserCard1
             // 
+            this.ctrlUserCard1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ctrlUserCard1.Location = new System.Drawing.Point(12, 58);
             this.ctrlUserCard1.Name = "ctrlUserCard1";
             this.ctrlUserCard1.Size = new System.Drawing.Size(816, 370);
@@ -74,6 +75,7 @@
             this.Controls.Add(this.ctrlUserCard1);
             this.Controls.Add(this.lb_Title);
             this.Controls.Add(this.btn_Close);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmShowUserDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
