@@ -1,7 +1,6 @@
 ﻿using DVLD.Logic;
 using DVLD.UI.People;
 using System;
-using System.Diagnostics.Eventing.Reader;
 using System.Windows.Forms;
 
 namespace DVLD.UI.UserControls

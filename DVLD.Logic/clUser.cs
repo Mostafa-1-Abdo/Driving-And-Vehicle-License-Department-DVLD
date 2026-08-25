@@ -1,16 +1,6 @@
 ﻿using DVLD.Data;
 using DVLD.Data.DTOs;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using static DVLD.Logic.clPerson;
 
 namespace DVLD.Logic
 {
