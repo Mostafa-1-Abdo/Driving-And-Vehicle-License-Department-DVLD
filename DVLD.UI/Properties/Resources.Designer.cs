@@ -393,6 +393,16 @@ namespace DVLD.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NationalNumber {
+            get {
+                object obj = ResourceManager.GetObject("NationalNumber", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NewDrivingLicense {
             get {
                 object obj = ResourceManager.GetObject("NewDrivingLicense", resourceCulture);
