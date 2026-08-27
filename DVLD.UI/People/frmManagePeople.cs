@@ -59,6 +59,8 @@ namespace DVLD.UI
 
             _Initialize_cb_Filter();
             ctrlManageData1.SetNumericColumns("ID", "Phone");
+
+            CancelButton = ctrlManageData1.CloseButton;
         }
 
         private void ctrlManageData_OnCloseClick()

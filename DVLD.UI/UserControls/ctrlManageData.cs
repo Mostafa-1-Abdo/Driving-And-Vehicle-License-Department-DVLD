@@ -21,6 +21,8 @@ namespace DVLD.UI
 
         public ToolStripItemCollection cms_dgvItems { get => ContectMenuStrip.Items; }
 
+        public IButtonControl CloseButton { get => btn_Close; }
+
         public ctrlManageData()
         {
             InitializeComponent();
