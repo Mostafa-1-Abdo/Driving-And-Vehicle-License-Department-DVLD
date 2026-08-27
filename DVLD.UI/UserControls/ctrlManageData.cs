@@ -28,7 +28,7 @@ namespace DVLD.UI
 
         private void ctrlManageData_Load(object sender, EventArgs e)
         {
-            cb_Filter.SelectedIndex = 0;
+            cb_Filter.SelectedItem = "None";
         }
 
         private List<string> _NumericColumns = new List<string>();
@@ -41,6 +41,8 @@ namespace DVLD.UI
         {
             dgv_Records.DataSource = View;
             RefreshNumberOfRecords();
+
+            cb_Filter.Text = "None";
         }
         public void RefreshNumberOfRecords()
         {

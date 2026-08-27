@@ -9,13 +9,18 @@ namespace DVLD.UI
 {
     public partial class frmManagePeople : Form
     {
-        private DataTable PeopleTable;
+        private DataTable _PeopleTable;
 
         public frmManagePeople()
         {
             InitializeComponent();
         }
 
+        private void _ResetForm()
+        {
+            _PeopleTable = clPerson.GetAllPeople();
+            ctrlManageData1.RefreshRecords(_PeopleTable.DefaultView);
+        }
         private void _Initialize_cms_dgv()
         {
             ctrlManageData1.cms_dgvItems.Add("Show Details", Resources.ShowDetails, ShowDetails_Click);
@@ -44,8 +49,7 @@ namespace DVLD.UI
         }
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
-            PeopleTable = clPerson.GetAllPeople();
-            ctrlManageData1.RefreshRecords(PeopleTable.DefaultView);
+            _ResetForm();
             _Initialize_dgv_RecordsColumns();
 
             _Initialize_cms_dgv();
@@ -64,7 +68,7 @@ namespace DVLD.UI
             frmAddEditPerson Form = new frmAddEditPerson();
             Form.ShowDialog();
 
-            ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
+            _ResetForm();
         }
 
         private void ctrlManageData_SearchTextChanged(string Filter, string Search)
@@ -72,23 +76,23 @@ namespace DVLD.UI
             Search = Search.Trim();
 
             if (Filter == "None" || string.IsNullOrEmpty(Search))
-                PeopleTable.DefaultView.RowFilter = string.Empty;
+                _PeopleTable.DefaultView.RowFilter = string.Empty;
 
             else
             {
                 if (Filter == "ID")
                 {
                     if (int.TryParse(Search, out int ID))
-                        PeopleTable.DefaultView.RowFilter = $"[ID] = {ID}";
+                        _PeopleTable.DefaultView.RowFilter = $"[ID] = {ID}";
                     else
-                        PeopleTable.DefaultView.RowFilter = $"[ID] = {-1}";
+                        _PeopleTable.DefaultView.RowFilter = $"[ID] = {-1}";
                 }
 
                 else if (Filter == "Gender")
-                    PeopleTable.DefaultView.RowFilter = $"Gender like '{Search}%'";
+                    _PeopleTable.DefaultView.RowFilter = $"Gender like '{Search}%'";
 
                 else
-                    PeopleTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
+                    _PeopleTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
             }
 
             ctrlManageData1.RefreshNumberOfRecords();
@@ -100,14 +104,14 @@ namespace DVLD.UI
             frmShowPersonDetails Form = new frmShowPersonDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value);
             Form.ShowDialog(this);
 
-            ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
+            _ResetForm();
         }
         private void EditPerson_Click(object sender, EventArgs e)
         {
             frmAddEditPerson Form = new frmAddEditPerson((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value);
             Form.ShowDialog(this);
 
-            ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
+            _ResetForm();
         }
         private void DeletePerson_Click(object sender, EventArgs e)
         {

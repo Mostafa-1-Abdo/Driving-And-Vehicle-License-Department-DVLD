@@ -66,7 +66,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label1.Location = new System.Drawing.Point(11, 498);
+            this.label1.Location = new System.Drawing.Point(11, 504);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(147, 21);
@@ -75,7 +75,7 @@
             // 
             // tb_CurrentPassword
             // 
-            this.tb_CurrentPassword.Location = new System.Drawing.Point(205, 497);
+            this.tb_CurrentPassword.Location = new System.Drawing.Point(205, 503);
             this.tb_CurrentPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_CurrentPassword.MaxLength = 50;
             this.tb_CurrentPassword.Name = "tb_CurrentPassword";
@@ -87,16 +87,16 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::DVLD.UI.Properties.Resources.Passwrod;
-            this.pictureBox2.Location = new System.Drawing.Point(167, 495);
+            this.pictureBox2.Location = new System.Drawing.Point(167, 502);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox2.TabIndex = 146;
             this.pictureBox2.TabStop = false;
             // 
             // tb_ConfirmPassword
             // 
-            this.tb_ConfirmPassword.Location = new System.Drawing.Point(205, 569);
+            this.tb_ConfirmPassword.Location = new System.Drawing.Point(205, 575);
             this.tb_ConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_ConfirmPassword.MaxLength = 50;
             this.tb_ConfirmPassword.Name = "tb_ConfirmPassword";
@@ -110,7 +110,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label3.Location = new System.Drawing.Point(11, 570);
+            this.label3.Location = new System.Drawing.Point(11, 576);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(152, 21);
@@ -122,7 +122,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label2.Location = new System.Drawing.Point(11, 534);
+            this.label2.Location = new System.Drawing.Point(11, 540);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(125, 21);
@@ -131,7 +131,7 @@
             // 
             // tb_NewPassword
             // 
-            this.tb_NewPassword.Location = new System.Drawing.Point(205, 533);
+            this.tb_NewPassword.Location = new System.Drawing.Point(205, 539);
             this.tb_NewPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_NewPassword.MaxLength = 50;
             this.tb_NewPassword.Name = "tb_NewPassword";
@@ -143,20 +143,20 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(167, 567);
+            this.pictureBox1.Location = new System.Drawing.Point(167, 574);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 144;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(167, 531);
+            this.pictureBox3.Location = new System.Drawing.Point(167, 538);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(31, 26);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox3.TabIndex = 142;
             this.pictureBox3.TabStop = false;
             // 

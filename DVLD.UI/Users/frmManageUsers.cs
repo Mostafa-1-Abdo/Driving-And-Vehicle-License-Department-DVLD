@@ -8,20 +8,25 @@ namespace DVLD.UI.Users
 {
     public partial class frmManageUsers : Form
     {
-        private DataTable UsersTable;
+        private DataTable _UsersTable;
 
         public frmManageUsers()
         {
             InitializeComponent();
         }
 
+        private void _ResetForm()
+        {
+            _UsersTable = clUser.GetAllUsers();
+            ctrlManageData1.RefreshRecords(_UsersTable.DefaultView);
+        }
         private void _Initialize_cms_dgv()
         {
             ctrlManageData1.cms_dgvItems.Add("Show Details", Resources.ShowDetails, ShowDetails_Click);
             ctrlManageData1.cms_dgvItems.Add("-");
             ctrlManageData1.cms_dgvItems.Add("Edit", Resources.Edit, EditUser_Click);
             ctrlManageData1.cms_dgvItems.Add("Delete", Resources.Delete, DeleteUser_Click);
-            ctrlManageData1.cms_dgvItems.Add("Change Password", Resources.Delete, ChangePassword_Click);
+            ctrlManageData1.cms_dgvItems.Add("Change Password", Resources.ChangePassword, ChangePassword_Click);
             ctrlManageData1.cms_dgvItems.Add("-");
             ctrlManageData1.cms_dgvItems.Add("Send Email", Resources.SendEmail, SendEmail_Click);
             ctrlManageData1.cms_dgvItems.Add("Phone Call", Resources.PhoneCall, PhoneCall_Click);
@@ -41,8 +46,7 @@ namespace DVLD.UI.Users
         }
         private void frmManageUsers_Load(object sender, EventArgs e)
         {
-            UsersTable = clUser.GetAllUsers();
-            ctrlManageData1.RefreshRecords(UsersTable.DefaultView);
+            _ResetForm();
             _Initialize_dgv_RecordsColumns();
 
             _Initialize_cms_dgv();
@@ -61,7 +65,7 @@ namespace DVLD.UI.Users
             frmAddEditUser Form = new frmAddEditUser();
             Form.ShowDialog();
 
-            ctrlManageData1.RefreshRecords(clUser.GetAllUsers().DefaultView);
+            _ResetForm();
         }
 
         private void ctrlManageData_SearchTextChanged(string Filter, string Search)
@@ -70,7 +74,7 @@ namespace DVLD.UI.Users
 
             if (Filter == "None" || string.IsNullOrEmpty(Search))
             {
-                UsersTable.DefaultView.RowFilter = string.Empty;
+                _UsersTable.DefaultView.RowFilter = string.Empty;
             }
 
             else
@@ -78,13 +82,13 @@ namespace DVLD.UI.Users
                 if (Filter == "User ID" || Filter == "Person ID" || Filter == "Is Active")
                 {
                     if (int.TryParse(Search, out int Value))
-                        UsersTable.DefaultView.RowFilter = $"[{Filter}] = {Value}";
+                        _UsersTable.DefaultView.RowFilter = $"[{Filter}] = {Value}";
                     else
-                        UsersTable.DefaultView.RowFilter = $"[{Filter}] = {Value}";
+                        _UsersTable.DefaultView.RowFilter = $"[{Filter}] = {Value}";
                 }
 
                 else
-                    UsersTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
+                    _UsersTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
             }
 
             ctrlManageData1.RefreshNumberOfRecords();
@@ -96,14 +100,14 @@ namespace DVLD.UI.Users
             frmShowUserDetails Form = new frmShowUserDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value);
             Form.ShowDialog(this);
 
-            ctrlManageData1.RefreshRecords(clUser.GetAllUsers().DefaultView);
+            _ResetForm();
         }
         private void EditUser_Click(object sender, EventArgs e)
         {
             frmAddEditUser Form = new frmAddEditUser((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value);
             Form.ShowDialog(this);
 
-            ctrlManageData1.RefreshRecords(clUser.GetAllUsers().DefaultView);
+            _ResetForm();
         }
         private void DeleteUser_Click(object sender, EventArgs e)
         {
@@ -134,7 +138,6 @@ namespace DVLD.UI.Users
         private void PhoneCall_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
         }
     }
 }
