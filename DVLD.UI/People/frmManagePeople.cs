@@ -20,6 +20,8 @@ namespace DVLD.UI
         {
             _PeopleTable = clPerson.GetAllPeople();
             ctrlManageData1.RefreshRecords(_PeopleTable.DefaultView);
+
+            ctrlManageData1.dgv_RecordsColumns["Date Of Birth"].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
         private void _Initialize_cms_dgv()
         {
