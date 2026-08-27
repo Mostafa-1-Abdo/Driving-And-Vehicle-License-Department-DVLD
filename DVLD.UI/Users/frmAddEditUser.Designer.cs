@@ -33,7 +33,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_PersonalInformation = new System.Windows.Forms.TabPage();
             this.btn_Next = new System.Windows.Forms.Button();
-            this.ctrlPersonCardWithFilter1 = new DVLD.UI.UserControls.ctrlPersonCardWithFilter();
             this.tp_LoginInformation = new System.Windows.Forms.TabPage();
             this.btn_Previous = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -53,6 +52,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btn_Close = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
+            this.ctrlPersonCardWithFilter1 = new DVLD.UI.UserControls.ctrlPersonCardWithFilter();
             this.tabControl1.SuspendLayout();
             this.tp_PersonalInformation.SuspendLayout();
             this.tp_LoginInformation.SuspendLayout();
@@ -103,17 +103,6 @@
             this.btn_Next.Text = "Next";
             this.btn_Next.UseVisualStyleBackColor = false;
             this.btn_Next.Click += new System.EventHandler(this.btn_Next_Click);
-            // 
-            // ctrlPersonCardWithFilter1
-            // 
-            this.ctrlPersonCardWithFilter1.BackColor = System.Drawing.Color.Transparent;
-            this.ctrlPersonCardWithFilter1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlPersonCardWithFilter1.gb_FilterEnabled = true;
-            this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(5, 3);
-            this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
-            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(707, 403);
-            this.ctrlPersonCardWithFilter1.TabIndex = 116;
-            this.ctrlPersonCardWithFilter1.OnSelectedPerson += new System.Action<int>(this.ctrlPersonCardWithFilter1_OnSelectedPerson);
             // 
             // tp_LoginInformation
             // 
@@ -334,6 +323,7 @@
             this.btn_Close.TabIndex = 118;
             this.btn_Close.Text = "Close";
             this.btn_Close.UseVisualStyleBackColor = false;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // btn_Save
             // 
@@ -350,12 +340,25 @@
             this.btn_Save.TabIndex = 117;
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = false;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            // 
+            // ctrlPersonCardWithFilter1
+            // 
+            this.ctrlPersonCardWithFilter1.BackColor = System.Drawing.Color.Transparent;
+            this.ctrlPersonCardWithFilter1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlPersonCardWithFilter1.gb_FilterEnabled = true;
+            this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(5, 3);
+            this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
+            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(707, 403);
+            this.ctrlPersonCardWithFilter1.TabIndex = 116;
+            this.ctrlPersonCardWithFilter1.OnSelectedPerson += new System.Action<int>(this.ctrlPersonCardWithFilter1_OnSelectedPerson);
             // 
             // frmAddEditUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btn_Close;
             this.ClientSize = new System.Drawing.Size(748, 630);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.btn_Save);

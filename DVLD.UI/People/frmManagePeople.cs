@@ -36,12 +36,12 @@ namespace DVLD.UI
         private void _Initialize_cb_Filter()
         {
             ctrlManageData1.cb_FilterItems.Add("ID");
-            ctrlManageData1.cb_FilterItems.Add("Gender");
-            ctrlManageData1.cb_FilterItems.Add("Full Name");
-            ctrlManageData1.cb_FilterItems.Add("Country");
             ctrlManageData1.cb_FilterItems.Add("National Number");
+            ctrlManageData1.cb_FilterItems.Add("Full Name");
+            ctrlManageData1.cb_FilterItems.Add("Gender");
             ctrlManageData1.cb_FilterItems.Add("Phone");
             ctrlManageData1.cb_FilterItems.Add("Email");
+            ctrlManageData1.cb_FilterItems.Add("Country");
         }
         private void _Initialize_dgv_RecordsColumns()
         {
@@ -58,7 +58,6 @@ namespace DVLD.UI
             _Initialize_cms_dgv();
 
             _Initialize_cb_Filter();
-            ctrlManageData1.SetNumericColumns("ID", "Phone");
 
             CancelButton = ctrlManageData1.CloseButton;
         }

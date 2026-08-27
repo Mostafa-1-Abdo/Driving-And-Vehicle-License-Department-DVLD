@@ -52,7 +52,6 @@ namespace DVLD.UI.Users
             _Initialize_cms_dgv();
 
             _Initialize_cb_Filter();
-            ctrlManageData1.SetNumericColumns("Person ID", "User ID","Is Active");
 
             CancelButton = ctrlManageData1.CloseButton;
         }

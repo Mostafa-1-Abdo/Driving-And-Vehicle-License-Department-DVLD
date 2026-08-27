@@ -170,7 +170,7 @@
             this.btn_Close.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.btn_Close.Image = global::DVLD.UI.Properties.Resources.Close;
             this.btn_Close.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Close.Location = new System.Drawing.Point(1058, 620);
+            this.btn_Close.Location = new System.Drawing.Point(1058, 617);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(121, 36);
             this.btn_Close.TabIndex = 6;

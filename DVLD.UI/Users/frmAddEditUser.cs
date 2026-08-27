@@ -118,14 +118,14 @@ namespace DVLD.UI.Users
                 if (e.Cancel)
                 {
                     btn_Save.Enabled = false;
-                    btn_Save.FlatAppearance.BorderSize = 0;
+                    btn_Save.FlatAppearance.BorderSize = 1;
                     AcceptButton = null;
                 }
 
                 else
                 {
                     btn_Save.Enabled = true;
-                    btn_Save.FlatAppearance.BorderSize = 1;
+                    btn_Save.FlatAppearance.BorderSize = 0;
                     AcceptButton = btn_Save;
                 }
             }

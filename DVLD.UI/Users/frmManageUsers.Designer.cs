@@ -42,7 +42,7 @@
             this.ctrlManageData1.Location = new System.Drawing.Point(0, 0);
             this.ctrlManageData1.Name = "ctrlManageData1";
             this.ctrlManageData1.pb_HeaderImage = global::DVLD.UI.Properties.Resources.ManageUsers;
-            this.ctrlManageData1.Size = new System.Drawing.Size(1188, 668);
+            this.ctrlManageData1.Size = new System.Drawing.Size(1188, 672);
             this.ctrlManageData1.TabIndex = 0;
             this.ctrlManageData1.CloseClicked += new System.Action(this.ctrlManageData_OnCloseClick);
             this.ctrlManageData1.AddClicked += new System.Action(this.ctrlManageData_OnAddClick);
@@ -52,7 +52,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1188, 668);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1188, 672);
             this.Controls.Add(this.ctrlManageData1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

@@ -209,7 +209,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(10, 169);
+            this.label4.Location = new System.Drawing.Point(9, 235);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 21);
@@ -220,7 +220,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 235);
+            this.label3.Location = new System.Drawing.Point(9, 170);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 21);
@@ -330,7 +330,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::DVLD.UI.Properties.Resources.Calendar;
-            this.pictureBox4.Location = new System.Drawing.Point(125, 233);
+            this.pictureBox4.Location = new System.Drawing.Point(125, 167);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(24, 24);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -400,7 +400,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::DVLD.UI.Properties.Resources.Phone;
-            this.pictureBox2.Location = new System.Drawing.Point(125, 167);
+            this.pictureBox2.Location = new System.Drawing.Point(125, 233);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(24, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;

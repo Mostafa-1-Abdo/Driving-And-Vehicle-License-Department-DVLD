@@ -23,6 +23,8 @@ namespace DVLD.UI
 
         public IButtonControl CloseButton { get => btn_Close; }
 
+        private DataView _View;
+
         public ctrlManageData()
         {
             InitializeComponent();
@@ -33,15 +35,9 @@ namespace DVLD.UI
             cb_Filter.SelectedItem = "None";
         }
 
-        private List<string> _NumericColumns = new List<string>();
-        public void SetNumericColumns(params string[] Columns)
-        {
-            _NumericColumns = new List<string>(Columns);
-        }
-       
         public void RefreshRecords(DataView View)
         {
-            dgv_Records.DataSource = View;
+            dgv_Records.DataSource = _View = View;
             RefreshNumberOfRecords();
 
             cb_Filter.Text = "None";
@@ -77,7 +73,17 @@ namespace DVLD.UI
 
         private void tb_Search_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(_NumericColumns.Contains(cb_Filter.Text))
+            if (!_View.Table.Columns.Contains(cb_Filter.Text))
+                return;
+
+            Type ColumnType = _View.Table.Columns[cb_Filter.Text].DataType;
+            if (ColumnType == typeof(int) ||
+                ColumnType == typeof(short) ||
+                 ColumnType == typeof(byte) ||
+                ColumnType == typeof(long) ||
+                ColumnType == typeof(decimal) ||
+                ColumnType == typeof(float) ||
+                ColumnType == typeof(double))
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
     }
