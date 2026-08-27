@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.msi_Applications = new System.Windows.Forms.ToolStripMenuItem();
             this.msi_DrivingLicensesServices = new System.Windows.Forms.ToolStripMenuItem();
             this.msi_NewDrivingLicense = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,6 @@
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.signOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -78,6 +78,18 @@
             this.MenuStrip.Size = new System.Drawing.Size(800, 56);
             this.MenuStrip.TabIndex = 0;
             this.MenuStrip.Text = "menuStrip1";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Black;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::DVLD.UI.Properties.Resources.MainBackground;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 56);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(800, 394);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // msi_Applications
             // 
@@ -121,14 +133,14 @@
             // 
             // msi_LocalLicense
             // 
-            this.msi_LocalLicense.Image = global::DVLD.UI.Properties.Resources.LocalLicense;
+            this.msi_LocalLicense.Image = global::DVLD.UI.Properties.Resources.Local;
             this.msi_LocalLicense.Name = "msi_LocalLicense";
             this.msi_LocalLicense.Size = new System.Drawing.Size(206, 38);
             this.msi_LocalLicense.Text = "Local License";
             // 
             // msi_InternationalLicense
             // 
-            this.msi_InternationalLicense.Image = global::DVLD.UI.Properties.Resources.InternationalLicense;
+            this.msi_InternationalLicense.Image = global::DVLD.UI.Properties.Resources.Global;
             this.msi_InternationalLicense.Name = "msi_InternationalLicense";
             this.msi_InternationalLicense.Size = new System.Drawing.Size(206, 38);
             this.msi_InternationalLicense.Text = "International License";
@@ -188,14 +200,14 @@
             // 
             // msi_LocalDrivingLicenseApplications
             // 
-            this.msi_LocalDrivingLicenseApplications.Image = global::DVLD.UI.Properties.Resources.LocalDrivingLicenseApplications;
+            this.msi_LocalDrivingLicenseApplications.Image = global::DVLD.UI.Properties.Resources.Local;
             this.msi_LocalDrivingLicenseApplications.Name = "msi_LocalDrivingLicenseApplications";
             this.msi_LocalDrivingLicenseApplications.Size = new System.Drawing.Size(276, 38);
             this.msi_LocalDrivingLicenseApplications.Text = "Local Driving License Applications";
             // 
             // toolStripMenuItem7
             // 
-            this.toolStripMenuItem7.Image = global::DVLD.UI.Properties.Resources.InternationalLicense;
+            this.toolStripMenuItem7.Image = global::DVLD.UI.Properties.Resources.Global;
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
             this.toolStripMenuItem7.Size = new System.Drawing.Size(276, 38);
             this.toolStripMenuItem7.Text = "International License Applications";
@@ -290,18 +302,6 @@
             this.signOutToolStripMenuItem.Size = new System.Drawing.Size(188, 38);
             this.signOutToolStripMenuItem.Text = "Sign Out";
             this.signOutToolStripMenuItem.Click += new System.EventHandler(this.signOutToolStripMenuItem_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Black;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::DVLD.UI.Properties.Resources.MainBackground;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 56);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(800, 394);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
             // 
             // frmMain
             // 

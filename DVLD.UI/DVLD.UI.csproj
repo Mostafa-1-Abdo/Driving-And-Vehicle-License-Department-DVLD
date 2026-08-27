@@ -368,5 +368,11 @@
   <ItemGroup>
     <None Include="Resources\NationalNumber.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FindPerson.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CurrentUserInfo1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

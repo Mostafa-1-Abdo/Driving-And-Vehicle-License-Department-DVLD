@@ -101,5 +101,10 @@ namespace DVLD.UI.UserControls
                 btn_SearchPerson.PerformClick();
             }
         }
+
+        private void gb_Filters_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

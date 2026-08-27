@@ -17,7 +17,7 @@ namespace DVLD.UI.Users
 
         private void _Initialize_cms_dgv()
         {
-            ctrlManageData1.cms_dgvItems.Add("Show Details", Resources.CurrentUserInfo, ShowDetails_Click);
+            ctrlManageData1.cms_dgvItems.Add("Show Details", Resources.ShowDetails, ShowDetails_Click);
             ctrlManageData1.cms_dgvItems.Add("-");
             ctrlManageData1.cms_dgvItems.Add("Edit", Resources.Edit, EditUser_Click);
             ctrlManageData1.cms_dgvItems.Add("Delete", Resources.Delete, DeleteUser_Click);
@@ -94,14 +94,14 @@ namespace DVLD.UI.Users
         private void ShowDetails_Click(object sender, EventArgs e)
         {
             frmShowUserDetails Form = new frmShowUserDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value);
-            Form.ShowDialog();
+            Form.ShowDialog(this);
 
             ctrlManageData1.RefreshRecords(clUser.GetAllUsers().DefaultView);
         }
         private void EditUser_Click(object sender, EventArgs e)
         {
             frmAddEditUser Form = new frmAddEditUser((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value);
-            Form.ShowDialog();
+            Form.ShowDialog(this);
 
             ctrlManageData1.RefreshRecords(clUser.GetAllUsers().DefaultView);
         }
@@ -124,7 +124,7 @@ namespace DVLD.UI.Users
         private void ChangePassword_Click(object sender, EventArgs e)
         {
             frmChangePassword Form = new frmChangePassword((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value);
-            Form.ShowDialog();
+            Form.ShowDialog(this);
         }
 
         private void SendEmail_Click(object sender, EventArgs e)

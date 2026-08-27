@@ -18,7 +18,7 @@ namespace DVLD.UI
 
         private void _Initialize_cms_dgv()
         {
-            ctrlManageData1.cms_dgvItems.Add("Show Details", Resources.CurrentUserInfo, ShowDetails_Click);
+            ctrlManageData1.cms_dgvItems.Add("Show Details", Resources.ShowDetails, ShowDetails_Click);
             ctrlManageData1.cms_dgvItems.Add("-");
             ctrlManageData1.cms_dgvItems.Add("Edit", Resources.Edit, EditPerson_Click);
             ctrlManageData1.cms_dgvItems.Add("Delete", Resources.Delete, DeletePerson_Click);
@@ -98,14 +98,14 @@ namespace DVLD.UI
         private void ShowDetails_Click(object sender, EventArgs e)
         {
             frmShowPersonDetails Form = new frmShowPersonDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value);
-            Form.ShowDialog();
+            Form.ShowDialog(this);
 
             ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }
         private void EditPerson_Click(object sender, EventArgs e)
         {
             frmAddEditPerson Form = new frmAddEditPerson((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value);
-            Form.ShowDialog();
+            Form.ShowDialog(this);
 
             ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
         }

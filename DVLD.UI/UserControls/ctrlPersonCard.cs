@@ -117,7 +117,7 @@ namespace DVLD.UI.UserControls
         private void llb_EditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmAddEditPerson Form = new frmAddEditPerson(_Person.ID);
-            Form.ShowDialog();
+            Form.ShowDialog(FindForm());
 
             LoadPersonInfo(_Person.ID);
         }
