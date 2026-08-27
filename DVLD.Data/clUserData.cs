@@ -42,7 +42,7 @@ namespace DVLD.Data
                                    Reader["Email"] != DBNull.Value ? (string)Reader["Email"] : null, Reader["ImagePath"] != DBNull.Value ? (string)Reader["ImagePath"] : null),
                                     Username = (string)Reader["Username"],
                                     Password = (string)Reader["Password"],
-                                    IsActive = (bool)Reader["IsActive"],
+                                    IsActive = (bool)Reader["IsActive"]
                                 };
                             }
                         }
@@ -90,7 +90,7 @@ namespace DVLD.Data
                                    Reader["Email"] != DBNull.Value ? (string)Reader["Email"] : null, Reader["ImagePath"] != DBNull.Value ? (string)Reader["ImagePath"] : null),
                                     Username = (string)Reader["Username"],
                                     Password = (string)Reader["Password"],
-                                    IsActive = (bool)Reader["IsActive"],
+                                    IsActive = (bool)Reader["IsActive"]
                                 };
                             }
                         }
@@ -326,7 +326,6 @@ namespace DVLD.Data
                 using (SqlConnection Connection = new SqlConnection(ConnectionString))
                 {
                     string SQL = @"select * from ManageUsers_View";
-
 
                     using (SqlCommand Command = new SqlCommand(SQL, Connection))
                     {

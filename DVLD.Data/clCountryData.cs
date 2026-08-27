@@ -9,31 +9,27 @@ namespace DVLD.Data
         public static DataTable GetAllCountries()
         {
             DataTable Table = new DataTable();
-            SqlConnection Connection = null;
 
             try
             {
-                Connection = new SqlConnection(ConnectionString);
-                Connection.Open();
+                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                {
+                    string SQL = "select * from Countries";
 
-                string SQL = "select * from Countries";
-                SqlCommand Command = new SqlCommand(SQL, Connection);
+                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    {
+                        Connection.Open();
 
-                SqlDataReader Reader = Command.ExecuteReader();
+                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        {
+                            Table.Load(Reader);
+                        }
+                    }
+                }
 
-                if (Reader.HasRows)
-                    Table.Load(Reader);
-
-                Reader.Close();
             }
             catch
             {
-                //Code
-            }
-            finally
-            {
-                if (Connection != null && Connection.State == ConnectionState.Open)
-                    Connection.Close();
             }
 
             return Table;
