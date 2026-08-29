@@ -4,6 +4,7 @@ using DVLD.UI.Properties;
 using DVLD.UI.People;
 using System.Data;
 using DVLD.Logic;
+using static DVLD.UI.ctrlManageData;
 
 namespace DVLD.UI
 {
@@ -36,9 +37,7 @@ namespace DVLD.UI
         private void _Initialize_dgv_RecordsColumns()
         {
             ctrlManageData1.dgv_RecordsColumns["National Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ctrlManageData1.dgv_RecordsColumns["Email"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ctrlManageData1.dgv_RecordsColumns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode = ctrlManageData1.dgv_RecordsColumns["Email"].AutoSizeMode = ctrlManageData1.dgv_RecordsColumns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
@@ -49,10 +48,8 @@ namespace DVLD.UI
 
             ctrlManageData1.cb_FilterItems.AddRange(new object[] { "ID", "National Number", "Full Name", "Gender", "Phone", "Email", "Country" });
 
-           CancelButton = ctrlManageData1.CloseButton;
+            CancelButton = ctrlManageData1.CloseButton;
         }
-
-        private void ctrlManageData_OnCloseClick() => Close();
 
         private void ctrlManageData_OnAddClick()
         {
@@ -61,25 +58,20 @@ namespace DVLD.UI
             _ResetForm();
         }
 
-        private void ctrlManageData_SearchTextChanged(string Filter, string Search)
+        private void ctrlManageData_OnFilterChanged(string Filter)
         {
-            Search = Search.Trim();
-
-            if (Filter == "None" || string.IsNullOrEmpty(Search))
-                _PeopleTable.DefaultView.RowFilter = string.Empty;
-
-            else if (Filter == "ID")
-                _PeopleTable.DefaultView.RowFilter = int.TryParse(Search, out int ID) ? $"ID = {ID}" : $"ID = {-1}";
-
-            else if (Filter == "Gender")
-                _PeopleTable.DefaultView.RowFilter = $"Gender like '{Search}%'";
+            if (Filter == "Gender")
+                ctrlManageData1.SetCustomeFilter(new clFilterOption[]
+                {
+                  new clFilterOption("All",null),
+                  new clFilterOption("Male","Male"),
+                  new clFilterOption("Female","Female")
+                });
 
             else
-                _PeopleTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
-
-            ctrlManageData1.RefreshNumberOfRecords();
+                ctrlManageData1.SetTextFilter();
         }
-
+       
         //Context Menu Strip Items Events
         private void ShowDetails_Click(object sender, EventArgs e)
         {

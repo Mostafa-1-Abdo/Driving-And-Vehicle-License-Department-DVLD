@@ -3,6 +3,7 @@ using DVLD.UI.Properties;
 using System;
 using System.Data;
 using System.Windows.Forms;
+using static DVLD.UI.ctrlManageData;
 
 namespace DVLD.UI.Users
 {
@@ -33,8 +34,7 @@ namespace DVLD.UI.Users
         }
         private void _Initialize_dgv_RecordsColumns()
         {
-            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ctrlManageData1.dgv_RecordsColumns["Username"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode = ctrlManageData1.dgv_RecordsColumns["Username"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         private void frmManageUsers_Load(object sender, EventArgs e)
         {
@@ -48,8 +48,6 @@ namespace DVLD.UI.Users
             CancelButton = ctrlManageData1.CloseButton;
         }
 
-        private void ctrlManageData_OnCloseClick() => Close();
-
         private void ctrlManageData_OnAddClick()
         {
             new frmAddEditUser().ShowDialog();
@@ -57,20 +55,18 @@ namespace DVLD.UI.Users
             _ResetForm();
         }
 
-        private void ctrlManageData_SearchTextChanged(string Filter, string Search)
+        private void ctrlManageData_OnFilterChanged(string Filter)
         {
-            Search = Search.Trim();
-
-            if (Filter == "None" || string.IsNullOrEmpty(Search))
-                _UsersTable.DefaultView.RowFilter = string.Empty;
-
-            else if (Filter == "User ID" || Filter == "Person ID" || Filter == "Is Active")
-                _UsersTable.DefaultView.RowFilter = int.TryParse(Search, out int Value) ? $"[{Filter}] = {Value}" : $"[{Filter}] = {-1}";
+            if (Filter == "Is Active")
+                ctrlManageData1.SetCustomeFilter(new clFilterOption[]
+                {
+                  new clFilterOption("All",null),
+                  new clFilterOption("Inactive",0),
+                  new clFilterOption("Active",1)
+                });
 
             else
-                _UsersTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
-
-            ctrlManageData1.RefreshNumberOfRecords();
+                ctrlManageData1.SetTextFilter();
         }
 
         //Context Menu Strip Items Events

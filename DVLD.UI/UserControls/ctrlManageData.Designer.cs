@@ -42,6 +42,7 @@
             this.tt_AddNew = new System.Windows.Forms.ToolTip(this.components);
             this.btn_Close = new System.Windows.Forms.Button();
             this.pb_Header = new System.Windows.Forms.PictureBox();
+            this.cb_Search = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Records)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Header)).BeginInit();
             this.SuspendLayout();
@@ -119,7 +120,7 @@
             // 
             this.tb_Search.Location = new System.Drawing.Point(284, 302);
             this.tb_Search.Name = "tb_Search";
-            this.tb_Search.Size = new System.Drawing.Size(210, 22);
+            this.tb_Search.Size = new System.Drawing.Size(172, 22);
             this.tb_Search.TabIndex = 4;
             this.tb_Search.Visible = false;
             this.tb_Search.TextChanged += new System.EventHandler(this.tb_Search_TextChanged);
@@ -189,11 +190,23 @@
             this.pb_Header.TabIndex = 5;
             this.pb_Header.TabStop = false;
             // 
+            // cb_Search
+            // 
+            this.cb_Search.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Search.FormattingEnabled = true;
+            this.cb_Search.Location = new System.Drawing.Point(284, 303);
+            this.cb_Search.Name = "cb_Search";
+            this.cb_Search.Size = new System.Drawing.Size(172, 21);
+            this.cb_Search.TabIndex = 10;
+            this.cb_Search.Visible = false;
+            this.cb_Search.SelectedIndexChanged += new System.EventHandler(this.cb_Search_SelectedIndexChanged);
+            // 
             // ctrlManageData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.cb_Search);
             this.Controls.Add(this.btn_Add);
             this.Controls.Add(this.lb_NumberOfRecords);
             this.Controls.Add(this.label3);
@@ -208,7 +221,6 @@
             this.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.Name = "ctrlManageData";
             this.Size = new System.Drawing.Size(1192, 663);
-            this.Load += new System.EventHandler(this.ctrlManageData_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Records)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Header)).EndInit();
             this.ResumeLayout(false);
@@ -230,5 +242,6 @@
         private System.Windows.Forms.Button btn_Add;
         private System.Windows.Forms.ContextMenuStrip ContectMenuStrip;
         private System.Windows.Forms.ToolTip tt_AddNew;
+        private System.Windows.Forms.ComboBox cb_Search;
     }
 }

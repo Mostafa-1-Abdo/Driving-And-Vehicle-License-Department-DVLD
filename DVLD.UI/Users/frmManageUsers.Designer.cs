@@ -44,9 +44,8 @@
             this.ctrlManageData1.pb_HeaderImage = global::DVLD.UI.Properties.Resources.ManageUsers;
             this.ctrlManageData1.Size = new System.Drawing.Size(1188, 672);
             this.ctrlManageData1.TabIndex = 0;
-            this.ctrlManageData1.CloseClicked += new System.Action(this.ctrlManageData_OnCloseClick);
             this.ctrlManageData1.AddClicked += new System.Action(this.ctrlManageData_OnAddClick);
-            this.ctrlManageData1.SearchTextChanged += new System.Action<string, string>(this.ctrlManageData_SearchTextChanged);
+            this.ctrlManageData1.OnFilterChanged += new System.Action<string>(this.ctrlManageData_OnFilterChanged);
             // 
             // frmManageUsers
             // 
