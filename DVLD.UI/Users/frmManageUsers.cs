@@ -28,16 +28,8 @@ namespace DVLD.UI.Users
             ctrlManageData1.cms_dgvItems.Add("Delete", Resources.Delete, DeleteUser_Click);
             ctrlManageData1.cms_dgvItems.Add("Change Password", Resources.ChangePassword, ChangePassword_Click);
             ctrlManageData1.cms_dgvItems.Add("-");
-            ctrlManageData1.cms_dgvItems.Add("Send Email", Resources.SendEmail, SendEmail_Click);
-            ctrlManageData1.cms_dgvItems.Add("Phone Call", Resources.PhoneCall, PhoneCall_Click);
-        }
-        private void _Initialize_cb_Filter()
-        {
-            ctrlManageData1.cb_FilterItems.Add("User ID");
-            ctrlManageData1.cb_FilterItems.Add("Person ID");
-            ctrlManageData1.cb_FilterItems.Add("Full Name");
-            ctrlManageData1.cb_FilterItems.Add("Username");
-            ctrlManageData1.cb_FilterItems.Add("Is Active");
+            ctrlManageData1.cms_dgvItems.Add("Send Email", Resources.SendEmail, FeatureNotImplemented_Click);
+            ctrlManageData1.cms_dgvItems.Add("Phone Call", Resources.PhoneCall, FeatureNotImplemented_Click);
         }
         private void _Initialize_dgv_RecordsColumns()
         {
@@ -51,20 +43,16 @@ namespace DVLD.UI.Users
 
             _Initialize_cms_dgv();
 
-            _Initialize_cb_Filter();
+            ctrlManageData1.cb_FilterItems.AddRange(new object[] { "User ID", "Person ID", "Full Name", "Username", "Is Active" });
 
             CancelButton = ctrlManageData1.CloseButton;
         }
 
-        private void ctrlManageData_OnCloseClick()
-        {
-           Close();
-        }
+        private void ctrlManageData_OnCloseClick() => Close();
 
         private void ctrlManageData_OnAddClick()
         {
-            frmAddEditUser Form = new frmAddEditUser();
-            Form.ShowDialog();
+            new frmAddEditUser().ShowDialog();
 
             _ResetForm();
         }
@@ -74,23 +62,13 @@ namespace DVLD.UI.Users
             Search = Search.Trim();
 
             if (Filter == "None" || string.IsNullOrEmpty(Search))
-            {
                 _UsersTable.DefaultView.RowFilter = string.Empty;
-            }
+
+            else if (Filter == "User ID" || Filter == "Person ID" || Filter == "Is Active")
+                _UsersTable.DefaultView.RowFilter = int.TryParse(Search, out int Value) ? $"[{Filter}] = {Value}" : $"[{Filter}] = {-1}";
 
             else
-            {
-                if (Filter == "User ID" || Filter == "Person ID" || Filter == "Is Active")
-                {
-                    if (int.TryParse(Search, out int Value))
-                        _UsersTable.DefaultView.RowFilter = $"[{Filter}] = {Value}";
-                    else
-                        _UsersTable.DefaultView.RowFilter = $"[{Filter}] = {Value}";
-                }
-
-                else
-                    _UsersTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
-            }
+                _UsersTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
 
             ctrlManageData1.RefreshNumberOfRecords();
         }
@@ -98,15 +76,13 @@ namespace DVLD.UI.Users
         //Context Menu Strip Items Events
         private void ShowDetails_Click(object sender, EventArgs e)
         {
-            frmShowUserDetails Form = new frmShowUserDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value);
-            Form.ShowDialog(this);
+            new frmShowUserDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value).ShowDialog(this);
 
             _ResetForm();
         }
         private void EditUser_Click(object sender, EventArgs e)
         {
-            frmAddEditUser Form = new frmAddEditUser((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value);
-            Form.ShowDialog(this);
+            new frmAddEditUser((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value).ShowDialog(this);
 
             _ResetForm();
         }
@@ -120,7 +96,7 @@ namespace DVLD.UI.Users
                 {
                     MessageBox.Show("User Deleted Successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    ctrlManageData1.RefreshRecords(clUser.GetAllUsers().DefaultView);
+                    _ResetForm();
                 }
                 else
                     MessageBox.Show("User was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -128,15 +104,10 @@ namespace DVLD.UI.Users
         }
         private void ChangePassword_Click(object sender, EventArgs e)
         {
-            frmChangePassword Form = new frmChangePassword((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value);
-            Form.ShowDialog(this);
+            new frmChangePassword((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value).ShowDialog(this);
         }
 
-        private void SendEmail_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-        private void PhoneCall_Click(object sender, EventArgs e)
+        private void FeatureNotImplemented_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }

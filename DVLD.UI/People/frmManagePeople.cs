@@ -52,10 +52,7 @@ namespace DVLD.UI
            CancelButton = ctrlManageData1.CloseButton;
         }
 
-        private void ctrlManageData_OnCloseClick()
-        {
-          Close();
-        }
+        private void ctrlManageData_OnCloseClick() => Close();
 
         private void ctrlManageData_OnAddClick()
         {
