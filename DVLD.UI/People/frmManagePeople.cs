@@ -30,18 +30,8 @@ namespace DVLD.UI
             ctrlManageData1.cms_dgvItems.Add("Edit", Resources.Edit, EditPerson_Click);
             ctrlManageData1.cms_dgvItems.Add("Delete", Resources.Delete, DeletePerson_Click);
             ctrlManageData1.cms_dgvItems.Add("-");
-            ctrlManageData1.cms_dgvItems.Add("Send Email", Resources.SendEmail, SendEmail_Click);
-            ctrlManageData1.cms_dgvItems.Add("Phone Call", Resources.PhoneCall, PhoneCall_Click);
-        }
-        private void _Initialize_cb_Filter()
-        {
-            ctrlManageData1.cb_FilterItems.Add("ID");
-            ctrlManageData1.cb_FilterItems.Add("National Number");
-            ctrlManageData1.cb_FilterItems.Add("Full Name");
-            ctrlManageData1.cb_FilterItems.Add("Gender");
-            ctrlManageData1.cb_FilterItems.Add("Phone");
-            ctrlManageData1.cb_FilterItems.Add("Email");
-            ctrlManageData1.cb_FilterItems.Add("Country");
+            ctrlManageData1.cms_dgvItems.Add("Send Email", Resources.SendEmail, FeatureNotImplemented_Click);
+            ctrlManageData1.cms_dgvItems.Add("Phone Call", Resources.PhoneCall, FeatureNotImplemented_Click);
         }
         private void _Initialize_dgv_RecordsColumns()
         {
@@ -57,20 +47,19 @@ namespace DVLD.UI
 
             _Initialize_cms_dgv();
 
-            _Initialize_cb_Filter();
+            ctrlManageData1.cb_FilterItems.AddRange(new object[] { "ID", "National Number", "Full Name", "Gender", "Phone", "Email", "Country" });
 
-            CancelButton = ctrlManageData1.CloseButton;
+           CancelButton = ctrlManageData1.CloseButton;
         }
 
         private void ctrlManageData_OnCloseClick()
         {
-            this.Close();
+          Close();
         }
 
         private void ctrlManageData_OnAddClick()
         {
-            frmAddEditPerson Form = new frmAddEditPerson();
-            Form.ShowDialog();
+            new frmAddEditPerson().ShowDialog();
 
             _ResetForm();
         }
@@ -82,22 +71,14 @@ namespace DVLD.UI
             if (Filter == "None" || string.IsNullOrEmpty(Search))
                 _PeopleTable.DefaultView.RowFilter = string.Empty;
 
+            else if (Filter == "ID")
+                _PeopleTable.DefaultView.RowFilter = int.TryParse(Search, out int ID) ? $"ID = {ID}" : $"ID = {-1}";
+
+            else if (Filter == "Gender")
+                _PeopleTable.DefaultView.RowFilter = $"Gender like '{Search}%'";
+
             else
-            {
-                if (Filter == "ID")
-                {
-                    if (int.TryParse(Search, out int ID))
-                        _PeopleTable.DefaultView.RowFilter = $"[ID] = {ID}";
-                    else
-                        _PeopleTable.DefaultView.RowFilter = $"[ID] = {-1}";
-                }
-
-                else if (Filter == "Gender")
-                    _PeopleTable.DefaultView.RowFilter = $"Gender like '{Search}%'";
-
-                else
-                    _PeopleTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
-            }
+                _PeopleTable.DefaultView.RowFilter = $"[{Filter}] like '%{Search}%'";
 
             ctrlManageData1.RefreshNumberOfRecords();
         }
@@ -105,15 +86,13 @@ namespace DVLD.UI
         //Context Menu Strip Items Events
         private void ShowDetails_Click(object sender, EventArgs e)
         {
-            frmShowPersonDetails Form = new frmShowPersonDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value);
-            Form.ShowDialog(this);
+            new frmShowPersonDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value).ShowDialog(this);
 
             _ResetForm();
         }
         private void EditPerson_Click(object sender, EventArgs e)
         {
-            frmAddEditPerson Form = new frmAddEditPerson((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value);
-            Form.ShowDialog(this);
+            new frmAddEditPerson((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value).ShowDialog(this);
 
             _ResetForm();
         }
@@ -121,27 +100,22 @@ namespace DVLD.UI
         {
             int ID = (int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value;
 
-            if (MessageBox.Show($"Are you sure you want to delete Person {ID}?","Confirm Delete",MessageBoxButtons.OKCancel,MessageBoxIcon.Question,MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            if (MessageBox.Show($"Are you sure you want to delete Person {ID}?", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
             {
-                if(clPerson.Delete(ID))
+                if (clPerson.Delete(ID))
                 {
-                    MessageBox.Show("Person Deleted Successfully.","Successful",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show("Person Deleted Successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    ctrlManageData1.RefreshRecords(clPerson.GetAllPeople().DefaultView);
+                    _ResetForm();
                 }
                 else
                     MessageBox.Show("Person was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void SendEmail_Click(object sender, EventArgs e)
+        private void FeatureNotImplemented_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-        private void PhoneCall_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
         }
     }
 }
