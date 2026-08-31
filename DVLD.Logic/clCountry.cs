@@ -6,7 +6,7 @@ namespace DVLD.Logic
 {
     public class clCountry
     {
-        public int ID { get; private set; }
+        public int ID { get; set; }
         public string Name { get; set; }
 
         public clCountryDTO CountryDTO => new clCountryDTO(ID, Name); 

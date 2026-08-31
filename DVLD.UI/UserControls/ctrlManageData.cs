@@ -22,6 +22,15 @@ namespace DVLD.UI
 
         public IButtonControl CloseButton { get => btn_Close; }
 
+        public void RemoveFilterAndAddButton()
+        {
+            lb_FilterBy.Visible = false;
+            cb_Filter.Visible = false;
+            btn_Add.Visible = false;
+
+            Height = 500;
+        }
+
         private DataView _View;
 
         public ctrlManageData()

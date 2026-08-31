@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_Records = new System.Windows.Forms.DataGridView();
             this.ContectMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.lb_FilterBy = new System.Windows.Forms.Label();
             this.lb_Title = new System.Windows.Forms.Label();
             this.cb_Filter = new System.Windows.Forms.ComboBox();
             this.tb_Search = new System.Windows.Forms.TextBox();
@@ -81,15 +81,15 @@
             this.ContectMenuStrip.Name = "ContectMenuStrip";
             this.ContectMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
-            // label1
+            // lb_FilterBy
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 303);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 21);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Filter By:";
+            this.lb_FilterBy.AutoSize = true;
+            this.lb_FilterBy.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_FilterBy.Location = new System.Drawing.Point(13, 303);
+            this.lb_FilterBy.Name = "lb_FilterBy";
+            this.lb_FilterBy.Size = new System.Drawing.Size(76, 21);
+            this.lb_FilterBy.TabIndex = 1;
+            this.lb_FilterBy.Text = "Filter By:";
             // 
             // lb_Title
             // 
@@ -215,7 +215,7 @@
             this.Controls.Add(this.tb_Search);
             this.Controls.Add(this.cb_Filter);
             this.Controls.Add(this.lb_Title);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lb_FilterBy);
             this.Controls.Add(this.dgv_Records);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.DarkSlateGray;
@@ -231,7 +231,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgv_Records;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lb_FilterBy;
         private System.Windows.Forms.Label lb_Title;
         private System.Windows.Forms.ComboBox cb_Filter;
         private System.Windows.Forms.TextBox tb_Search;
