@@ -5,7 +5,7 @@ using static DVLD.Data.clDataAccessSettings;
 
 namespace DVLD.Data
 {
-    public static class clTestTypesData
+    public static class clTestTypeData
     {
         public static clTestTypeDTO Find(int ID)
         {
