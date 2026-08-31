@@ -6,10 +6,10 @@ namespace DVLD.Logic
 {
     public class clCountry
     {
-        public int ID { get; set; }
+        public int ID { get; private set; }
         public string Name { get; set; }
 
-        public clCountryDTO CountryDTO { get => new clCountryDTO(ID, Name); }
+        public clCountryDTO CountryDTO => new clCountryDTO(ID, Name); 
 
         public clCountry()
         {
@@ -22,9 +22,6 @@ namespace DVLD.Logic
             Name = CountryDTO.Name;
         }
 
-        static public DataTable GetAllCountries()
-        {
-            return clCountryData.GetAllCountries();
-        }
+        static public DataTable GetAllCountries() =>  clCountryData.GetAllCountries();
     }
 }

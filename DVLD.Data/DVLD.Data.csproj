@@ -48,7 +48,7 @@
     <Compile Include="clUserData.cs" />
     <Compile Include="DTOs\clCountryDTO.cs" />
     <Compile Include="DTOs\clPersonDTO.cs" />
-    <Compile Include="DTOs\clTestTypesDTO.cs" />
+    <Compile Include="DTOs\clTestTypeDTO.cs" />
     <Compile Include="DTOs\clUserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

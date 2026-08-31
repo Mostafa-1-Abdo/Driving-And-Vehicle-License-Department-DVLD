@@ -12,7 +12,7 @@ namespace DVLD.Logic
 
         private enMode _Mode;
 
-        public int ID { get; set; }
+        public int ID { get; private set; }
         public enGender Gender { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
@@ -26,14 +26,13 @@ namespace DVLD.Logic
         public string Email { get; set; }
         public string ImagePath { get; set; }
 
-        public string FullName
-        {
-            get => !string.IsNullOrEmpty(ThirdName) ? $"{FirstName} {SecondName} {ThirdName} {LastName}" : $"{FirstName} {SecondName} {LastName}";
-        }
-        public clPersonDTO PersonDTO
-        {
-            get => new clPersonDTO(ID, (byte)Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth,Country.CountryDTO, NationalNumber, Address, Phone, Email, ImagePath);
-        }
+        public string FullName => !string.IsNullOrWhiteSpace(ThirdName) ?
+            $"{FirstName} {SecondName} {ThirdName} {LastName}" :
+            $"{FirstName} {SecondName} {LastName}";
+        
+        public clPersonDTO PersonDTO => new clPersonDTO(
+          ID, (byte)Gender, FirstName, SecondName, ThirdName, LastName,
+          DateOfBirth,Country.CountryDTO, NationalNumber, Address, Phone, Email, ImagePath);
 
         public clPerson()
         {
@@ -45,7 +44,7 @@ namespace DVLD.Logic
             SecondName = string.Empty;
             ThirdName = string.Empty;
             LastName = string.Empty;
-            DateOfBirth = DateTime.MinValue;
+            DateOfBirth = DateTime.Now.AddYears(-18);
             Country = new clCountry();
             NationalNumber = string.Empty;
             Address = string.Empty;
@@ -72,38 +71,14 @@ namespace DVLD.Logic
             ImagePath = PersonDTO.ImagePath;
         }
 
-        public static clPerson Find(int ID)
-        {
-            clPersonDTO PersonDTO = clPersonData.Find(ID);
+        public static clPerson Find(int ID) => clPersonData.Find(ID) is clPersonDTO PersonDTO ? new clPerson(PersonDTO) : null;
+        public static clPerson Find(string NationalNumber) => clPersonData.Find(NationalNumber) is clPersonDTO PersonDTO ? new clPerson(PersonDTO) : null;
 
-            return PersonDTO != null ? new clPerson(PersonDTO) : null;
-        }
-        public static clPerson Find(string NationalNumber)
-        {
-            clPersonDTO PersonDTO = clPersonData.Find(NationalNumber);
-
-            return PersonDTO != null ? new clPerson(PersonDTO) : null;
-        }
-
-        public static bool IsExist(int ID)
-        {
-            return clPersonData.IsExist(ID);
-        }
-        public static bool IsExist(string NationalNumber)
-        {
-            return clPersonData.IsExist(NationalNumber);
-        }
-
-        private bool _AddNew()
-        {
-            ID = clPersonData.AddNew(PersonDTO);
-
-            return ID != -1;
-        }
-        private bool _Update()
-        {
-            return clPersonData.Update(PersonDTO);
-        }
+        public static bool IsExist(int ID) => clPersonData.IsExist(ID);
+        public static bool IsExist(string NationalNumber) => clPersonData.IsExist(NationalNumber);
+      
+        private bool _AddNew() => (ID = clPersonData.AddNew(PersonDTO)) != -1;
+        private bool _Update() => clPersonData.Update(PersonDTO);
         public bool Save()
         {
             switch (_Mode)
@@ -124,14 +99,8 @@ namespace DVLD.Logic
             }
         }
 
-        public static bool Delete(int ID)
-        {
-            return clPersonData.Delete(ID);
-        }
-
-        public static DataTable GetAllPeople()
-        {
-            return clPersonData.GetManagePeopleList();
-        }
+        public static bool Delete(int ID) => clPersonData.Delete(ID);
+     
+        public static DataTable GetAllPeople() => clPersonData.GetManagePeopleList();
     }
 }

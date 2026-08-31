@@ -6,9 +6,9 @@ namespace DVLD.Logic
 {
     public class clTestType
     {
-        public enum enTestType :byte { None = 0 ,VisionTest = 1,WrittenTest = 2,StreetTest = 3}
+        public enum enTestType : byte { None = 0, VisionTest = 1, WrittenTest = 2, StreetTest = 3 }
 
-        public enTestType ID { get; set; }
+        public enTestType ID { get;private set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Fees { get; set; }

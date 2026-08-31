@@ -10,13 +10,13 @@ namespace DVLD.Logic
 
         private enMode _Mode;
 
-        public int ID { get; set; }
+        public int ID { get; private set; }
         public clPerson Person { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }
 
-        public clUserDTO UserDTO { get => new clUserDTO(ID, Person.PersonDTO, Username, Password, IsActive); }
+        public clUserDTO UserDTO => new clUserDTO(ID, Person.PersonDTO, Username, Password, IsActive);
 
         public clUser()
         {
@@ -39,59 +39,32 @@ namespace DVLD.Logic
             IsActive = UserDTO.IsActive;
         }
 
-        public enum enLoginResults { Success, UserNotFound,InvalidPassword,UserNotActive}
-        public static (enLoginResults Result,clUser User) Login(string Username,string Password)
+        public enum enLoginResults : byte { Success, UserNotFound, InvalidPassword, UserNotActive }
+        public static (enLoginResults Result, clUser User) Login(string Username, string Password)
         {
             clUserDTO UserDTO = clUserData.Find(Username);
 
             if (UserDTO == null)
-                return (enLoginResults.UserNotFound,null);
+                return (enLoginResults.UserNotFound, null);
 
-            else if (Password != UserDTO.Password)
-                return (enLoginResults.InvalidPassword,null);
+            if (Password != UserDTO.Password)
+                return (enLoginResults.InvalidPassword, null);
 
-            else if(!UserDTO.IsActive)
-                return (enLoginResults.UserNotActive,null);
+            if (!UserDTO.IsActive)
+                return (enLoginResults.UserNotActive, null);
 
-            return (enLoginResults.Success,new clUser(UserDTO));
+            return (enLoginResults.Success, new clUser(UserDTO));
         }
 
-        public static clUser Find(int ID)
-        {
-            clUserDTO UserDTO = clUserData.Find(ID);
+        public static clUser Find(int ID) => clUserData.Find(ID) is clUserDTO UserDTO ? new clUser(UserDTO) : null;
+        public static clUser Find(string Username) => clUserData.Find(Username) is clUserDTO UserDTO ? new clUser(UserDTO) : null;
 
-            return UserDTO != null ? new clUser(UserDTO) : null;
-        }
-        public static clUser Find(string Username)
-        {
-            clUserDTO UserDTO = clUserData.Find(Username);
+        public static bool IsExist(int ID) => clUserData.IsExist(ID);
+        public static bool IsExist(string Username) => clUserData.IsExist(Username);
+        public static bool IsExistForPersonID(int PersonID) => clUserData.IsExistForPersonID(PersonID);
 
-            return UserDTO != null ? new clUser(UserDTO) : null;
-        }
-
-        public static bool IsExist(int ID)
-        {
-            return clUserData.IsExist(ID);
-        }
-        public static bool IsExist(string Username)
-        {
-            return clUserData.IsExist(Username);
-        }
-        public static bool IsExistForPersonID(int PersonID)
-        {
-            return clUserData.IsExistForPersonID(PersonID);
-        }
-
-        private bool _AddNew()
-        {
-            ID = clUserData.AddNew(UserDTO);
-
-            return ID != -1;
-        }
-        private bool _Update()
-        {
-            return clUserData.Update(UserDTO);
-        }
+        private bool _AddNew() => (ID = clUserData.AddNew(UserDTO)) != -1;
+        private bool _Update() => clUserData.Update(UserDTO);
         public bool Save()
         {
             switch (_Mode)
@@ -122,14 +95,8 @@ namespace DVLD.Logic
             return false;
         }
 
-        public static bool Delete(int ID)
-        {
-            return clUserData.Delete(ID);
-        }
+        public static bool Delete(int ID) => clUserData.Delete(ID);
 
-        public static DataTable GetAllUsers()
-        {
-            return clUserData.GetManageUsersList();
-        }
+        public static DataTable GetAllUsers() => clUserData.GetManageUsersList();
     }
 }
