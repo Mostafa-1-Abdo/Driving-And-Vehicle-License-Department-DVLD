@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using DVLD.UI.Properties;
 using System.Data;
 using DVLD.Logic;
-using static DVLD.UI.ctrlManageData;
 
 namespace DVLD.UI
 {
@@ -23,12 +22,15 @@ namespace DVLD.UI
         }
         private void _Initialize_cms_dgv()
         {
-            ctrlManageData1.cms_dgvItems.Add("Edit", Resources.Edit, EditTestType_Click);
+            ctrlManageData1.cms_dgvItems.Add("Edit", Resources.EditTest, EditTestType_Click);
         }
         private void _Initialize_dgv_RecordsColumns()
         {
             ctrlManageData1.dgv_RecordsColumns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ctrlManageData1.dgv_RecordsColumns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            ctrlManageData1.dgv_RecordsColumns["Description"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            ctrlManageData1.dgv_RecordsAutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
         private void frmManageTestTypes_Load(object sender, EventArgs e)
         {

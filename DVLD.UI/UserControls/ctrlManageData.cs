@@ -22,13 +22,20 @@ namespace DVLD.UI
 
         public IButtonControl CloseButton { get => btn_Close; }
 
+        public DataGridViewAutoSizeRowsMode dgv_RecordsAutoSizeRowsMode
+        {
+            get => dgv_Records.AutoSizeRowsMode;
+            set => dgv_Records.AutoSizeRowsMode = value;
+        }
+
         public void RemoveFilterAndAddButton()
         {
             lb_FilterBy.Visible = false;
             cb_Filter.Visible = false;
             btn_Add.Visible = false;
 
-            Height = 500;
+            dgv_Records.Top = cb_Filter.Top;
+            dgv_Records.Height += dgv_Records.Top- cb_Filter.Top;
         }
 
         private DataView _View;
@@ -46,7 +53,7 @@ namespace DVLD.UI
             cb_Filter.Text = "None";
         }
         public void RefreshNumberOfRecords() => lb_NumberOfRecords.Text = dgv_Records.Rows.Count.ToString();
-        
+
         private void btn_Close_Click(object sender, EventArgs e) => ParentForm.Close();
 
         public event Action AddClicked;

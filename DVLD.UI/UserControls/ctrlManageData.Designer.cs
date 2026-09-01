@@ -93,8 +93,7 @@
             // 
             // lb_Title
             // 
-            this.lb_Title.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_Title.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lb_Title.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_Title.ForeColor = System.Drawing.Color.Firebrick;
             this.lb_Title.Location = new System.Drawing.Point(430, 200);
@@ -181,8 +180,7 @@
             // 
             // pb_Header
             // 
-            this.pb_Header.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pb_Header.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pb_Header.Location = new System.Drawing.Point(486, 8);
             this.pb_Header.Name = "pb_Header";
             this.pb_Header.Size = new System.Drawing.Size(220, 189);

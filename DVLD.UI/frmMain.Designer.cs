@@ -221,7 +221,7 @@
             // 
             // msi_ManageTestTypes
             // 
-            this.msi_ManageTestTypes.Image = global::DVLD.UI.Properties.Resources.ManageTestTypes;
+            this.msi_ManageTestTypes.Image = global::DVLD.UI.Properties.Resources.TestTypes;
             this.msi_ManageTestTypes.Name = "msi_ManageTestTypes";
             this.msi_ManageTestTypes.Size = new System.Drawing.Size(238, 38);
             this.msi_ManageTestTypes.Text = "Manage Test Types";
