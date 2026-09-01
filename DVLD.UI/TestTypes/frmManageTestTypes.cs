@@ -4,7 +4,7 @@ using DVLD.UI.Properties;
 using System.Data;
 using DVLD.Logic;
 
-namespace DVLD.UI
+namespace DVLD.UI.TestTypes
 {
     public partial class frmManageTestTypes : Form
     {
@@ -47,7 +47,7 @@ namespace DVLD.UI
         //Context Menu Strip Items Events
         private void EditTestType_Click(object sender, EventArgs e)
         {
-           // new frmAddEditTestType((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value).ShowDialog(this);
+           new frmEditTestType((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value).ShowDialog(this);
 
             _ResetForm();
         }

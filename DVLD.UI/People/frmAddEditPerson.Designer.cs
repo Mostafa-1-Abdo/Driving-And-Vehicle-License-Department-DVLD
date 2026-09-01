@@ -616,7 +616,7 @@
             this.lb_Title.ForeColor = System.Drawing.Color.Firebrick;
             this.lb_Title.Location = new System.Drawing.Point(318, 24);
             this.lb_Title.Name = "lb_Title";
-            this.lb_Title.Size = new System.Drawing.Size(375, 38);
+            this.lb_Title.Size = new System.Drawing.Size(375, 48);
             this.lb_Title.TabIndex = 115;
             this.lb_Title.Text = "Add / Edit New Person";
             this.lb_Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

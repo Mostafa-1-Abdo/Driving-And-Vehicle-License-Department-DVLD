@@ -152,7 +152,7 @@ namespace DVLD.UI.People
                 errorProvider1.SetError(tb_Email, null);
 
             else if (!clUtil.IsValidEmail(tb_Email.Text))
-                errorProvider1.SetError(tb_Email, $"Invalid Email Address format! (e.g., user@example.com)");
+                errorProvider1.SetError(tb_Email, $"Invalid Email Address format! (e.g. user@example.com)");
 
             else
                 errorProvider1.SetError(tb_Email, null);

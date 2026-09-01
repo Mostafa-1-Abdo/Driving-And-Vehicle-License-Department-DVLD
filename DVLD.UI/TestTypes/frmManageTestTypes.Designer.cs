@@ -1,4 +1,4 @@
-﻿namespace DVLD.UI
+﻿namespace DVLD.UI.TestTypes
 {
     partial class frmManageTestTypes
     {
