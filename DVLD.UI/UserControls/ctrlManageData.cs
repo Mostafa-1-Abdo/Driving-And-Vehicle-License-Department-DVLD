@@ -11,22 +11,18 @@ namespace DVLD.UI
 
         public string lb_TitleText { get => lb_Title.Text; set => lb_Title.Text = value; }
 
-        public ComboBox.ObjectCollection cb_FilterItems { get => cb_Filter.Items; }
+        public ComboBox.ObjectCollection cb_FilterItems => cb_Filter.Items;
 
         public Image btn_AddImage { get => btn_Add.Image; set => btn_Add.Image = value; }
 
-        public DataGridViewColumnCollection dgv_RecordsColumns { get => dgv_Records.Columns; }
-        public DataGridViewRow dgv_RecordsCurrentRow { get => dgv_Records.CurrentRow; }
+        public DataGridViewColumnCollection dgv_RecordsColumns => dgv_Records.Columns;
+        public DataGridViewRow dgv_RecordsCurrentRow => dgv_Records.CurrentRow;
 
-        public ToolStripItemCollection cms_dgvItems { get => ContectMenuStrip.Items; }
+        public ToolStripItemCollection cms_dgvItems => ContectMenuStrip.Items;
 
-        public IButtonControl CloseButton { get => btn_Close; }
+        public IButtonControl CloseButton => btn_Close;
 
-        public DataGridViewAutoSizeRowsMode dgv_RecordsAutoSizeRowsMode
-        {
-            get => dgv_Records.AutoSizeRowsMode;
-            set => dgv_Records.AutoSizeRowsMode = value;
-        }
+        public DataGridViewAutoSizeRowsMode dgv_RecordsAutoSizeRowsMode { get => dgv_Records.AutoSizeRowsMode; set => dgv_Records.AutoSizeRowsMode = value; }
 
         public void RemoveFilterAndAddButton()
         {
@@ -35,7 +31,6 @@ namespace DVLD.UI
             btn_Add.Visible = false;
 
             dgv_Records.Top = cb_Filter.Top;
-            dgv_Records.Height += dgv_Records.Top- cb_Filter.Top;
         }
 
         private DataView _View;
@@ -45,21 +40,23 @@ namespace DVLD.UI
             InitializeComponent();
         }
 
-        public void RefreshRecords(DataView View)
+        public void RefreshRecords(DataView view)
         {
-            dgv_Records.DataSource = _View = View;
+            _View = view;
+            dgv_Records.DataSource = _View;
             RefreshNumberOfRecords();
 
             cb_Filter.Text = "None";
         }
+
         public void RefreshNumberOfRecords() => lb_NumberOfRecords.Text = dgv_Records.Rows.Count.ToString();
 
-        private void btn_Close_Click(object sender, EventArgs e) => ParentForm.Close();
+        private void btn_Close_Click(object sender, EventArgs e) => ParentForm?.Close();
 
         public event Action AddClicked;
         private void btn_Add_Click(object sender, EventArgs e) => AddClicked?.Invoke();
 
-        //Filter
+        // Filter Helpers
         public class clFilterOption
         {
             public string DisplayText { get; set; }
@@ -73,17 +70,19 @@ namespace DVLD.UI
 
             public override string ToString() => DisplayText;
         }
-        public void SetCustomeFilter(clFilterOption[] Options)
+
+        public void SetCustomeFilter(clFilterOption[] options)
         {
             cb_Search.DataSource = null;
             cb_Search.DisplayMember = "DisplayText";
             cb_Search.ValueMember = "ActualValue";
-            cb_Search.DataSource = Options;
+            cb_Search.DataSource = options;
             cb_Search.SelectedIndex = 0;
 
             tb_Search.Visible = false;
             cb_Search.Visible = true;
         }
+
         public void SetTextFilter()
         {
             tb_Search.Clear();
@@ -114,54 +113,77 @@ namespace DVLD.UI
 
         private void tb_Search_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(tb_Search.Text.Trim()))
+            if (_View == null || _View.Table == null)
+                return;
+
+            string filterColumn = cb_Filter.Text.Trim();
+            string searchValue = tb_Search.Text.Trim();
+
+            if (string.IsNullOrEmpty(searchValue) || !_View.Table.Columns.Contains(filterColumn))
             {
                 _View.RowFilter = string.Empty;
                 RefreshNumberOfRecords();
-
                 return;
             }
 
-            Type ColumnType = _View.Table.Columns[cb_Filter.Text].DataType;
+            Type columnType = _View.Table.Columns[filterColumn].DataType;
 
-            if (ColumnType == typeof(byte) || ColumnType == typeof(short) || ColumnType == typeof(int) ||
-            ColumnType == typeof(long) || ColumnType == typeof(float) | ColumnType == typeof(double) ||
-            ColumnType == typeof(decimal))
-                _View.RowFilter = int.TryParse(tb_Search.Text, out int Number) ? $"[{cb_Filter.Text}] = {Number}" : $"[{cb_Filter.Text}] = {-1}";
-
+            if (columnType == typeof(byte) || columnType == typeof(short) || columnType == typeof(int) ||
+                columnType == typeof(long) || columnType == typeof(float) || columnType == typeof(double) ||
+                columnType == typeof(decimal))
+            {
+                _View.RowFilter = int.TryParse(searchValue, out int number)
+                    ? $"[{filterColumn}] = {number}"
+                    : $"[{filterColumn}] = -1";
+            }
             else
-                _View.RowFilter = $"[{cb_Filter.Text}] like '%{tb_Search.Text}%'";
+            {
+                // استبدال الـ single quote لتجنب كسر صيغة الفلترة
+                string safeSearchValue = searchValue.Replace("'", "''");
+                _View.RowFilter = $"[{filterColumn}] LIKE '%{safeSearchValue}%'";
+            }
 
             RefreshNumberOfRecords();
         }
         private void cb_Search_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cb_Search.SelectedValue == null)
+            if (_View == null || _View.Table == null)
+                return;
+
+            string filterColumn = cb_Filter.Text.Trim();
+
+            if (cb_Search.SelectedValue == null || !_View.Table.Columns.Contains(filterColumn))
             {
                 _View.RowFilter = string.Empty;
                 RefreshNumberOfRecords();
                 return;
             }
 
-            if (cb_Search.SelectedValue is string)
-                _View.RowFilter = $"[{cb_Filter.Text}] = '{cb_Search.SelectedValue}'";
-
+            if (cb_Search.SelectedValue is string stringValue)
+            {
+                _View.RowFilter = $"[{filterColumn}] = '{stringValue.Replace("'", "''")}'";
+            }
             else
-                _View.RowFilter = $"[{cb_Filter.Text}] = {cb_Search.SelectedValue}";
+            {
+                _View.RowFilter = $"[{filterColumn}] = {cb_Search.SelectedValue}";
+            }
 
             RefreshNumberOfRecords();
         }
 
         private void tb_Search_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!_View.Table.Columns.Contains(cb_Filter.Text))
+            if (_View == null || _View.Table == null || !_View.Table.Columns.Contains(cb_Filter.Text.Trim()))
                 return;
 
-            Type ColumnType = _View.Table.Columns[cb_Filter.Text].DataType;
-            if (ColumnType == typeof(byte) || ColumnType == typeof(short) || ColumnType == typeof(int) ||
-                ColumnType == typeof(long) || ColumnType == typeof(float) | ColumnType == typeof(double) ||
-                ColumnType == typeof(decimal))
+            Type columnType = _View.Table.Columns[cb_Filter.Text.Trim()].DataType;
+
+            if (columnType == typeof(byte) || columnType == typeof(short) || columnType == typeof(int) ||
+                columnType == typeof(long) || columnType == typeof(float) || columnType == typeof(double) ||
+                columnType == typeof(decimal))
+            {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            }
         }
     }
 }

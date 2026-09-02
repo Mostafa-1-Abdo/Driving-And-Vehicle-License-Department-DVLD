@@ -7,33 +7,33 @@ namespace DVLD.Data
 {
     public static class clTestTypeData
     {
-        public static clTestTypeDTO Find(int ID)
+        public static clTestTypeDTO Find(int id)
         {
-            clTestTypeDTO TestTypeDTO = null;
+            clTestTypeDTO testTypeDTO = null;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"select * from TestTypes
+                    string sql = @"select * from TestTypes
                                    where ID = @ID";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@ID", ID);
+                        command.Parameters.AddWithValue("@ID", id);
 
-                        Connection.Open();
+                        connection.Open();
 
-                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (Reader.Read())
+                            if (reader.Read())
                             {
-                                TestTypeDTO = new clTestTypeDTO
+                                testTypeDTO = new clTestTypeDTO
                                 {
-                                    ID = (int)Reader["ID"],
-                                    Title = (string)Reader["Title"],
-                                    Description = (string)Reader["Description"],
-                                    Fees = (decimal)Reader["Fees"]
+                                    ID = (int)reader["ID"],
+                                    Title = (string)reader["Title"],
+                                    Description = (string)reader["Description"],
+                                    Fees = (decimal)reader["Fees"]
                                 };
                             }
                         }
@@ -42,33 +42,33 @@ namespace DVLD.Data
             }
             catch
             {
-                TestTypeDTO = null;
+                testTypeDTO = null;
             }
 
-            return TestTypeDTO;
+            return testTypeDTO;
         }
 
-        public static bool Update(clTestTypeDTO TestTypeDTO)
+        public static bool Update(clTestTypeDTO testTypeDTO)
         {
-            int RowsAffected = 0;
+            int rowsAffected = 0;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"update TestTypes set Title = @Title, Description = @Description, Fees = @Fees
+                    string sql = @"update TestTypes set Title = @Title, Description = @Description, Fees = @Fees
                                    where ID = @ID";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@ID", TestTypeDTO.ID);
-                        Command.Parameters.AddWithValue("@Title", TestTypeDTO.Title);
-                        Command.Parameters.AddWithValue("@Description", TestTypeDTO.Description);
-                        Command.Parameters.AddWithValue("@Fees", TestTypeDTO.Fees);
+                        command.Parameters.AddWithValue("@ID", testTypeDTO.ID);
+                        command.Parameters.AddWithValue("@Title", testTypeDTO.Title);
+                        command.Parameters.AddWithValue("@Description", testTypeDTO.Description);
+                        command.Parameters.AddWithValue("@Fees", testTypeDTO.Fees);
 
-                        Connection.Open();
+                        connection.Open();
 
-                        RowsAffected = Command.ExecuteNonQuery();
+                        rowsAffected = command.ExecuteNonQuery();
                     }
                 }
             }
@@ -76,36 +76,35 @@ namespace DVLD.Data
             {
             }
 
-            return RowsAffected > 0;
+            return rowsAffected > 0;
         }
 
         public static DataTable GetAllTestTypes()
         {
-            DataTable Table = new DataTable();
+            DataTable testTypesTable = new DataTable();
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = "select * from TestTypes";
+                    string sql = "select * from TestTypes";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Connection.Open();
+                        connection.Open();
 
-                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            Table.Load(Reader);
+                            testTypesTable.Load(reader);
                         }
                     }
                 }
-
             }
             catch
             {
             }
 
-            return Table;
+            return testTypesTable;
         }
     }
 }

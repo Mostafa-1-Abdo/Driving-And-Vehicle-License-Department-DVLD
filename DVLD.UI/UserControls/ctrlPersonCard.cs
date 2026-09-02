@@ -1,6 +1,7 @@
 ﻿using DVLD.Logic;
 using DVLD.UI.People;
 using DVLD.UI.Properties;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DVLD.UI.UserControls
@@ -9,15 +10,17 @@ namespace DVLD.UI.UserControls
     {
         private clPerson _Person;
 
-        public clPerson SelectedPerson { get => _Person; }
+        public clPerson SelectedPerson => _Person;
 
         public ctrlPersonCard()
         {
             InitializeComponent();
         }
 
-        private void _ResetPersonCard()
+        public void ResetPersonCard()
         {
+            _Person = null;
+
             lb_ID.Text = "[????]";
             lb_FullName.Text = "[????]";
             lb_NationalNumber.Text = "[????]";
@@ -36,21 +39,26 @@ namespace DVLD.UI.UserControls
         private void _LoadPersonImage()
         {
             if (_Person.Gender == clPerson.enGender.Male)
+            {
                 pb_Gender.Image = Resources.Male;
-
+                pb_PersonImage.Image = Resources.MalePersonImage;
+            }
             else
+            {
                 pb_Gender.Image = Resources.Female;
+                pb_PersonImage.Image = Resources.FemalePersonImage;
+            }
 
-            if (!string.IsNullOrEmpty(_Person.ImagePath) && System.IO.File.Exists(_Person.ImagePath))
+            if (!string.IsNullOrEmpty(_Person.ImagePath) && File.Exists(_Person.ImagePath))
+            {
                 pb_PersonImage.ImageLocation = _Person.ImagePath;
-
+            }
             else
             {
                 pb_PersonImage.ImageLocation = string.Empty;
-                pb_PersonImage.Image = (_Person.Gender.ToString() == "Male") ? Resources.MalePersonImage : Resources.FemalePersonImage;
             }
         }
-        private void _FillCardWithPeronInfo()
+        private void _FillCardWithPersonInfo()
         {
             lb_ID.Text = _Person.ID.ToString();
             lb_FullName.Text = _Person.FullName;
@@ -60,65 +68,59 @@ namespace DVLD.UI.UserControls
             lb_Address.Text = _Person.Address;
             lb_DateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
             lb_Phone.Text = _Person.Phone;
-            lb_Country.Text = _Person.Country.Name;
+            lb_Country.Text = _Person.Country?.Name ?? "[????]";
 
             _LoadPersonImage();
 
             llb_EditPersonInfo.Enabled = true;
         }
 
-        public bool LoadPersonInfo(int ID)
+        public bool LoadPersonInfo(int id)
         {
-            _Person = clPerson.Find(ID);
+            _Person = clPerson.Find(id);
 
             if (_Person == null)
             {
-                MessageBox.Show($"No person with ID = {ID} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                _ResetPersonCard();
+                ResetPersonCard();
                 return false;
             }
 
-            _FillCardWithPeronInfo();
-
+            _FillCardWithPersonInfo();
             return true;
         }
-        public bool LoadPersonInfo(string NationalNumber)
+        public bool LoadPersonInfo(string nationalNumber)
         {
-            _Person = clPerson.Find(NationalNumber);
+            _Person = clPerson.Find(nationalNumber);
 
             if (_Person == null)
             {
-                MessageBox.Show($"No Person with national number = {NationalNumber} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                _ResetPersonCard();
+                ResetPersonCard();
                 return false;
             }
 
-            _FillCardWithPeronInfo();
-
+            _FillCardWithPersonInfo();
             return true;
         }
-        public bool LoadPersonInfo(clPerson Person)
+        public bool LoadPersonInfo(clPerson person)
         {
-            _Person = Person;
+            _Person = person;
 
             if (_Person == null)
             {
-                MessageBox.Show($"No Person with was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                _ResetPersonCard();
-               
-                return false ;
+                ResetPersonCard();
+                return false;
             }
 
-            _FillCardWithPeronInfo();
-
+            _FillCardWithPersonInfo();
             return true;
         }
 
         private void llb_EditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frmAddEditPerson Form = new frmAddEditPerson(_Person.ID);
-            Form.ShowDialog(FindForm());
+            if (_Person == null)
+                return;
 
+            new frmAddEditPerson(_Person.ID).ShowDialog(FindForm());
             LoadPersonInfo(_Person.ID);
         }
     }

@@ -8,41 +8,51 @@ namespace DVLD.Data
 {
     public class clUserData
     {
-        public static clUserDTO Find(int ID)
+        public static clUserDTO Find(int id)
         {
-            clUserDTO UserDTO = null;
+            clUserDTO userDTO = null;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"select u.ID,u.PersonID,p.Gender,p.FirstName,p.SecondName,p.ThirdName,p.LastName,p.DateOfBirth,
+                    string sql = @"select u.ID,u.PersonID,p.Gender,p.FirstName,p.SecondName,p.ThirdName,p.LastName,p.DateOfBirth,
                                    p.CountryID,c.Name as Country,p.NationalNumber,p.Address,p.Phone,p.Email,p.ImagePath,
                                    u.Username,u.Password,u.IsActive from Users u
                                    join People p on u.PersonID = p.ID
                                    join Countries c on p.CountryID = c.ID
                                    where u.ID = @ID";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@ID", ID);
+                        command.Parameters.AddWithValue("@ID", id);
 
-                        Connection.Open();
+                        connection.Open();
 
-                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (Reader.Read())
+                            if (reader.Read())
                             {
-                                UserDTO = new clUserDTO
+                                userDTO = new clUserDTO
                                 {
-                                    ID = (int)Reader["ID"],
-                                    PersonDTO = new clPersonDTO((int)Reader["PersonID"], (byte)Reader["Gender"],
-                                    (string)Reader["FirstName"], (string)Reader["SecondName"], Reader["ThirdName"] != DBNull.Value ? (string)Reader["ThirdName"] : null, (string)Reader["LastName"],
-                                   (DateTime)Reader["DateOfBirth"], new clCountryDTO((int)Reader["CountryID"], (string)Reader["Country"]), (string)Reader["NationalNumber"], (string)Reader["Address"], (string)Reader["Phone"],
-                                   Reader["Email"] != DBNull.Value ? (string)Reader["Email"] : null, Reader["ImagePath"] != DBNull.Value ? (string)Reader["ImagePath"] : null),
-                                    Username = (string)Reader["Username"],
-                                    Password = (string)Reader["Password"],
-                                    IsActive = (bool)Reader["IsActive"]
+                                    ID = (int)reader["ID"],
+                                    PersonID = (int)reader["PersonID"],
+                                    Gender = (byte)reader["Gender"],
+                                    FirstName = (string)reader["FirstName"],
+                                    SecondName = (string)reader["SecondName"],
+                                    ThirdName = reader["ThirdName"] != DBNull.Value ? (string)reader["ThirdName"] : null,
+                                    LastName = (string)reader["LastName"],
+                                    DateOfBirth = (DateTime)reader["DateOfBirth"],
+                                    CountryID = (int)reader["CountryID"],
+                                    CountryName = (string)reader["Country"],
+                                    NationalNumber = (string)reader["NationalNumber"],
+                                    Address = (string)reader["Address"],
+                                    Phone = (string)reader["Phone"],
+                                    Email = reader["Email"] != DBNull.Value ? (string)reader["Email"] : null,
+                                    ImagePath = reader["ImagePath"] != DBNull.Value ? (string)reader["ImagePath"] : null,
+                                    Username = (string)reader["Username"],
+                                    Password = (string)reader["Password"],
+                                    IsActive = (bool)reader["IsActive"]
                                 };
                             }
                         }
@@ -51,46 +61,56 @@ namespace DVLD.Data
             }
             catch
             {
-                UserDTO = null;
+                userDTO = null;
             }
 
-            return UserDTO;
+            return userDTO;
         }
-        public static clUserDTO Find(string Username)
+        public static clUserDTO Find(string username)
         {
-            clUserDTO UserDTO = null;
+            clUserDTO userDTO = null;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"select u.ID,u.PersonID,p.Gender,p.FirstName,p.SecondName,p.ThirdName,p.LastName,p.DateOfBirth,
+                    string sql = @"select u.ID,u.PersonID,p.Gender,p.FirstName,p.SecondName,p.ThirdName,p.LastName,p.DateOfBirth,
                                    p.CountryID,c.Name as Country,p.NationalNumber,p.Address,p.Phone,p.Email,p.ImagePath,
                                    u.Username,u.Password,u.IsActive from Users u
                                    join People p on u.PersonID = p.ID
                                    join Countries c on p.CountryID = c.ID
                                    where u.Username = @Username";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@Username", Username);
+                        command.Parameters.AddWithValue("@Username", username);
 
-                        Connection.Open();
+                        connection.Open();
 
-                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (Reader.Read())
+                            if (reader.Read())
                             {
-                                UserDTO = new clUserDTO
+                                userDTO = new clUserDTO
                                 {
-                                    ID = (int)Reader["ID"],
-                                    PersonDTO = new clPersonDTO((int)Reader["PersonID"], (byte)Reader["Gender"],
-                                    (string)Reader["FirstName"], (string)Reader["SecondName"], Reader["ThirdName"] != DBNull.Value ? (string)Reader["ThirdName"] : null, (string)Reader["LastName"],
-                                   (DateTime)Reader["DateOfBirth"], new clCountryDTO((int)Reader["CountryID"], (string)Reader["Country"]), (string)Reader["NationalNumber"], (string)Reader["Address"], (string)Reader["Phone"],
-                                   Reader["Email"] != DBNull.Value ? (string)Reader["Email"] : null, Reader["ImagePath"] != DBNull.Value ? (string)Reader["ImagePath"] : null),
-                                    Username = (string)Reader["Username"],
-                                    Password = (string)Reader["Password"],
-                                    IsActive = (bool)Reader["IsActive"]
+                                    ID = (int)reader["ID"],
+                                    PersonID = (int)reader["PersonID"],
+                                    Gender = (byte)reader["Gender"],
+                                    FirstName = (string)reader["FirstName"],
+                                    SecondName = (string)reader["SecondName"],
+                                    ThirdName = reader["ThirdName"] != DBNull.Value ? (string)reader["ThirdName"] : null,
+                                    LastName = (string)reader["LastName"],
+                                    DateOfBirth = (DateTime)reader["DateOfBirth"],
+                                    CountryID = (int)reader["CountryID"],
+                                    CountryName = (string)reader["Country"],
+                                    NationalNumber = (string)reader["NationalNumber"],
+                                    Address = (string)reader["Address"],
+                                    Phone = (string)reader["Phone"],
+                                    Email = reader["Email"] != DBNull.Value ? (string)reader["Email"] : null,
+                                    ImagePath = reader["ImagePath"] != DBNull.Value ? (string)reader["ImagePath"] : null,
+                                    Username = (string)reader["Username"],
+                                    Password = (string)reader["Password"],
+                                    IsActive = (bool)reader["IsActive"]
                                 };
                             }
                         }
@@ -99,126 +119,126 @@ namespace DVLD.Data
             }
             catch
             {
-                UserDTO = null;
+                userDTO = null;
             }
 
-            return UserDTO;
+            return userDTO;
         }
 
-        public static bool IsExist(int ID)
+        public static bool IsExist(int id)
         {
-            bool IsFound = false;
+            bool isFound = false;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"select 1 from Users
+                    string sql = @"select 1 from Users
                                    where ID = @ID";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@ID", ID);
+                        command.Parameters.AddWithValue("@ID", id);
 
-                        Connection.Open();
+                        connection.Open();
 
-                        if (Command.ExecuteScalar() != null)
-                            IsFound = true;
+                        if (command.ExecuteScalar() != null)
+                            isFound = true;
                     }
                 }
             }
             catch
             {
-                IsFound = false;
+                isFound = false;
             }
 
-            return IsFound;
+            return isFound;
         }
-        public static bool IsExist(string Username)
+        public static bool IsExist(string username)
         {
-            bool IsFound = false;
+            bool isFound = false;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"select 1 from Users
+                    string sql = @"select 1 from Users
                                    where Username = @Username";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@Username", Username);
+                        command.Parameters.AddWithValue("@Username", username);
 
-                        Connection.Open();
+                        connection.Open();
 
-                        if (Command.ExecuteScalar() != null)
-                            IsFound = true;
+                        if (command.ExecuteScalar() != null)
+                            isFound = true;
                     }
                 }
             }
             catch
             {
-                IsFound = false;
+                isFound = false;
             }
 
-            return IsFound;
+            return isFound;
         }
-        public static bool IsExistForPersonID(int PersonID)
+        public static bool IsExistForPersonID(int personID)
         {
-            bool IsFound = false;
+            bool isFound = false;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"select 1 from Users
+                    string sql = @"select 1 from Users
                                    where PersonID = @PersonID";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@PersonID", PersonID);
+                        command.Parameters.AddWithValue("@PersonID", personID);
 
-                        Connection.Open();
+                        connection.Open();
 
-                        if (Command.ExecuteScalar() != null)
-                            IsFound = true;
+                        if (command.ExecuteScalar() != null)
+                            isFound = true;
                     }
                 }
             }
             catch
             {
-                IsFound = false;
+                isFound = false;
             }
 
-            return IsFound;
+            return isFound;
         }
 
-        public static int AddNew(clUserDTO UserDTO)
+        public static int AddNew(clUserDTO userDTO)
         {
-            int ID = -1;
+            int id = -1;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"insert into Users(PersonID,Username,Password,IsActive)
+                    string sql = @"insert into Users(PersonID,Username,Password,IsActive)
                                    values
                                    (@PersonID,@Username,@Password,@IsActive)
                                    select SCOPE_IDENTITY()";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@PersonID", UserDTO.PersonDTO.ID);
-                        Command.Parameters.AddWithValue("@Username", UserDTO.Username);
-                        Command.Parameters.AddWithValue("@Password", UserDTO.Password);
-                        Command.Parameters.AddWithValue("@IsActive", UserDTO.IsActive);
-                   
-                        Connection.Open();
+                        command.Parameters.AddWithValue("@PersonID", userDTO.PersonID);
+                        command.Parameters.AddWithValue("@Username", userDTO.Username);
+                        command.Parameters.AddWithValue("@Password", userDTO.Password);
+                        command.Parameters.AddWithValue("@IsActive", userDTO.IsActive);
 
-                        object Result = Command.ExecuteScalar();
-                        if (Result != null && int.TryParse(Result.ToString(), out int InsertedID))
+                        connection.Open();
+
+                        object result = command.ExecuteScalar();
+                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
                         {
-                            ID = InsertedID;
+                            id = insertedID;
                         }
                     }
                 }
@@ -227,30 +247,30 @@ namespace DVLD.Data
             {
             }
 
-            return ID;
+            return id;
         }
 
-        public static bool Update(clUserDTO UserDTO)
+        public static bool Update(clUserDTO userDTO)
         {
-            int RowsAffected = 0;
+            int rowsAffected = 0;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"update Users set Username = @Username, Password = @Password, IsActive = @IsActive
+                    string sql = @"update Users set Username = @Username, Password = @Password, IsActive = @IsActive
                                    where ID = @ID";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@ID", UserDTO.ID);
-                        Command.Parameters.AddWithValue("@Username", UserDTO.Username);
-                        Command.Parameters.AddWithValue("@Password", UserDTO.Password);
-                        Command.Parameters.AddWithValue("@IsActive", UserDTO.IsActive);
+                        command.Parameters.AddWithValue("@ID", userDTO.ID);
+                        command.Parameters.AddWithValue("@Username", userDTO.Username);
+                        command.Parameters.AddWithValue("@Password", userDTO.Password);
+                        command.Parameters.AddWithValue("@IsActive", userDTO.IsActive);
 
-                        Connection.Open();
+                        connection.Open();
 
-                        RowsAffected = Command.ExecuteNonQuery();
+                        rowsAffected = command.ExecuteNonQuery();
                     }
                 }
             }
@@ -258,27 +278,27 @@ namespace DVLD.Data
             {
             }
 
-            return RowsAffected > 0;
+            return rowsAffected > 0;
         }
-        public static bool ChangePassword(int ID, string NewPassword)
+        public static bool ChangePassword(int id, string newPassword)
         {
-            int RowsAffected = 0;
+            int rowsAffected = 0;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"update Users set Password = @Password
+                    string sql = @"update Users set Password = @Password
                                    where ID = @ID";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@ID", ID);
-                        Command.Parameters.AddWithValue("@Password", NewPassword);
+                        command.Parameters.AddWithValue("@ID", id);
+                        command.Parameters.AddWithValue("@Password", newPassword);
 
-                        Connection.Open();
+                        connection.Open();
 
-                        RowsAffected = Command.ExecuteNonQuery();
+                        rowsAffected = command.ExecuteNonQuery();
                     }
                 }
             }
@@ -286,27 +306,27 @@ namespace DVLD.Data
             {
             }
 
-            return RowsAffected > 0;
+            return rowsAffected > 0;
         }
 
-        public static bool Delete(int ID)
+        public static bool Delete(int id)
         {
-            int RowsAffected = 0;
+            int rowsAffected = 0;
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"delete Users
+                    string sql = @"delete Users
                                    where ID = @ID";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Command.Parameters.AddWithValue("@ID", ID);
+                        command.Parameters.AddWithValue("@ID", id);
 
-                        Connection.Open();
+                        connection.Open();
 
-                        RowsAffected = Command.ExecuteNonQuery();
+                        rowsAffected = command.ExecuteNonQuery();
                     }
                 }
             }
@@ -314,26 +334,26 @@ namespace DVLD.Data
             {
             }
 
-            return RowsAffected > 0;
+            return rowsAffected > 0;
         }
 
         public static DataTable GetManageUsersList()
         {
-            DataTable UsersTable = new DataTable();
+            DataTable usersTable = new DataTable();
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = @"select * from ManageUsers_View";
+                    string sql = @"select * from ManageUsers_View";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Connection.Open();
+                        connection.Open();
 
-                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            UsersTable.Load(Reader);
+                            usersTable.Load(reader);
                         }
                     }
                 }
@@ -343,7 +363,7 @@ namespace DVLD.Data
             {
             }
 
-            return UsersTable;
+            return usersTable;
         }
     }
 }

@@ -52,7 +52,6 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btn_Close = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.tb_Address = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -69,11 +68,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tb_FirstName = new System.Windows.Forms.TextBox();
             this.pb_PersonImage = new System.Windows.Forms.PictureBox();
-            this.btn_Save = new System.Windows.Forms.Button();
             this.lb_Title = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.btn_Close = new System.Windows.Forms.Button();
+            this.btn_Save = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -119,7 +119,7 @@
             this.llb_RemoveImage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.llb_RemoveImage.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.llb_RemoveImage.LinkColor = System.Drawing.Color.Crimson;
-            this.llb_RemoveImage.Location = new System.Drawing.Point(822, 314);
+            this.llb_RemoveImage.Location = new System.Drawing.Point(822, 311);
             this.llb_RemoveImage.Name = "llb_RemoveImage";
             this.llb_RemoveImage.Size = new System.Drawing.Size(54, 15);
             this.llb_RemoveImage.TabIndex = 112;
@@ -250,6 +250,7 @@
             this.dtp_DateOfBirth.Name = "dtp_DateOfBirth";
             this.dtp_DateOfBirth.Size = new System.Drawing.Size(167, 22);
             this.dtp_DateOfBirth.TabIndex = 6;
+            this.dtp_DateOfBirth.Tag = "Date Of Birth";
             this.dtp_DateOfBirth.Value = new System.DateTime(2000, 12, 31, 0, 0, 0, 0);
             // 
             // groupBox1
@@ -274,7 +275,6 @@
             this.groupBox1.Controls.Add(this.pictureBox3);
             this.groupBox1.Controls.Add(this.pictureBox2);
             this.groupBox1.Controls.Add(this.dtp_DateOfBirth);
-            this.groupBox1.Controls.Add(this.btn_Close);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.tb_Address);
             this.groupBox1.Controls.Add(this.label12);
@@ -291,11 +291,10 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.tb_FirstName);
             this.groupBox1.Controls.Add(this.pb_PersonImage);
-            this.groupBox1.Controls.Add(this.btn_Save);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Location = new System.Drawing.Point(15, 111);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(981, 360);
+            this.groupBox1.Size = new System.Drawing.Size(981, 332);
             this.groupBox1.TabIndex = 114;
             this.groupBox1.TabStop = false;
             // 
@@ -389,24 +388,6 @@
             this.pictureBox2.TabIndex = 94;
             this.pictureBox2.TabStop = false;
             // 
-            // btn_Close
-            // 
-            this.btn_Close.BackColor = System.Drawing.Color.Gainsboro;
-            this.btn_Close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Close.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
-            this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Close.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btn_Close.Image = global::DVLD.UI.Properties.Resources.Close;
-            this.btn_Close.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Close.Location = new System.Drawing.Point(445, 314);
-            this.btn_Close.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(126, 37);
-            this.btn_Close.TabIndex = 15;
-            this.btn_Close.Text = "Close";
-            this.btn_Close.UseVisualStyleBackColor = false;
-            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -451,6 +432,7 @@
             this.tb_Email.Name = "tb_Email";
             this.tb_Email.Size = new System.Drawing.Size(167, 22);
             this.tb_Email.TabIndex = 10;
+            this.tb_Email.Tag = "Email";
             this.tb_Email.Validating += new System.ComponentModel.CancelEventHandler(this.tb_Email_Validating);
             // 
             // label6
@@ -510,6 +492,7 @@
             this.tb_NationalNumber.Size = new System.Drawing.Size(167, 22);
             this.tb_NationalNumber.TabIndex = 5;
             this.tb_NationalNumber.Tag = "National Number";
+            this.tb_NationalNumber.Text = "National Number";
             this.tb_NationalNumber.Validating += new System.ComponentModel.CancelEventHandler(this.tb_NationalNumber_Validating);
             // 
             // label2
@@ -592,24 +575,6 @@
             this.pb_PersonImage.TabIndex = 85;
             this.pb_PersonImage.TabStop = false;
             // 
-            // btn_Save
-            // 
-            this.btn_Save.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btn_Save.FlatAppearance.BorderColor = System.Drawing.Color.DarkBlue;
-            this.btn_Save.FlatAppearance.BorderSize = 0;
-            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Save.ForeColor = System.Drawing.Color.White;
-            this.btn_Save.Image = global::DVLD.UI.Properties.Resources.Save;
-            this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Save.Location = new System.Drawing.Point(579, 314);
-            this.btn_Save.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(126, 37);
-            this.btn_Save.TabIndex = 14;
-            this.btn_Save.Text = "Save";
-            this.btn_Save.UseVisualStyleBackColor = false;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
-            // 
             // lb_Title
             // 
             this.lb_Title.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -642,15 +607,49 @@
             this.pictureBox10.TabIndex = 118;
             this.pictureBox10.TabStop = false;
             // 
+            // btn_Close
+            // 
+            this.btn_Close.BackColor = System.Drawing.Color.Gainsboro;
+            this.btn_Close.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_Close.FlatAppearance.BorderColor = System.Drawing.Color.DarkSlateGray;
+            this.btn_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Close.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btn_Close.Image = global::DVLD.UI.Properties.Resources.Close;
+            this.btn_Close.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Close.Location = new System.Drawing.Point(736, 451);
+            this.btn_Close.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(126, 37);
+            this.btn_Close.TabIndex = 114;
+            this.btn_Close.Text = "Close";
+            this.btn_Close.UseVisualStyleBackColor = false;
+            // 
+            // btn_Save
+            // 
+            this.btn_Save.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btn_Save.FlatAppearance.BorderColor = System.Drawing.Color.DarkBlue;
+            this.btn_Save.FlatAppearance.BorderSize = 0;
+            this.btn_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Save.ForeColor = System.Drawing.Color.White;
+            this.btn_Save.Image = global::DVLD.UI.Properties.Resources.Save;
+            this.btn_Save.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Save.Location = new System.Drawing.Point(870, 451);
+            this.btn_Save.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(126, 37);
+            this.btn_Save.TabIndex = 113;
+            this.btn_Save.Text = "Save";
+            this.btn_Save.UseVisualStyleBackColor = false;
+            // 
             // frmAddEditPerson
             // 
-            this.AcceptButton = this.btn_Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.CancelButton = this.btn_Close;
-            this.ClientSize = new System.Drawing.Size(1011, 481);
+            this.ClientSize = new System.Drawing.Size(1011, 497);
+            this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.lb_ID);
+            this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.groupBox1);
@@ -708,7 +707,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.DateTimePicker dtp_DateOfBirth;
         private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tb_Address;
@@ -726,9 +724,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tb_FirstName;
         private System.Windows.Forms.PictureBox pb_PersonImage;
-        private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.Label lb_Title;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btn_Close;
+        private System.Windows.Forms.Button btn_Save;
     }
 }

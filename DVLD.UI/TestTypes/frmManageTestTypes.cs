@@ -1,15 +1,12 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using DVLD.Logic;
 using DVLD.UI.Properties;
-using System.Data;
-using DVLD.Logic;
+using System;
+using System.Windows.Forms;
 
 namespace DVLD.UI.TestTypes
 {
     public partial class frmManageTestTypes : Form
     {
-        private DataTable _TestTypesTable;
-
         public frmManageTestTypes()
         {
             InitializeComponent();
@@ -17,8 +14,7 @@ namespace DVLD.UI.TestTypes
 
         private void _ResetForm()
         {
-            _TestTypesTable = clTestType.GetAllTestTypes();
-            ctrlManageData1.RefreshRecords(_TestTypesTable.DefaultView);
+            ctrlManageData1.RefreshRecords(clTestType.GetAllTestTypes().DefaultView);
         }
         private void _Initialize_cms_dgv()
         {
@@ -38,16 +34,18 @@ namespace DVLD.UI.TestTypes
 
             _ResetForm();
             _Initialize_dgv_RecordsColumns();
-
             _Initialize_cms_dgv();
 
             CancelButton = ctrlManageData1.CloseButton;
         }
 
-        //Context Menu Strip Items Events
+        // Context Menu Strip Items Events
         private void EditTestType_Click(object sender, EventArgs e)
         {
-           new frmEditTestType((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value).ShowDialog(this);
+            if (ctrlManageData1.dgv_RecordsCurrentRow == null)
+                return;
+
+            new frmEditTestType((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value).ShowDialog(this);
 
             _ResetForm();
         }

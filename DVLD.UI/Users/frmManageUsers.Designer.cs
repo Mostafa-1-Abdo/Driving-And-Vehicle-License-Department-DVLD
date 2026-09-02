@@ -35,6 +35,7 @@
             // 
             this.ctrlManageData1.BackColor = System.Drawing.Color.White;
             this.ctrlManageData1.btn_AddImage = global::DVLD.UI.Properties.Resources.AddNewPerson;
+            this.ctrlManageData1.dgv_RecordsAutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.None;
             this.ctrlManageData1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctrlManageData1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ctrlManageData1.ForeColor = System.Drawing.Color.DarkSlateGray;
@@ -60,7 +61,7 @@
             this.MinimizeBox = false;
             this.Name = "frmManageUsers";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "Manage Users";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmManageUsers_Load);

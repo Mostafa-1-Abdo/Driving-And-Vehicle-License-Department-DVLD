@@ -1,5 +1,6 @@
 ﻿using DVLD.Logic;
 using DVLD.UI.People;
+using DVLD.UI.Util;
 using System;
 using System.Windows.Forms;
 
@@ -7,14 +8,15 @@ namespace DVLD.UI.UserControls
 {
     public partial class ctrlPersonCardWithFilter : UserControl
     {
-        public clPerson SelectedPerson { get => ctrlPersonCard1.SelectedPerson; }
+        public clPerson SelectedPerson => ctrlPersonCard1.SelectedPerson;
 
-        public bool gb_FilterEnabled { get => gb_Filters.Enabled; set => gb_Filters.Enabled = value; }
-
-        public void SearchSelect()
+        public bool gb_FilterEnabled
         {
-            tb_Search.Select();
+            get => gb_Filters.Enabled;
+            set => gb_Filters.Enabled = value;
         }
+
+        public void SearchSelect() => tb_Search.Select();
 
         public ctrlPersonCardWithFilter()
         {
@@ -23,67 +25,90 @@ namespace DVLD.UI.UserControls
             cb_Filter.Text = "ID";
         }
 
-        public bool LoadPersonInfo(clPerson Person)
+        public bool LoadPersonInfo(clPerson person)
         {
-            if (ctrlPersonCard1.LoadPersonInfo(Person))
+            if (person == null)
+                return false;
+
+            if (ctrlPersonCard1.LoadPersonInfo(person))
             {
                 cb_Filter.Text = "ID";
-                tb_Search.Text = Person.ID.ToString();
-
+                tb_Search.Text = person.ID.ToString();
                 return true;
             }
+
             return false;
         }
 
         public event Action<int> OnSelectedPerson;
+
         private void btn_SearchPerson_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_Search.Text.Trim()))
+            string searchValue = tb_Search.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(searchValue))
             {
                 tb_Search.Select();
                 return;
             }
 
-            bool IsFailed = true;
+            bool isFailed = true;
 
             if (cb_Filter.Text == "ID")
-                IsFailed = !ctrlPersonCard1.LoadPersonInfo(Convert.ToInt32(tb_Search.Text));
-
+            {
+                if (int.TryParse(searchValue, out int personID))
+                {
+                    isFailed = !ctrlPersonCard1.LoadPersonInfo(personID);
+                    if (isFailed)
+                        clUIMessages.ShowNotFound("Person", personID);
+                }
+                else
+                {
+                    isFailed = true;
+                    clUIMessages.ShowValidationError();
+                }
+            }
             else if (cb_Filter.Text == "National Number")
-                IsFailed = !ctrlPersonCard1.LoadPersonInfo(tb_Search.Text);
+            {
+                isFailed = !ctrlPersonCard1.LoadPersonInfo(searchValue);
+                if (isFailed)
+                    clUIMessages.ShowNotFoundByField("Person", "National Number", searchValue);
+            }
 
-            if (IsFailed)
+            if (isFailed)
             {
                 tb_Search.Clear();
                 tb_Search.Select();
-
                 OnSelectedPerson?.Invoke(-1);
             }
-
             else
+            {
                 OnSelectedPerson?.Invoke(SelectedPerson.ID);
+            }
         }
 
-        private void _OnPersonSaved(clPerson Person)
+        private void _OnPersonSaved(clPerson person)
         {
-            if (ctrlPersonCard1.LoadPersonInfo(Person))
+            if (ctrlPersonCard1.LoadPersonInfo(person))
             {
                 cb_Filter.Text = "ID";
-                tb_Search.Text = Person.ID.ToString();
+                tb_Search.Text = person.ID.ToString();
 
                 gb_Filters.Enabled = false;
 
                 OnSelectedPerson?.Invoke(SelectedPerson.ID);
             }
-
             else
+            {
                 OnSelectedPerson?.Invoke(-1);
+            }
         }
+
         private void btn_AddNewPerson_Click(object sender, EventArgs e)
         {
-            frmAddEditPerson Form = new frmAddEditPerson();
-            Form.OnPersonSaved += _OnPersonSaved;
-            Form.ShowDialog();
+            frmAddEditPerson form = new frmAddEditPerson();
+            form.OnPersonSaved += _OnPersonSaved;
+            form.ShowDialog(FindForm());
 
             tb_Search.Select();
         }
@@ -93,6 +118,7 @@ namespace DVLD.UI.UserControls
             if (cb_Filter.Text == "ID")
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
+
         private void tb_Search_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -100,11 +126,6 @@ namespace DVLD.UI.UserControls
                 e.SuppressKeyPress = true;
                 btn_SearchPerson.PerformClick();
             }
-        }
-
-        private void gb_Filters_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }

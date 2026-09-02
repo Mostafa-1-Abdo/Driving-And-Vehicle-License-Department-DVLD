@@ -8,35 +8,28 @@ namespace DVLD.Logic
     {
         private enum enMode : byte { AddNew, Update }
 
-        private enMode _Mode;
+        private enMode _Mode = enMode.AddNew;
 
-        public int ID { get; private set; }
-        public clPerson Person { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public bool IsActive { get; set; }
+        public int ID { get; private set; } = -1;
+        public clPerson Person { get; set; } = new clPerson();
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public bool IsActive { get; set; } = false;
 
-        public clUserDTO UserDTO => new clUserDTO(ID, Person.PersonDTO, Username, Password, IsActive);
+        public clUserDTO UserDTO => new clUserDTO(ID, Person.ID,(byte)Person.Gender,Person.FirstName,Person.SecondName,Person.ThirdName,Person.LastName,
+            Person.DateOfBirth,Person.Country.ID,Person.Country.Name,Person.NationalNumber,Person.Address,Person.Phone,Person.Email,Person.ImagePath, Username, Password, IsActive);
 
-        public clUser()
-        {
-            _Mode = enMode.AddNew;
-
-            ID = -1;
-            Person = new clPerson();
-            Username = string.Empty;
-            Password = string.Empty;
-            IsActive = false;
-        }
-        internal clUser(clUserDTO UserDTO)
+        public clUser() { }
+        public clUser(clUserDTO userDTO)
         {
             _Mode = enMode.Update;
 
-            ID = UserDTO.ID;
-            Person = new clPerson(UserDTO.PersonDTO);
-            Username = UserDTO.Username;
-            Password = UserDTO.Password;
-            IsActive = UserDTO.IsActive;
+            ID = userDTO.ID;
+            Person = new clPerson(new clPersonDTO(userDTO.PersonID,userDTO.Gender,userDTO.FirstName,userDTO.SecondName,userDTO.ThirdName,userDTO.LastName,
+                userDTO.DateOfBirth,userDTO.CountryID,userDTO.CountryName,userDTO.NationalNumber,userDTO.Address,userDTO.Phone,userDTO.Email,userDTO.ImagePath));
+            Username = userDTO.Username;
+            Password = userDTO.Password;
+            IsActive = userDTO.IsActive;
         }
 
         public enum enLoginResults : byte { Success, UserNotFound, InvalidPassword, UserNotActive }
@@ -56,12 +49,12 @@ namespace DVLD.Logic
             return (enLoginResults.Success, new clUser(UserDTO));
         }
 
-        public static clUser Find(int ID) => clUserData.Find(ID) is clUserDTO UserDTO ? new clUser(UserDTO) : null;
-        public static clUser Find(string Username) => clUserData.Find(Username) is clUserDTO UserDTO ? new clUser(UserDTO) : null;
+        public static clUser Find(int id) => clUserData.Find(id) is clUserDTO UserDTO ? new clUser(UserDTO) : null;
+        public static clUser Find(string username) => clUserData.Find(username) is clUserDTO UserDTO ? new clUser(UserDTO) : null;
 
-        public static bool IsExist(int ID) => clUserData.IsExist(ID);
-        public static bool IsExist(string Username) => clUserData.IsExist(Username);
-        public static bool IsExistForPersonID(int PersonID) => clUserData.IsExistForPersonID(PersonID);
+        public static bool IsExist(int id) => clUserData.IsExist(id);
+        public static bool IsExist(string username) => clUserData.IsExist(username);
+        public static bool IsExistForPersonID(int personID) => clUserData.IsExistForPersonID(personID);
 
         private bool _AddNew() => (ID = clUserData.AddNew(UserDTO)) != -1;
         private bool _Update() => clUserData.Update(UserDTO);
@@ -85,17 +78,17 @@ namespace DVLD.Logic
             }
         }
 
-        public bool ChangePassword(string NewPassword)
+        public bool ChangePassword(string newPassword)
         {
-            if (clUserData.ChangePassword(ID, NewPassword))
+            if (clUserData.ChangePassword(ID, newPassword))
             {
-                Password = NewPassword;
+                Password = newPassword;
                 return true;
             }
             return false;
         }
 
-        public static bool Delete(int ID) => clUserData.Delete(ID);
+        public static bool Delete(int id) => clUserData.Delete(id);
 
         public static DataTable GetAllUsers() => clUserData.GetManageUsersList();
     }

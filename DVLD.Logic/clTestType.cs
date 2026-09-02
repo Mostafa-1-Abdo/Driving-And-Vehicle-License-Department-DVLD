@@ -8,29 +8,23 @@ namespace DVLD.Logic
     {
         public enum enTestType : byte { None = 0, VisionTest = 1, WrittenTest = 2, StreetTest = 3 }
 
-        public enTestType ID { get;private set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public decimal Fees { get; set; }
+        public enTestType ID { get; private set; } = enTestType.None;
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public decimal Fees { get; set; } = decimal.Zero;
 
         public clTestTypeDTO TestTypeDTO => new clTestTypeDTO((int)ID, Title, Description, Fees);
 
-        public clTestType()
+        public clTestType() { }
+        public clTestType(clTestTypeDTO testTypeDTO)
         {
-            ID = enTestType.None;
-            Title = string.Empty;
-            Description = string.Empty;
-            Fees = 0;
-        }
-        internal clTestType(clTestTypeDTO TestTypeDTO)
-        {
-            ID = (enTestType)TestTypeDTO.ID;
-            Title = TestTypeDTO.Title;
-            Description = TestTypeDTO.Description;
-            Fees = TestTypeDTO.Fees;
+            ID = (enTestType)testTypeDTO.ID;
+            Title = testTypeDTO.Title;
+            Description = testTypeDTO.Description;
+            Fees = testTypeDTO.Fees;
         }
 
-        public static clTestType Find(enTestType ID) => clTestTypeData.Find((int)ID) is clTestTypeDTO TestTypeDTO ? new clTestType(TestTypeDTO) : null;
+        public static clTestType Find(enTestType id) => clTestTypeData.Find((int)id) is clTestTypeDTO TestTypeDTO ? new clTestType(TestTypeDTO) : null;
 
         private bool _Update() => clTestTypeData.Update(TestTypeDTO);
         public bool Save() => _Update();

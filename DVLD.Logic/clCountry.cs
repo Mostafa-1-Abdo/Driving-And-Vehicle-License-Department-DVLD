@@ -1,25 +1,18 @@
 ﻿using DVLD.Data;
-using DVLD.Data.DTOs;
 using System.Data;
 
 namespace DVLD.Logic
 {
     public class clCountry
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
+        public int ID { get; set; } = -1;
+        public string Name { get; set; } = string.Empty;
 
-        public clCountryDTO CountryDTO => new clCountryDTO(ID, Name); 
-
-        public clCountry()
+        public clCountry() { }
+        public clCountry(int id,string name)
         {
-            ID = -1;
-            Name = string.Empty;
-        }
-        internal clCountry(clCountryDTO CountryDTO)
-        {
-            ID = CountryDTO.ID;
-            Name = CountryDTO.Name;
+            ID = id;
+            Name = name;
         }
 
         static public DataTable GetAllCountries() =>  clCountryData.GetAllCountries();

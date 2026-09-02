@@ -8,31 +8,30 @@ namespace DVLD.Data
     {
         public static DataTable GetAllCountries()
         {
-            DataTable Table = new DataTable();
+            DataTable countriesTable = new DataTable();
 
             try
             {
-                using (SqlConnection Connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string SQL = "select * from Countries";
+                    string sql = "select * from Countries";
 
-                    using (SqlCommand Command = new SqlCommand(SQL, Connection))
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        Connection.Open();
+                        connection.Open();
 
-                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            Table.Load(Reader);
+                            countriesTable.Load(reader);
                         }
                     }
                 }
-
             }
             catch
             {
             }
 
-            return Table;
+            return countriesTable;
         }
     }
 }

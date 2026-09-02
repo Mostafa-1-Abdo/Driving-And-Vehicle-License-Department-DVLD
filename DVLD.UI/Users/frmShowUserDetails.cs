@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD.UI.Util;
+using System;
 using System.Windows.Forms;
 
 namespace DVLD.UI.Users
@@ -7,22 +8,22 @@ namespace DVLD.UI.Users
     {
         private int _ID;
 
-        public frmShowUserDetails(int ID)
+        public frmShowUserDetails(int id)
         {
             InitializeComponent();
 
-            _ID = ID;
+            _ID = id;
         }
 
         private void frmShowUserDetails_Load(object sender, EventArgs e)
         {
-            if(!ctrlUserCard1.LoadUserInfo(_ID))
+            if (!ctrlUserCard1.LoadUserInfo(_ID))
+            {
+                clUIMessages.ShowNotFound("User", _ID);
                 Close();
+            }
         }
 
-        private void btn_Close_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void btn_Close_Click(object sender, EventArgs e) => Close();
     }
 }

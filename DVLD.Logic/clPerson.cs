@@ -10,73 +10,55 @@ namespace DVLD.Logic
         private enum enMode : byte { AddNew, Update }
         public enum enGender : byte { Male, Female }
 
-        private enMode _Mode;
+        private enMode _Mode = enMode.AddNew;
 
-        public int ID { get; private set; }
-        public enGender Gender { get; set; }
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public string ThirdName { get; set; }
-        public string LastName { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public clCountry Country { get; set; }
-        public string NationalNumber { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string ImagePath { get; set; }
+        public int ID { get; private set; } = -1;
+        public enGender Gender { get; set; } = enGender.Male;
+        public string FirstName { get; set; } = string.Empty;
+        public string SecondName { get; set; } = string.Empty;
+        public string ThirdName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public DateTime DateOfBirth { get; set; } = DateTime.Now.AddYears(-18);
+        public clCountry Country { get; set; } = new clCountry();
+        public string NationalNumber { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
 
         public string FullName => !string.IsNullOrWhiteSpace(ThirdName) ?
             $"{FirstName} {SecondName} {ThirdName} {LastName}" :
             $"{FirstName} {SecondName} {LastName}";
-        
-        public clPersonDTO PersonDTO => new clPersonDTO(
-          ID, (byte)Gender, FirstName, SecondName, ThirdName, LastName,
-          DateOfBirth,Country.CountryDTO, NationalNumber, Address, Phone, Email, ImagePath);
 
-        public clPerson()
-        {
-            _Mode = enMode.AddNew;
+        public clPersonDTO PersonDTO => new clPersonDTO(ID, (byte)Gender, FirstName, SecondName, ThirdName, LastName,
+            DateOfBirth, Country?.ID ?? -1,Country?.Name ?? string.Empty,NationalNumber, Address, Phone, Email, ImagePath);
 
-            ID = -1;
-            Gender = enGender.Male;
-            FirstName = string.Empty;
-            SecondName = string.Empty;
-            ThirdName = string.Empty;
-            LastName = string.Empty;
-            DateOfBirth = DateTime.Now.AddYears(-18);
-            Country = new clCountry();
-            NationalNumber = string.Empty;
-            Address = string.Empty;
-            Phone = string.Empty;
-            Email = string.Empty;
-            ImagePath = string.Empty;
-        }
-        internal clPerson(clPersonDTO PersonDTO)
+        public clPerson() { }
+        public clPerson(clPersonDTO personDTO)
         {
             _Mode = enMode.Update;
 
-            ID = PersonDTO.ID;
-            Gender = (enGender)PersonDTO.Gender;
-            FirstName = PersonDTO.FirstName;
-            SecondName = PersonDTO.SecondName;
-            ThirdName = PersonDTO.ThirdName;
-            LastName = PersonDTO.LastName;
-            DateOfBirth = PersonDTO.DateOfBirth;
-            Country = new clCountry(PersonDTO.CountryDTO);
-            NationalNumber = PersonDTO.NationalNumber;
-            Address = PersonDTO.Address;
-            Phone = PersonDTO.Phone;
-            Email = PersonDTO.Email;
-            ImagePath = PersonDTO.ImagePath;
+            ID = personDTO.ID;
+            Gender = (enGender)personDTO.Gender;
+            FirstName = personDTO.FirstName;
+            SecondName = personDTO.SecondName;
+            ThirdName = personDTO.ThirdName;
+            LastName = personDTO.LastName;
+            DateOfBirth = personDTO.DateOfBirth;
+            Country = new clCountry(personDTO.CountryID, personDTO.CountryName);
+            NationalNumber = personDTO.NationalNumber;
+            Address = personDTO.Address;
+            Phone = personDTO.Phone;
+            Email = personDTO.Email;
+            ImagePath = personDTO.ImagePath;
         }
 
-        public static clPerson Find(int ID) => clPersonData.Find(ID) is clPersonDTO PersonDTO ? new clPerson(PersonDTO) : null;
-        public static clPerson Find(string NationalNumber) => clPersonData.Find(NationalNumber) is clPersonDTO PersonDTO ? new clPerson(PersonDTO) : null;
+        public static clPerson Find(int id) => clPersonData.Find(id) is clPersonDTO PersonDTO ? new clPerson(PersonDTO) : null;
+        public static clPerson Find(string nationalNumber) => clPersonData.Find(nationalNumber) is clPersonDTO PersonDTO ? new clPerson(PersonDTO) : null;
 
-        public static bool IsExist(int ID) => clPersonData.IsExist(ID);
-        public static bool IsExist(string NationalNumber) => clPersonData.IsExist(NationalNumber);
-      
+        public static bool IsExist(int id) => clPersonData.IsExist(id);
+        public static bool IsExist(string nationalNumber) => clPersonData.IsExist(nationalNumber);
+
         private bool _AddNew() => (ID = clPersonData.AddNew(PersonDTO)) != -1;
         private bool _Update() => clPersonData.Update(PersonDTO);
         public bool Save()
@@ -99,8 +81,8 @@ namespace DVLD.Logic
             }
         }
 
-        public static bool Delete(int ID) => clPersonData.Delete(ID);
-     
+        public static bool Delete(int id) => clPersonData.Delete(id);
+
         public static DataTable GetAllPeople() => clPersonData.GetManagePeopleList();
     }
 }
