@@ -79,7 +79,7 @@
             // 
             this.ContextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.ContextMenuStrip.Name = "ContectMenuStrip";
-            this.ContextMenuStrip.Size = new System.Drawing.Size(181, 26);
+            this.ContextMenuStrip.Size = new System.Drawing.Size(61, 4);
             // 
             // lb_FilterBy
             // 
@@ -96,9 +96,9 @@
             this.lb_Title.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lb_Title.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_Title.ForeColor = System.Drawing.Color.Firebrick;
-            this.lb_Title.Location = new System.Drawing.Point(430, 200);
+            this.lb_Title.Location = new System.Drawing.Point(264, 200);
             this.lb_Title.Name = "lb_Title";
-            this.lb_Title.Size = new System.Drawing.Size(333, 46);
+            this.lb_Title.Size = new System.Drawing.Size(664, 46);
             this.lb_Title.TabIndex = 2;
             this.lb_Title.Text = "Title";
             this.lb_Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

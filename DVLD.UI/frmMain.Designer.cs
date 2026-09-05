@@ -181,7 +181,7 @@
             this.msi_ManageApplications.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.msi_LocalDrivingLicenseApplications,
             this.toolStripMenuItem7});
-            this.msi_ManageApplications.Image = global::DVLD.UI.Properties.Resources.ManageApplications;
+            this.msi_ManageApplications.Image = global::DVLD.UI.Properties.Resources.ManageApplications1;
             this.msi_ManageApplications.Name = "msi_ManageApplications";
             this.msi_ManageApplications.Size = new System.Drawing.Size(238, 38);
             this.msi_ManageApplications.Text = "Manage Applications";
@@ -214,10 +214,11 @@
             // 
             // msi_ManageApplicationsTypes
             // 
-            this.msi_ManageApplicationsTypes.Image = global::DVLD.UI.Properties.Resources.ManageApplicationTypes;
+            this.msi_ManageApplicationsTypes.Image = global::DVLD.UI.Properties.Resources.ApplicationTypes;
             this.msi_ManageApplicationsTypes.Name = "msi_ManageApplicationsTypes";
             this.msi_ManageApplicationsTypes.Size = new System.Drawing.Size(238, 38);
             this.msi_ManageApplicationsTypes.Text = "Manage Applications Types";
+            this.msi_ManageApplicationsTypes.Click += new System.EventHandler(this.msi_ManageApplicationsTypes_Click);
             // 
             // msi_ManageTestTypes
             // 

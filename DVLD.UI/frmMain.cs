@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using DVLD.UI.Users;
 using DVLD.UI.TestTypes;
+using DVLD.UI.ApplicationTypes;
 
 namespace DVLD.UI
 {
@@ -54,6 +55,11 @@ namespace DVLD.UI
         private void msi_ManageTestTypes_Click(object sender, EventArgs e)
         {
             new frmManageTestTypes().ShowDialog(this);
+        }
+
+        private void msi_ManageApplicationsTypes_Click(object sender, EventArgs e)
+        {
+            new frmManageApplicationTypes().ShowDialog(this);
         }
     }
 }
