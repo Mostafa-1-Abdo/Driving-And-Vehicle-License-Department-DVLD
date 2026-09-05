@@ -1,4 +1,5 @@
 ﻿using DVLD.Logic;
+using DVLD.UI.UserControls;
 using DVLD.UI.Util;
 using System;
 using System.ComponentModel;
@@ -17,12 +18,14 @@ namespace DVLD.UI.Users
         public frmAddEditUser()
         {
             InitializeComponent();
+
             _Mode = enMode.AddNew;
         }
 
         public frmAddEditUser(int id)
         {
             InitializeComponent();
+
             _Mode = enMode.Edit;
             _ID = id;
         }
@@ -31,6 +34,7 @@ namespace DVLD.UI.Users
         {
             if (!ctrlPersonCardWithFilter1.LoadPersonInfo(_User.Person))
             {
+                clUIMessages.ShowNotFound("User", _ID);
                 Close();
                 return;
             }
@@ -72,27 +76,21 @@ namespace DVLD.UI.Users
                 _FillFormWithUserInfo();
             }
         }
-        private void frmAddEditUser_Load(object sender, EventArgs e)
-        {
-            _DesignForm();
-        }
+        private void frmAddEditUser_Load(object sender, EventArgs e) => _DesignForm();
 
-        private void ctrlPersonCardWithFilter1_OnSelectedPerson(int id)
-        {
-            btn_Next.Enabled = (id != -1);
-        }
+        private void ctrlPersonCardWithFilter1_OnSelectedPerson(int id) => btn_Next.Enabled = (id != -1);
+        private void ctrlPersonCardWithFilter1_OnSavedPerson(int id) => ctrlPersonCardWithFilter1.gb_FilterEnabled = !(btn_Next.Enabled = (id != -1));
 
         private void btn_Next_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tp_LoginInformation;
 
             if (tabControl1.SelectedTab == tp_PersonalInformation)
+            {
                 ctrlPersonCardWithFilter1.SearchSelect();
+            }
         }
-        private void btn_Previous_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tp_PersonalInformation;
-        }
+        private void btn_Previous_Click(object sender, EventArgs e) => tabControl1.SelectedTab = tp_PersonalInformation;
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
@@ -131,30 +129,60 @@ namespace DVLD.UI.Users
 
         private void tb_Username_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_Username.Text))
+            if (_Mode == enMode.Edit) return;
+
+            string username = tb_Username.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(username))
+            {
                 errorProvider1.SetError(tb_Username, "Username is required.");
-            else if (_Mode == enMode.AddNew && clUser.IsExist(tb_Username.Text.Trim()))
+            }
+            else if (clUser.IsExist(username))
+            {
                 errorProvider1.SetError(tb_Username, "Username is already used by another person.");
+            }
             else
+            {
                 errorProvider1.SetError(tb_Username, null);
+            }
         }
         private void tb_Password_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_Password.Text))
+            if (_Mode == enMode.Edit) return;
+
+            string password = tb_Password.Text;
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
                 errorProvider1.SetError(tb_Password, "Password is required.");
-            else if (tb_Password.Text.Length < 6)
+            }
+            else if (password.Length < 6)
+            {
                 errorProvider1.SetError(tb_Password, "Password should be at least 6 characters.");
+            }
             else
+            {
                 errorProvider1.SetError(tb_Password, null);
+            }
         }
         private void tb_ConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_ConfirmPassword.Text))
+            if (_Mode == enMode.Edit) return;
+
+            string confrimPassword = tb_ConfirmPassword.Text;
+
+            if (string.IsNullOrWhiteSpace(confrimPassword))
+            {
                 errorProvider1.SetError(tb_ConfirmPassword, "Confirm password is required.");
-            else if (tb_ConfirmPassword.Text != tb_Password.Text)
+            }
+            else if (confrimPassword != tb_Password.Text)
+            {
                 errorProvider1.SetError(tb_ConfirmPassword, "Password confirmation does not match the password.");
+            }
             else
+            {
                 errorProvider1.SetError(tb_ConfirmPassword, null);
+            }
         }
 
         private void btn_Save_Click(object sender, EventArgs e)
@@ -166,10 +194,13 @@ namespace DVLD.UI.Users
             }
 
             if (_Mode == enMode.AddNew)
+            {
                 _User.Person = ctrlPersonCardWithFilter1.SelectedPerson;
 
-            _User.Username = tb_Username.Text.Trim();
-            _User.Password = tb_Password.Text.Trim();
+                _User.Username = tb_Username.Text.Trim();
+                _User.Password = tb_Password.Text;
+            }
+
             _User.IsActive = ckb_IsActive.Checked;
 
             if (_User.Save())

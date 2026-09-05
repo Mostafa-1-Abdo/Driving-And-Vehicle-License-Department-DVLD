@@ -9,17 +9,22 @@ namespace DVLD.UI.UserControls
 
         public clUser User { get => _User; }
 
-        public ctrlUserCard()
+        public ctrlUserCard() => InitializeComponent();
+
+        public void ResetUserCard()
         {
-            InitializeComponent();
+            ctrlPersonCard1.ResetPersonCard();
+            lb_ID.Text = "[???]";
+            lb_Username.Text = "[???]";
+            lb_IsActive.Text = "[???]";
         }
 
-        private void _FillCardWithPeronInfo()
+        private void _FillCardWithPersonInfo()
         {
             ctrlPersonCard1.LoadPersonInfo(_User.Person);
             lb_ID.Text = _User.ID.ToString();
             lb_Username.Text = _User.Username;
-            lb_IsActive.Text = _User.IsActive ? "Acitve" : "Inactive";
+            lb_IsActive.Text = _User.IsActive ? "Active" : "Inactive";
         }
 
         public bool LoadUserInfo(int ID)
@@ -28,11 +33,11 @@ namespace DVLD.UI.UserControls
 
             if (_User == null)
             {
-                MessageBox.Show($"No user with ID = {ID} was found in the system.", "Person Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                ResetUserCard();
                 return false;
             }
 
-            _FillCardWithPeronInfo();
+            _FillCardWithPersonInfo();
 
             return true;
         }

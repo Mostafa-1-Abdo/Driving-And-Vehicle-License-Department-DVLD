@@ -492,7 +492,6 @@
             this.tb_NationalNumber.Size = new System.Drawing.Size(167, 22);
             this.tb_NationalNumber.TabIndex = 5;
             this.tb_NationalNumber.Tag = "National Number";
-            this.tb_NationalNumber.Text = "National Number";
             this.tb_NationalNumber.Validating += new System.ComponentModel.CancelEventHandler(this.tb_NationalNumber_Validating);
             // 
             // label2
@@ -623,6 +622,7 @@
             this.btn_Close.TabIndex = 114;
             this.btn_Close.Text = "Close";
             this.btn_Close.UseVisualStyleBackColor = false;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // btn_Save
             // 
@@ -640,12 +640,15 @@
             this.btn_Save.TabIndex = 113;
             this.btn_Save.Text = "Save";
             this.btn_Save.UseVisualStyleBackColor = false;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // frmAddEditPerson
             // 
+            this.AcceptButton = this.btn_Save;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btn_Close;
             this.ClientSize = new System.Drawing.Size(1011, 497);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.lb_ID);

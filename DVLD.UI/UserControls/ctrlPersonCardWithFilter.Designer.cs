@@ -74,6 +74,7 @@
             this.cb_Filter.Name = "cb_Filter";
             this.cb_Filter.Size = new System.Drawing.Size(210, 21);
             this.cb_Filter.TabIndex = 16;
+            this.cb_Filter.SelectedIndexChanged += new System.EventHandler(this.cb_Filter_SelectedIndexChanged);
             // 
             // btn_SearchPerson
             // 
@@ -117,7 +118,6 @@
             this.gb_Filters.TabIndex = 17;
             this.gb_Filters.TabStop = false;
             this.gb_Filters.Text = "Filter";
-            this.gb_Filters.Enter += new System.EventHandler(this.gb_Filters_Enter);
             // 
             // ctrlPersonCard1
             // 

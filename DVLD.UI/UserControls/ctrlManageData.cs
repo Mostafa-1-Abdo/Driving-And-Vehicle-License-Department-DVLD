@@ -18,7 +18,7 @@ namespace DVLD.UI
         public DataGridViewColumnCollection dgv_RecordsColumns => dgv_Records.Columns;
         public DataGridViewRow dgv_RecordsCurrentRow => dgv_Records.CurrentRow;
 
-        public ToolStripItemCollection cms_dgvItems => ContectMenuStrip.Items;
+        public ToolStripItemCollection cms_dgvItems => ContextMenuStrip.Items;
 
         public IButtonControl CloseButton => btn_Close;
 
@@ -35,11 +35,8 @@ namespace DVLD.UI
 
         private DataView _View;
 
-        public ctrlManageData()
-        {
-            InitializeComponent();
-        }
-
+        public ctrlManageData() => InitializeComponent();
+        
         public void RefreshRecords(DataView view)
         {
             _View = view;
@@ -56,7 +53,6 @@ namespace DVLD.UI
         public event Action AddClicked;
         private void btn_Add_Click(object sender, EventArgs e) => AddClicked?.Invoke();
 
-        // Filter Helpers
         public class clFilterOption
         {
             public string DisplayText { get; set; }
@@ -70,7 +66,6 @@ namespace DVLD.UI
 
             public override string ToString() => DisplayText;
         }
-
         public void SetCustomeFilter(clFilterOption[] options)
         {
             cb_Search.DataSource = null;
@@ -113,8 +108,7 @@ namespace DVLD.UI
 
         private void tb_Search_TextChanged(object sender, EventArgs e)
         {
-            if (_View == null || _View.Table == null)
-                return;
+            if (_View == null || _View.Table == null) return;
 
             string filterColumn = cb_Filter.Text.Trim();
             string searchValue = tb_Search.Text.Trim();
@@ -129,16 +123,14 @@ namespace DVLD.UI
             Type columnType = _View.Table.Columns[filterColumn].DataType;
 
             if (columnType == typeof(byte) || columnType == typeof(short) || columnType == typeof(int) ||
-                columnType == typeof(long) || columnType == typeof(float) || columnType == typeof(double) ||
-                columnType == typeof(decimal))
+                columnType == typeof(long))
             {
-                _View.RowFilter = int.TryParse(searchValue, out int number)
+                _View.RowFilter = long.TryParse(searchValue, out long number)
                     ? $"[{filterColumn}] = {number}"
                     : $"[{filterColumn}] = -1";
             }
             else
             {
-                // استبدال الـ single quote لتجنب كسر صيغة الفلترة
                 string safeSearchValue = searchValue.Replace("'", "''");
                 _View.RowFilter = $"[{filterColumn}] LIKE '%{safeSearchValue}%'";
             }
@@ -147,14 +139,13 @@ namespace DVLD.UI
         }
         private void cb_Search_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_View == null || _View.Table == null)
-                return;
+            if (_View == null || _View.Table == null) return;
 
             string filterColumn = cb_Filter.Text.Trim();
 
             if (cb_Search.SelectedValue == null || !_View.Table.Columns.Contains(filterColumn))
             {
-                _View.RowFilter = string.Empty;
+                _View.RowFilter = null;
                 RefreshNumberOfRecords();
                 return;
             }
@@ -173,14 +164,12 @@ namespace DVLD.UI
 
         private void tb_Search_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (_View == null || _View.Table == null || !_View.Table.Columns.Contains(cb_Filter.Text.Trim()))
-                return;
+            if (_View == null || _View.Table == null || !_View.Table.Columns.Contains(cb_Filter.Text.Trim())) return;
 
-            Type columnType = _View.Table.Columns[cb_Filter.Text.Trim()].DataType;
+            Type columnType = _View.Table.Columns[cb_Filter.Text].DataType;
 
             if (columnType == typeof(byte) || columnType == typeof(short) || columnType == typeof(int) ||
-                columnType == typeof(long) || columnType == typeof(float) || columnType == typeof(double) ||
-                columnType == typeof(decimal))
+                columnType == typeof(long))
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }

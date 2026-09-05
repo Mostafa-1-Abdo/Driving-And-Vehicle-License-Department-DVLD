@@ -21,6 +21,7 @@ namespace DVLD.UI.People
             {
                 clUIMessages.ShowNotFound("Person", _ID);
                 Close();
+                return;
             }
         }
 

@@ -17,12 +17,6 @@ namespace DVLD.UI.TestTypes
 
             _ID = (clTestType.enTestType)id;
         }
-        public frmEditTestType(clTestType.enTestType testTypeID)
-        {
-            InitializeComponent();
-
-            _ID = testTypeID;
-        }
 
         private void _FillFormWithTestTypeInfo()
         {
@@ -43,12 +37,8 @@ namespace DVLD.UI.TestTypes
 
             _FillFormWithTestTypeInfo();
         }
-        private void frmEditTestType_Load(object sender, EventArgs e)
-        {
-            _DesignForm();
-        }
+        private void frmEditTestType_Load(object sender, EventArgs e) => _DesignForm();
 
-        private void btn_Close_Click(object sender, EventArgs e) => Close();
         private void btn_Save_Click(object sender, EventArgs e)
         {
             if (!this.IsValid(errorProvider1))
@@ -70,28 +60,47 @@ namespace DVLD.UI.TestTypes
                 clUIMessages.ShowSaveError();
             }
         }
+        private void btn_Close_Click(object sender, EventArgs e) => Close();
 
         private void tb_Validating(object sender, CancelEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
 
             if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
                 errorProvider1.SetError(textBox, $"{textBox.Tag?.ToString() ?? "This field"} is required.");
+            }
             else
+            {
                 errorProvider1.SetError(textBox, null);
+            }
         }
         private void tb_Fees_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_Fees.Text))
+            string fees = tb_Fees.Text.Trim();
+
+            if (string.IsNullOrEmpty(fees))
+            {
                 errorProvider1.SetError(tb_Fees, "Fees is required.");
-            else if (!clUtil.IsValidMoney(tb_Fees.Text.Trim()))
+            }
+            else if (!clUtil.IsValidMoney(fees))
+            {
                 errorProvider1.SetError(tb_Fees, "Invalid fees format! (e.g. 15 or 15.50).");
+            }
             else
+            {
                 errorProvider1.SetError(tb_Fees, null);
+            }
         }
+
         private void tb_Fees_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && !char.IsControl(e.KeyChar);
+            if (e.KeyChar == '.' && (!tb_Fees.Text.Contains(".") || tb_Fees.SelectedText.Contains(".")))
+            {
+                e.Handled = false;
+                return;
+            }
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
         private void tb_Fees_KeyDown(object sender, KeyEventArgs e)
         {

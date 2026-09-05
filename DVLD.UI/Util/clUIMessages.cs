@@ -47,5 +47,8 @@ namespace DVLD.UI.Util
 
         public static void ShowPasswordChangeFailed() => MessageBox.Show("Failed to change password. Please try again.", "Error",
             MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        public static void ShowCannotDeleteCurrentUser() => MessageBox.Show("You cannot delete the currently logged-in user.", "Action Not Allowed",
+    MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }

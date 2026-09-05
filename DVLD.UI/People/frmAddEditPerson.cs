@@ -19,12 +19,14 @@ namespace DVLD.UI.People
         public frmAddEditPerson()
         {
             InitializeComponent();
+
             _Mode = enMode.AddNew;
         }
 
         public frmAddEditPerson(int id)
         {
             InitializeComponent();
+
             _Mode = enMode.Edit;
             _ID = id;
         }
@@ -46,9 +48,13 @@ namespace DVLD.UI.People
             dtp_DateOfBirth.Value = _Person.DateOfBirth;
 
             if (_Person.Gender == clPerson.enGender.Male)
+            {
                 rb_Male.Checked = true;
+            }
             else
+            {
                 rb_Female.Checked = true;
+            }
 
             tb_Phone.Text = _Person.Phone;
             tb_Email.Text = _Person.Email;
@@ -56,9 +62,13 @@ namespace DVLD.UI.People
             tb_Address.Text = _Person.Address;
 
             if (File.Exists(_Person.ImagePath))
+            {
                 pb_PersonImage.ImageLocation = _Person.ImagePath;
+            }
             else
+            {
                 _ChangePersonImageAccordingToGender();
+            }
         }
         private void _DesignForm()
         {
@@ -99,7 +109,9 @@ namespace DVLD.UI.People
         private void _ChangePersonImageAccordingToGender()
         {
             if (string.IsNullOrEmpty(pb_PersonImage.ImageLocation))
+            {
                 pb_PersonImage.Image = rb_Male.Checked ? Resources.MalePersonImage : Resources.FemalePersonImage;
+            }
         }
         private void rb_Gender_CheckedChanged(object sender, EventArgs e) => _ChangePersonImageAccordingToGender();
 
@@ -123,33 +135,51 @@ namespace DVLD.UI.People
             Control control = (Control)sender;
 
             if (string.IsNullOrWhiteSpace(control.Text))
+            {
                 errorProvider1.SetError(control, $"{control.Tag?.ToString() ?? "This field"} is required.");
+            }
             else
+            {
                 errorProvider1.SetError(control, null);
+            }
         }
         private void tb_NationalNumber_Validating(object sender, CancelEventArgs e)
         {
-            if (_Mode == enMode.Edit)
-                return;
+            if (_Mode == enMode.Edit) return;
 
-            if (string.IsNullOrWhiteSpace(tb_NationalNumber.Text))
+            string nationalNumber = tb_NationalNumber.Text.Trim();
+
+            if (string.IsNullOrEmpty(nationalNumber))
+            {
                 errorProvider1.SetError(tb_NationalNumber, "National Number is required.");
-            else if (clPerson.IsExist(tb_NationalNumber.Text.Trim()))
+            }
+            else if (clPerson.IsExist(nationalNumber))
+            {
                 errorProvider1.SetError(tb_NationalNumber, "National Number is already used by another person.");
+            }
             else
+            {
                 errorProvider1.SetError(tb_NationalNumber, null);
-        }
+            }
+            }
         private void tb_Email_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_Email.Text))
+            string email = tb_Email.Text.Trim();
+
+            if (string.IsNullOrEmpty(email))
+            {
                 errorProvider1.SetError(tb_Email, null);
-            else if (!clUtil.IsValidEmail(tb_Email.Text.Trim()))
+            }
+            else if (!clUtil.IsValidEmail(email))
+            {
                 errorProvider1.SetError(tb_Email, "Invalid Email Address format! (e.g. user@example.com)");
+            }
             else
+            {
                 errorProvider1.SetError(tb_Email, null);
+            }
         }
-        private void tb_Phone_KeyPress(object sender, KeyPressEventArgs e) =>
-           e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        private void tb_Phone_KeyPress(object sender, KeyPressEventArgs e) => e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
 
         public event Action<clPerson> OnPersonSaved;
         private void btn_Save_Click(object sender, EventArgs e)
@@ -212,6 +242,6 @@ namespace DVLD.UI.People
                 }
             }
         }
-        private void btn_Close_Click(object sender, EventArgs e) => Close();       
+        private void btn_Close_Click(object sender, EventArgs e) => Close();
     }
 }

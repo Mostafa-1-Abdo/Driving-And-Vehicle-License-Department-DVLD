@@ -22,6 +22,7 @@ namespace DVLD.UI.Users
             {
                 clUIMessages.ShowNotFound("User", _ID);
                 Close();
+                return;
             }
         }
 
@@ -33,46 +34,63 @@ namespace DVLD.UI.Users
                 return;
             }
 
-            if (ctrlUserCard1.User.ChangePassword(tb_NewPassword.Text.Trim()))
+            if (ctrlUserCard1.User.ChangePassword(tb_NewPassword.Text))
             {
                 clUIMessages.ShowPasswordChangedSuccess();
 
-                tb_CurrentPassword.Text = tb_NewPassword.Text = tb_ConfirmPassword.Text = string.Empty;
+                Close();
             }
             else
             {
                 clUIMessages.ShowPasswordChangeFailed();
             }
         }
-
         private void btn_Close_Click(object sender, EventArgs e) => Close();
 
         private void tb_CurrentPassword_Validating(object sender, CancelEventArgs e)
         {
             if (tb_CurrentPassword.Text != ctrlUserCard1.User?.Password)
+            {
                 errorProvider1.SetError(tb_CurrentPassword, "Password is wrong.");
+            }
             else
+            {
                 errorProvider1.SetError(tb_CurrentPassword, null);
+            }
         }
-
         private void tb_NewPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_NewPassword.Text))
-                errorProvider1.SetError(tb_NewPassword, "Password is required.");
-            else if (tb_NewPassword.Text.Length < 6)
-                errorProvider1.SetError(tb_NewPassword, "Password should be at least 6 characters.");
-            else
-                errorProvider1.SetError(tb_NewPassword, null);
-        }
+            string newPassword = tb_NewPassword.Text;
 
+            if (string.IsNullOrWhiteSpace(newPassword))
+            {
+                errorProvider1.SetError(tb_NewPassword, "Password is required.");
+            }
+            else if (newPassword.Length < 6)
+            {
+                errorProvider1.SetError(tb_NewPassword, "Password should be at least 6 characters.");
+            }
+            else
+            {
+                errorProvider1.SetError(tb_NewPassword, null);
+            }
+        }
         private void tb_ConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tb_ConfirmPassword.Text))
+            string confirmPassword = tb_ConfirmPassword.Text;
+
+            if (string.IsNullOrWhiteSpace(confirmPassword))
+            {
                 errorProvider1.SetError(tb_ConfirmPassword, "Confirm password is required.");
-            else if (tb_ConfirmPassword.Text != tb_NewPassword.Text)
+            }
+            else if (confirmPassword != tb_NewPassword.Text)
+            {
                 errorProvider1.SetError(tb_ConfirmPassword, "Password confirmation does not match the password.");
+            }
             else
+            {
                 errorProvider1.SetError(tb_ConfirmPassword, null);
+            }
         }
     }
 }

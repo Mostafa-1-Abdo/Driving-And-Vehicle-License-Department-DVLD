@@ -3,6 +3,7 @@ using DVLD.UI.People;
 using DVLD.UI.Properties;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace DVLD.UI.UserControls
 {
@@ -12,41 +13,41 @@ namespace DVLD.UI.UserControls
 
         public clPerson SelectedPerson => _Person;
 
-        public ctrlPersonCard()
-        {
-            InitializeComponent();
-        }
+        public ctrlPersonCard() => InitializeComponent();
 
         public void ResetPersonCard()
         {
             _Person = null;
 
-            lb_ID.Text = "[????]";
-            lb_FullName.Text = "[????]";
-            lb_NationalNumber.Text = "[????]";
-            lb_Gender.Text = "[????]";
+            lb_ID.Text = "[???]";
+            lb_FullName.Text = "[???]";
+            lb_NationalNumber.Text = "[???]";
+            lb_Gender.Text = "[???]";
             pb_Gender.Image = Resources.Male;
             pb_PersonImage.Image = Resources.MalePersonImage;
-            lb_Email.Text = "[????]";
-            lb_Address.Text = "[????]";
-            lb_DateOfBirth.Text = "[????]";
-            lb_Phone.Text = "[????]";
-            lb_Country.Text = "[????]";
+            pb_PersonImage.ImageLocation = null;
+            lb_Email.Text = "[???]";
+            lb_Address.Text = "[???]";
+            lb_DateOfBirth.Text = "[???]";
+            lb_Phone.Text = "[???]";
+            lb_Country.Text = "[???]";
 
             llb_EditPersonInfo.Enabled = false;
         }
 
         private void _LoadPersonImage()
         {
+            Image personImage = null;
+
             if (_Person.Gender == clPerson.enGender.Male)
             {
                 pb_Gender.Image = Resources.Male;
-                pb_PersonImage.Image = Resources.MalePersonImage;
+                personImage = Resources.MalePersonImage;
             }
             else
             {
                 pb_Gender.Image = Resources.Female;
-                pb_PersonImage.Image = Resources.FemalePersonImage;
+                personImage = Resources.FemalePersonImage;
             }
 
             if (!string.IsNullOrEmpty(_Person.ImagePath) && File.Exists(_Person.ImagePath))
@@ -55,7 +56,8 @@ namespace DVLD.UI.UserControls
             }
             else
             {
-                pb_PersonImage.ImageLocation = string.Empty;
+                pb_PersonImage.ImageLocation = null;
+                pb_PersonImage.Image = personImage;
             }
         }
         private void _FillCardWithPersonInfo()
@@ -64,7 +66,7 @@ namespace DVLD.UI.UserControls
             lb_FullName.Text = _Person.FullName;
             lb_NationalNumber.Text = _Person.NationalNumber;
             lb_Gender.Text = _Person.Gender.ToString();
-            lb_Email.Text = _Person.Email;
+            lb_Email.Text = _Person.Email?? "[????]";
             lb_Address.Text = _Person.Address;
             lb_DateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
             lb_Phone.Text = _Person.Phone;
@@ -117,8 +119,7 @@ namespace DVLD.UI.UserControls
 
         private void llb_EditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (_Person == null)
-                return;
+            if (_Person == null) return;
 
             new frmAddEditPerson(_Person.ID).ShowDialog(FindForm());
             LoadPersonInfo(_Person.ID);

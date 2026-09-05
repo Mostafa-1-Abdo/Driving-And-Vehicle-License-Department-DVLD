@@ -13,15 +13,19 @@ namespace DVLD.UI
     {
         private DataTable _PeopleTable;
 
-        public frmManagePeople()
-        {
-            InitializeComponent();
-        }
+        public frmManagePeople() => InitializeComponent();
 
         private void _ResetForm()
         {
             _PeopleTable = clPerson.GetAllPeople();
             ctrlManageData1.RefreshRecords(_PeopleTable.DefaultView);
+        }
+        private void _Initialize_dgv_RecordsColumns()
+        {
+            ctrlManageData1.dgv_RecordsColumns["National Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode =
+                ctrlManageData1.dgv_RecordsColumns["Email"].AutoSizeMode =
+                ctrlManageData1.dgv_RecordsColumns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             ctrlManageData1.dgv_RecordsColumns["Date Of Birth"].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
@@ -34,13 +38,6 @@ namespace DVLD.UI
             ctrlManageData1.cms_dgvItems.Add("-");
             ctrlManageData1.cms_dgvItems.Add("Send Email", Resources.SendEmail, FeatureNotImplemented_Click);
             ctrlManageData1.cms_dgvItems.Add("Phone Call", Resources.PhoneCall, FeatureNotImplemented_Click);
-        }
-        private void _Initialize_dgv_RecordsColumns()
-        {
-            ctrlManageData1.dgv_RecordsColumns["National Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode =
-                ctrlManageData1.dgv_RecordsColumns["Email"].AutoSizeMode =
-                ctrlManageData1.dgv_RecordsColumns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
@@ -79,27 +76,23 @@ namespace DVLD.UI
         // Context Menu Strip Items Events
         private void ShowDetails_Click(object sender, EventArgs e)
         {
-            if (ctrlManageData1.dgv_RecordsCurrentRow == null)
-                return;
+            if (ctrlManageData1.dgv_RecordsCurrentRow == null) return;
 
             new frmShowPersonDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value).ShowDialog(this);
             _ResetForm();
         }
         private void EditPerson_Click(object sender, EventArgs e)
         {
-            if (ctrlManageData1.dgv_RecordsCurrentRow == null)
-                return;
+            if (ctrlManageData1.dgv_RecordsCurrentRow == null) return;
 
             new frmAddEditPerson((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value).ShowDialog(this);
             _ResetForm();
         }
         private void DeletePerson_Click(object sender, EventArgs e)
         {
-            if (ctrlManageData1.dgv_RecordsCurrentRow == null)
-                return;
+            if (ctrlManageData1.dgv_RecordsCurrentRow == null) return;
 
             int id = (int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value;
-
             if (clUIMessages.ShowConfirmDelete("Person", id))
             {
                 clPerson person = clPerson.Find(id);
@@ -110,7 +103,9 @@ namespace DVLD.UI
                     clUIMessages.ShowDeleteSuccess("Person");
 
                     if (!string.IsNullOrEmpty(imagePath))
+                    {
                         clFileHandler.HandleFileDelete(imagePath);
+                    }
 
                     _ResetForm();
                 }

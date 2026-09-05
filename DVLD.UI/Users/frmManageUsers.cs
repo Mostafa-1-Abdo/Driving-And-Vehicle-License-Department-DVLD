@@ -22,6 +22,11 @@ namespace DVLD.UI.Users
             _UsersTable = clUser.GetAllUsers();
             ctrlManageData1.RefreshRecords(_UsersTable.DefaultView);
         }
+        private void _Initialize_dgv_RecordsColumns()
+        {
+            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode =
+                ctrlManageData1.dgv_RecordsColumns["Username"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
         private void _Initialize_cms_dgv()
         {
             ctrlManageData1.cms_dgvItems.Add("Show Details", Resources.ShowDetails, ShowDetails_Click);
@@ -32,11 +37,6 @@ namespace DVLD.UI.Users
             ctrlManageData1.cms_dgvItems.Add("-");
             ctrlManageData1.cms_dgvItems.Add("Send Email", Resources.SendEmail, FeatureNotImplemented_Click);
             ctrlManageData1.cms_dgvItems.Add("Phone Call", Resources.PhoneCall, FeatureNotImplemented_Click);
-        }
-        private void _Initialize_dgv_RecordsColumns()
-        {
-            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode =
-                ctrlManageData1.dgv_RecordsColumns["Username"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         private void frmManageUsers_Load(object sender, EventArgs e)
         {
@@ -75,26 +75,29 @@ namespace DVLD.UI.Users
         // Context Menu Strip Items Events
         private void ShowDetails_Click(object sender, EventArgs e)
         {
-            if (ctrlManageData1.dgv_RecordsCurrentRow == null)
-                return;
+            if (ctrlManageData1.dgv_RecordsCurrentRow == null) return;
 
             new frmShowUserDetails((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value).ShowDialog(this);
             _ResetForm();
         }
         private void EditUser_Click(object sender, EventArgs e)
         {
-            if (ctrlManageData1.dgv_RecordsCurrentRow == null)
-                return;
+            if (ctrlManageData1.dgv_RecordsCurrentRow == null) return;
 
             new frmAddEditUser((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value).ShowDialog(this);
             _ResetForm();
         }
         private void DeleteUser_Click(object sender, EventArgs e)
         {
-            if (ctrlManageData1.dgv_RecordsCurrentRow == null)
-                return;
+            if (ctrlManageData1.dgv_RecordsCurrentRow == null) return;
 
             int id = (int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value;
+
+            if (id == clGlobalUser.GlobalUser.ID)
+            {
+                clUIMessages.ShowCannotDeleteCurrentUser();
+                return;
+            }
 
             if (clUIMessages.ShowConfirmDelete("User", id))
             {
@@ -111,8 +114,7 @@ namespace DVLD.UI.Users
         }
         private void ChangePassword_Click(object sender, EventArgs e)
         {
-            if (ctrlManageData1.dgv_RecordsCurrentRow == null)
-                return;
+            if (ctrlManageData1.dgv_RecordsCurrentRow == null) return;
 
             new frmChangePassword((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value).ShowDialog(this);
         }
