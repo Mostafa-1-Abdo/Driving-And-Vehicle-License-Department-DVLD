@@ -58,7 +58,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmManageApplicationTypes";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Manage Application Types";
             this.Load += new System.EventHandler(this.frmManageApplicationTypes_Load);

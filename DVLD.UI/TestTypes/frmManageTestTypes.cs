@@ -21,7 +21,7 @@ namespace DVLD.UI.TestTypes
             ctrlManageData1.dgv_RecordsAutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
             ctrlManageData1.dgv_RecordsColumns["Fees"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ctrlManageData1.dgv_RecordsColumns["Fees"].DefaultCellStyle.Format = "00.00";
+            ctrlManageData1.dgv_RecordsColumns["Fees"].DefaultCellStyle.Format = "N2";
         }
         private void frmManageTestTypes_Load(object sender, EventArgs e)
         {

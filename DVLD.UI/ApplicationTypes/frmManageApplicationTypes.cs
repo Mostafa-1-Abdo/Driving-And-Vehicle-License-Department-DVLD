@@ -1,14 +1,6 @@
 ﻿using DVLD.Logic;
 using DVLD.UI.Properties;
-using DVLD.UI.ApplicationTypes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD.UI.ApplicationTypes
@@ -24,7 +16,7 @@ namespace DVLD.UI.ApplicationTypes
         {
             ctrlManageData1.dgv_RecordsColumns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            ctrlManageData1.dgv_RecordsColumns["Fees"].DefaultCellStyle.Format = "00.00";
+            ctrlManageData1.dgv_RecordsColumns["Fees"].DefaultCellStyle.Format = "N2";
         }
         private void frmManageApplicationTypes_Load(object sender, EventArgs e)
         {
@@ -42,7 +34,7 @@ namespace DVLD.UI.ApplicationTypes
         {
             if (ctrlManageData1.dgv_RecordsCurrentRow == null) return;
 
-           //new frmEditApplicationType((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value).ShowDialog(this);
+            new frmEditApplicationType((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value).ShowDialog(this);
             _ResetForm();
         }
     }
