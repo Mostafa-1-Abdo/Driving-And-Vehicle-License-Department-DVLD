@@ -35,6 +35,7 @@
             // 
             this.ctrlManageData1.BackColor = System.Drawing.Color.Transparent;
             this.ctrlManageData1.btn_AddImage = null;
+            this.ctrlManageData1.dgv_RecordsAutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.None;
             this.ctrlManageData1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctrlManageData1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ctrlManageData1.ForeColor = System.Drawing.Color.DarkSlateGray;
@@ -42,7 +43,7 @@
             this.ctrlManageData1.Location = new System.Drawing.Point(0, 0);
             this.ctrlManageData1.Name = "ctrlManageData1";
             this.ctrlManageData1.pb_HeaderImage = global::DVLD.UI.Properties.Resources.ManageTestTypes;
-            this.ctrlManageData1.Size = new System.Drawing.Size(934, 499);
+            this.ctrlManageData1.Size = new System.Drawing.Size(734, 547);
             this.ctrlManageData1.TabIndex = 0;
             // 
             // frmManageTestTypes
@@ -50,7 +51,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(934, 499);
+            this.ClientSize = new System.Drawing.Size(734, 547);
             this.Controls.Add(this.ctrlManageData1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

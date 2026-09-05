@@ -209,7 +209,7 @@
             // 
             this.tb_Username.Location = new System.Drawing.Point(232, 83);
             this.tb_Username.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_Username.MaxLength = 50;
+            this.tb_Username.MaxLength = 20;
             this.tb_Username.Name = "tb_Username";
             this.tb_Username.Size = new System.Drawing.Size(167, 22);
             this.tb_Username.TabIndex = 131;
@@ -219,7 +219,7 @@
             // 
             this.tb_ConfirmPassword.Location = new System.Drawing.Point(232, 155);
             this.tb_ConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_ConfirmPassword.MaxLength = 50;
+            this.tb_ConfirmPassword.MaxLength = 20;
             this.tb_ConfirmPassword.Name = "tb_ConfirmPassword";
             this.tb_ConfirmPassword.PasswordChar = '*';
             this.tb_ConfirmPassword.Size = new System.Drawing.Size(167, 22);
@@ -266,7 +266,7 @@
             // 
             this.tb_Password.Location = new System.Drawing.Point(232, 119);
             this.tb_Password.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_Password.MaxLength = 50;
+            this.tb_Password.MaxLength = 20;
             this.tb_Password.Name = "tb_Password";
             this.tb_Password.PasswordChar = '*';
             this.tb_Password.Size = new System.Drawing.Size(167, 22);

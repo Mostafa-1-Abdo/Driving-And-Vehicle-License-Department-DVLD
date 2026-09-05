@@ -153,7 +153,7 @@
             // 
             this.tb_Description.Location = new System.Drawing.Point(166, 57);
             this.tb_Description.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_Description.MaxLength = 50;
+            this.tb_Description.MaxLength = 500;
             this.tb_Description.Multiline = true;
             this.tb_Description.Name = "tb_Description";
             this.tb_Description.Size = new System.Drawing.Size(539, 94);
@@ -202,7 +202,7 @@
             // 
             this.tb_Title.Location = new System.Drawing.Point(166, 19);
             this.tb_Title.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_Title.MaxLength = 50;
+            this.tb_Title.MaxLength = 100;
             this.tb_Title.Name = "tb_Title";
             this.tb_Title.Size = new System.Drawing.Size(167, 22);
             this.tb_Title.TabIndex = 1;

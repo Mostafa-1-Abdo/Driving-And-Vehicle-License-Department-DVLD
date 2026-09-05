@@ -404,7 +404,7 @@
             // 
             this.tb_Address.Location = new System.Drawing.Point(166, 208);
             this.tb_Address.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_Address.MaxLength = 50;
+            this.tb_Address.MaxLength = 500;
             this.tb_Address.Multiline = true;
             this.tb_Address.Name = "tb_Address";
             this.tb_Address.Size = new System.Drawing.Size(539, 94);
@@ -451,7 +451,7 @@
             // 
             this.tb_Phone.Location = new System.Drawing.Point(566, 131);
             this.tb_Phone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_Phone.MaxLength = 50;
+            this.tb_Phone.MaxLength = 20;
             this.tb_Phone.Name = "tb_Phone";
             this.tb_Phone.Size = new System.Drawing.Size(167, 22);
             this.tb_Phone.TabIndex = 9;
@@ -487,7 +487,7 @@
             // 
             this.tb_NationalNumber.Location = new System.Drawing.Point(166, 94);
             this.tb_NationalNumber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_NationalNumber.MaxLength = 50;
+            this.tb_NationalNumber.MaxLength = 20;
             this.tb_NationalNumber.Name = "tb_NationalNumber";
             this.tb_NationalNumber.Size = new System.Drawing.Size(167, 22);
             this.tb_NationalNumber.TabIndex = 5;
@@ -510,7 +510,7 @@
             // 
             this.tb_LastName.Location = new System.Drawing.Point(766, 57);
             this.tb_LastName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_LastName.MaxLength = 50;
+            this.tb_LastName.MaxLength = 20;
             this.tb_LastName.Name = "tb_LastName";
             this.tb_LastName.Size = new System.Drawing.Size(167, 22);
             this.tb_LastName.TabIndex = 4;
@@ -521,7 +521,7 @@
             // 
             this.tb_ThirdName.Location = new System.Drawing.Point(566, 57);
             this.tb_ThirdName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_ThirdName.MaxLength = 50;
+            this.tb_ThirdName.MaxLength = 20;
             this.tb_ThirdName.Name = "tb_ThirdName";
             this.tb_ThirdName.Size = new System.Drawing.Size(167, 22);
             this.tb_ThirdName.TabIndex = 3;
@@ -530,7 +530,7 @@
             // 
             this.tb_SecondName.Location = new System.Drawing.Point(366, 57);
             this.tb_SecondName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_SecondName.MaxLength = 50;
+            this.tb_SecondName.MaxLength = 20;
             this.tb_SecondName.Name = "tb_SecondName";
             this.tb_SecondName.Size = new System.Drawing.Size(167, 22);
             this.tb_SecondName.TabIndex = 2;
@@ -554,7 +554,7 @@
             // 
             this.tb_FirstName.Location = new System.Drawing.Point(166, 57);
             this.tb_FirstName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tb_FirstName.MaxLength = 50;
+            this.tb_FirstName.MaxLength = 20;
             this.tb_FirstName.Name = "tb_FirstName";
             this.tb_FirstName.Size = new System.Drawing.Size(167, 22);
             this.tb_FirstName.TabIndex = 1;
