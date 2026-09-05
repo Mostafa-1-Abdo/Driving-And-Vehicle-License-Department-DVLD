@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="clApplicationType.cs" />
     <Compile Include="clCountry.cs" />
+    <Compile Include="clLicenseClass.cs" />
     <Compile Include="clPerson.cs" />
     <Compile Include="clTestType.cs" />
     <Compile Include="clUser.cs" />
