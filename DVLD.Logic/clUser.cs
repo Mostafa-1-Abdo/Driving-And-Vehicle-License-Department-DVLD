@@ -11,13 +11,14 @@ namespace DVLD.Logic
         private enMode _Mode = enMode.AddNew;
 
         public int ID { get; private set; } = -1;
-        public clPerson Person { get; set; } = new clPerson();
+        public int PersonID { get; set; } = -1;
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public bool IsActive { get; set; } = false;
 
-        public clUserDTO UserDTO => new clUserDTO(ID, Person.ID,(byte)Person.Gender,Person.FirstName,Person.SecondName,Person.ThirdName,Person.LastName,
-            Person.DateOfBirth,Person.Country.ID,Person.Country.Name,Person.NationalNumber,Person.Address,Person.Phone,Person.Email,Person.ImagePath, Username, Password, IsActive);
+        public clPerson Person => PersonID != -1 ? clPerson.Find(PersonID) : null;
+
+        private clUserDTO UserDTO => new clUserDTO(ID, PersonID, Username, Password, IsActive);
 
         public clUser() { }
         public clUser(clUserDTO userDTO)
@@ -25,8 +26,7 @@ namespace DVLD.Logic
             _Mode = enMode.Update;
 
             ID = userDTO.ID;
-            Person = new clPerson(new clPersonDTO(userDTO.PersonID,userDTO.Gender,userDTO.FirstName,userDTO.SecondName,userDTO.ThirdName,userDTO.LastName,
-                userDTO.DateOfBirth,userDTO.CountryID,userDTO.CountryName,userDTO.NationalNumber,userDTO.Address,userDTO.Phone,userDTO.Email,userDTO.ImagePath));
+            PersonID = userDTO.PersonID;
             Username = userDTO.Username;
             Password = userDTO.Password;
             IsActive = userDTO.IsActive;
@@ -80,6 +80,8 @@ namespace DVLD.Logic
 
         public bool ChangePassword(string newPassword)
         {
+            if (_Mode == enMode.AddNew) return false;
+
             if (clUserData.ChangePassword(ID, newPassword))
             {
                 Password = newPassword;

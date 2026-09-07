@@ -12,6 +12,7 @@ namespace DVLD.UI.UserControls
         private clPerson _Person;
 
         public clPerson SelectedPerson => _Person;
+        public int SelectedPersonID => _Person != null? _Person.ID : -1;
 
         public ctrlPersonCard() => InitializeComponent();
 

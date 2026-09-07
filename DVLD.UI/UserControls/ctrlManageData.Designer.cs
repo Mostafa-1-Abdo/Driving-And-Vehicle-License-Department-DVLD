@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv_Records = new System.Windows.Forms.DataGridView();
-            this.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ContextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lb_FilterBy = new System.Windows.Forms.Label();
             this.lb_Title = new System.Windows.Forms.Label();
             this.cb_Filter = new System.Windows.Forms.ComboBox();
@@ -65,7 +65,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_Records.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_Records.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Records.ContextMenuStrip = this.ContextMenuStrip;
+            this.dgv_Records.ContextMenuStrip = this.ContextMenuStrip1;
             this.dgv_Records.Location = new System.Drawing.Point(14, 330);
             this.dgv_Records.MultiSelect = false;
             this.dgv_Records.Name = "dgv_Records";
@@ -75,11 +75,11 @@
             this.dgv_Records.Size = new System.Drawing.Size(1165, 278);
             this.dgv_Records.TabIndex = 0;
             // 
-            // ContextMenuStrip
+            // ContextMenuStrip1
             // 
-            this.ContextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.ContextMenuStrip.Name = "ContectMenuStrip";
-            this.ContextMenuStrip.Size = new System.Drawing.Size(61, 4);
+            this.ContextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.ContextMenuStrip1.Name = "ContectMenuStrip";
+            this.ContextMenuStrip1.Size = new System.Drawing.Size(181, 26);
             // 
             // lb_FilterBy
             // 
@@ -238,7 +238,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lb_NumberOfRecords;
         private System.Windows.Forms.Button btn_Add;
-        private System.Windows.Forms.ContextMenuStrip ContextMenuStrip;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuStrip1;
         private System.Windows.Forms.ToolTip tt_AddNew;
         private System.Windows.Forms.ComboBox cb_Search;
     }

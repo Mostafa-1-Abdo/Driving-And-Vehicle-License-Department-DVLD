@@ -1,19 +1,21 @@
 ﻿using DVLD.Data;
+using DVLD.Data.DTOs;
 using System.Data;
 
 namespace DVLD.Logic
 {
     public class clCountry
     {
-        public int ID { get; set; } = -1;
-        public string Name { get; set; } = string.Empty;
+        public int ID { get; private set; } = -1;
+        public string Name { get; private set; } = string.Empty;
 
-        public clCountry() { }
-        public clCountry(int id,string name)
+        public clCountry(clCountryDTO countryDTO)
         {
-            ID = id;
-            Name = name;
+            ID = countryDTO.ID;
+            Name = countryDTO.Name;
         }
+
+        public static clCountry Find(int id) => clCountryData.Find(id) is clCountryDTO CountryDTO ? new clCountry(CountryDTO) : null;
 
         static public DataTable GetAllCountries() =>  clCountryData.GetAllCountries();
     }

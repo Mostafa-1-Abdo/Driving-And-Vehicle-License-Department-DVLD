@@ -16,9 +16,9 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"select p.*, c.Name as Country from People p
-                                   join Countries c on p.CountryID = c.ID
-                                   where p.ID = @ID";
+                    string sql = @"select ID, Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth, CountryID, 
+                                   NationalNumber, Address, Phone, Email, ImagePath from People 
+                                   where ID = @ID";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -40,7 +40,6 @@ namespace DVLD.Data
                                     LastName = (string)reader["LastName"],
                                     DateOfBirth = (DateTime)reader["DateOfBirth"],
                                     CountryID = (int)reader["CountryID"],
-                                    CountryName = (string)reader["Country"],
                                     NationalNumber = (string)reader["NationalNumber"],
                                     Address = (string)reader["Address"],
                                     Phone = (string)reader["Phone"],
@@ -59,7 +58,6 @@ namespace DVLD.Data
 
             return personDTO;
         }
-
         public static clPersonDTO Find(string nationalNumber)
         {
             clPersonDTO personDTO = null;
@@ -68,9 +66,9 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"select p.*, c.Name as Country from People p
-                                   join Countries c on p.CountryID = c.ID
-                                   where p.NationalNumber = @NationalNumber";
+                    string sql = @"select ID, Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth, CountryID, 
+                                   NationalNumber, Address, Phone, Email, ImagePath from People 
+                                   where NationalNumber = @NationalNumber";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -92,7 +90,6 @@ namespace DVLD.Data
                                     LastName = (string)reader["LastName"],
                                     DateOfBirth = (DateTime)reader["DateOfBirth"],
                                     CountryID = (int)reader["CountryID"],
-                                    CountryName = (string)reader["Country"],
                                     NationalNumber = (string)reader["NationalNumber"],
                                     Address = (string)reader["Address"],
                                     Phone = (string)reader["Phone"],
@@ -141,7 +138,6 @@ namespace DVLD.Data
 
             return isFound;
         }
-
         public static bool IsExist(string nationalNumber)
         {
             bool isFound = false;

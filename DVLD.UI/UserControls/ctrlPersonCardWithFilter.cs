@@ -9,6 +9,7 @@ namespace DVLD.UI.UserControls
     public partial class ctrlPersonCardWithFilter : UserControl
     {
         public clPerson SelectedPerson => ctrlPersonCard1.SelectedPerson;
+        public int SelectedPersonID => ctrlPersonCard1.SelectedPersonID;
 
         public bool gb_FilterEnabled { get => gb_Filters.Enabled; set => gb_Filters.Enabled = value; }
 

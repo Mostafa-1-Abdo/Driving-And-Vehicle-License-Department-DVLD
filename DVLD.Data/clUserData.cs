@@ -1,12 +1,11 @@
 ﻿using DVLD.Data.DTOs;
-using System;
 using System.Data;
 using System.Data.SqlClient;
 using static DVLD.Data.clDataAccessSettings;
 
 namespace DVLD.Data
 {
-    public class clUserData
+    public static class clUserData
     {
         public static clUserDTO Find(int id)
         {
@@ -16,12 +15,8 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"select u.ID,u.PersonID,p.Gender,p.FirstName,p.SecondName,p.ThirdName,p.LastName,p.DateOfBirth,
-                                   p.CountryID,c.Name as Country,p.NationalNumber,p.Address,p.Phone,p.Email,p.ImagePath,
-                                   u.Username,u.Password,u.IsActive from Users u
-                                   join People p on u.PersonID = p.ID
-                                   join Countries c on p.CountryID = c.ID
-                                   where u.ID = @ID";
+                    string sql = @"select ID, PersonID, Username, Password, IsActive from Users
+                                   where ID = @ID";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -37,19 +32,6 @@ namespace DVLD.Data
                                 {
                                     ID = (int)reader["ID"],
                                     PersonID = (int)reader["PersonID"],
-                                    Gender = (byte)reader["Gender"],
-                                    FirstName = (string)reader["FirstName"],
-                                    SecondName = (string)reader["SecondName"],
-                                    ThirdName = reader["ThirdName"] != DBNull.Value ? (string)reader["ThirdName"] : null,
-                                    LastName = (string)reader["LastName"],
-                                    DateOfBirth = (DateTime)reader["DateOfBirth"],
-                                    CountryID = (int)reader["CountryID"],
-                                    CountryName = (string)reader["Country"],
-                                    NationalNumber = (string)reader["NationalNumber"],
-                                    Address = (string)reader["Address"],
-                                    Phone = (string)reader["Phone"],
-                                    Email = reader["Email"] != DBNull.Value ? (string)reader["Email"] : null,
-                                    ImagePath = reader["ImagePath"] != DBNull.Value ? (string)reader["ImagePath"] : null,
                                     Username = (string)reader["Username"],
                                     Password = (string)reader["Password"],
                                     IsActive = (bool)reader["IsActive"]
@@ -74,12 +56,8 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"select u.ID,u.PersonID,p.Gender,p.FirstName,p.SecondName,p.ThirdName,p.LastName,p.DateOfBirth,
-                                   p.CountryID,c.Name as Country,p.NationalNumber,p.Address,p.Phone,p.Email,p.ImagePath,
-                                   u.Username,u.Password,u.IsActive from Users u
-                                   join People p on u.PersonID = p.ID
-                                   join Countries c on p.CountryID = c.ID
-                                   where u.Username = @Username";
+                    string sql = @"select ID, PersonID, Username, Password, IsActive from Users
+                                   where Username = @Username";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -95,19 +73,6 @@ namespace DVLD.Data
                                 {
                                     ID = (int)reader["ID"],
                                     PersonID = (int)reader["PersonID"],
-                                    Gender = (byte)reader["Gender"],
-                                    FirstName = (string)reader["FirstName"],
-                                    SecondName = (string)reader["SecondName"],
-                                    ThirdName = reader["ThirdName"] != DBNull.Value ? (string)reader["ThirdName"] : null,
-                                    LastName = (string)reader["LastName"],
-                                    DateOfBirth = (DateTime)reader["DateOfBirth"],
-                                    CountryID = (int)reader["CountryID"],
-                                    CountryName = (string)reader["Country"],
-                                    NationalNumber = (string)reader["NationalNumber"],
-                                    Address = (string)reader["Address"],
-                                    Phone = (string)reader["Phone"],
-                                    Email = reader["Email"] != DBNull.Value ? (string)reader["Email"] : null,
-                                    ImagePath = reader["ImagePath"] != DBNull.Value ? (string)reader["ImagePath"] : null,
                                     Username = (string)reader["Username"],
                                     Password = (string)reader["Password"],
                                     IsActive = (bool)reader["IsActive"]

@@ -187,6 +187,12 @@ namespace DVLD.UI.Users
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
+            if (_Mode == enMode.AddNew && ctrlPersonCardWithFilter1.SelectedPersonID == -1)
+            {
+                clUIMessages.ShowSelectPersonRequired();
+                return;
+            }
+
             if (!this.IsValid(errorProvider1))
             {
                 clUIMessages.ShowValidationError();
@@ -195,7 +201,7 @@ namespace DVLD.UI.Users
 
             if (_Mode == enMode.AddNew)
             {
-                _User.Person = ctrlPersonCardWithFilter1.SelectedPerson;
+                _User.PersonID = ctrlPersonCardWithFilter1.SelectedPersonID;
 
                 _User.Username = tb_Username.Text.Trim();
                 _User.Password = tb_Password.Text;

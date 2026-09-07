@@ -18,7 +18,7 @@ namespace DVLD.UI
         public DataGridViewColumnCollection dgv_RecordsColumns => dgv_Records.Columns;
         public DataGridViewRow dgv_RecordsCurrentRow => dgv_Records.CurrentRow;
 
-        public ToolStripItemCollection cms_dgvItems => ContextMenuStrip.Items;
+        public ToolStripItemCollection cms_dgvItems => ContextMenuStrip1.Items;
 
         public IButtonControl CloseButton => btn_Close;
 

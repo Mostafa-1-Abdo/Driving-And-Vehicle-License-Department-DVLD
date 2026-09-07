@@ -206,7 +206,7 @@ namespace DVLD.UI.People
             _Person.ThirdName = tb_ThirdName.Text.Trim();
             _Person.LastName = tb_LastName.Text.Trim();
             _Person.DateOfBirth = dtp_DateOfBirth.Value;
-            _Person.Country = new clCountry((int)cb_Country.SelectedValue, cb_Country.Text);
+            _Person.CountryID = cb_Country.SelectedIndex;
             _Person.NationalNumber = tb_NationalNumber.Text.Trim();
             _Person.Phone = tb_Phone.Text.Trim();
             _Person.Email = tb_Email.Text.Trim();
