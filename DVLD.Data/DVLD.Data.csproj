@@ -48,6 +48,7 @@
     <Compile Include="clPersonData.cs" />
     <Compile Include="clTestTypeData.cs" />
     <Compile Include="clUserData.cs" />
+    <Compile Include="DTOs\clApplicationDTO.cs" />
     <Compile Include="DTOs\clApplicationTypeDTO.cs" />
     <Compile Include="DTOs\clCountryDTO.cs" />
     <Compile Include="DTOs\clPersonDTO.cs" />

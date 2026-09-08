@@ -10,7 +10,7 @@ namespace DVLD.Data.DTOs
         public string SecondName { get; set; } = string.Empty;
         public string ThirdName { get; set; } = null;
         public string LastName { get; set; } = string.Empty;
-        public DateTime DateOfBirth { get; set; } = DateTime.MinValue;
+        public DateTime DateOfBirth { get; set; } = DateTime.Now;
         public int CountryID { get; set; } = -1;
         public string NationalNumber { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
