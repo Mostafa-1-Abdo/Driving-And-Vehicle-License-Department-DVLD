@@ -51,6 +51,7 @@
     <Compile Include="DTOs\clApplicationDTO.cs" />
     <Compile Include="DTOs\clApplicationTypeDTO.cs" />
     <Compile Include="DTOs\clCountryDTO.cs" />
+    <Compile Include="DTOs\clLocalLicenseApplicationDTO.cs" />
     <Compile Include="DTOs\clPersonDTO.cs" />
     <Compile Include="DTOs\clTestTypeDTO.cs" />
     <Compile Include="DTOs\clUserDTO.cs" />
