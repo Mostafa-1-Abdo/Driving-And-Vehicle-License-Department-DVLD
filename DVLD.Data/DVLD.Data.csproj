@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clApplicationData.cs" />
     <Compile Include="clApplicationTypeData.cs" />
     <Compile Include="clCountryData.cs" />
     <Compile Include="clDataAccessSettings.cs" />
