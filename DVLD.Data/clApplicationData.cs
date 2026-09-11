@@ -92,7 +92,7 @@ namespace DVLD.Data
             return id;
         }
 
-        public static bool UpdateStatus(int id,byte status)
+        public static bool UpdateStatus(int id, byte status)
         {
             int rowsAffected = 0;
 
@@ -100,7 +100,7 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"update Applications set Status = @Status, LastStatusDate = @LastStatusDate
+                    string sql = @"update Applications set Status = @Status, LastStatusDate = getdate()
                                    where ID = @ID";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
