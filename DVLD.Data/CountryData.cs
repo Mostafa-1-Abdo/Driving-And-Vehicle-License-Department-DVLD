@@ -5,11 +5,11 @@ using static DVLD.Data.clDataAccessSettings;
 
 namespace DVLD.Data
 {
-    public static class clCountryData
+    public static class CountryData
     {
-        public static clCountryDTO Find(int id)
+        public static CountryDTO Find(int id)
         {
-            clCountryDTO CountryDTO = null;
+            CountryDTO CountryDTO = null;
 
             try
             {
@@ -28,7 +28,7 @@ namespace DVLD.Data
                         {
                             if (reader.Read())
                             {
-                                CountryDTO = new clCountryDTO
+                                CountryDTO = new CountryDTO
                                 {
                                     ID = (int)reader["ID"],
                                     Name = (string)reader["Name"],

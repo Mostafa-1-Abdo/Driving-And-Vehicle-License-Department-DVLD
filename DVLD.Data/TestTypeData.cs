@@ -5,17 +5,17 @@ using static DVLD.Data.clDataAccessSettings;
 
 namespace DVLD.Data
 {
-    public static class clTestTypeData
+    public static class TestTypeData
     {
-        public static clTestTypeDTO Find(int id)
+        public static TestTypeDTO Find(int id)
         {
-            clTestTypeDTO testTypeDTO = null;
+            TestTypeDTO testTypeDTO = null;
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"select * from TestTypes
+                    string sql = @"select ID, Title, Description, Fees from TestTypes
                                    where ID = @ID";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -28,9 +28,9 @@ namespace DVLD.Data
                         {
                             if (reader.Read())
                             {
-                                testTypeDTO = new clTestTypeDTO
+                                testTypeDTO = new TestTypeDTO
                                 {
-                                    ID = (int)reader["ID"],
+                                    ID = (byte)reader["ID"],
                                     Title = (string)reader["Title"],
                                     Description = (string)reader["Description"],
                                     Fees = (decimal)reader["Fees"]
@@ -48,7 +48,7 @@ namespace DVLD.Data
             return testTypeDTO;
         }
 
-        public static bool Update(clTestTypeDTO testTypeDTO)
+        public static bool Update(TestTypeDTO testTypeDTO)
         {
             int rowsAffected = 0;
 
@@ -87,7 +87,7 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = "select * from TestTypes";
+                    string sql = "select ID, Title, Description, Fees from TestTypes";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {

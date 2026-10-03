@@ -19,7 +19,7 @@ namespace DVLD.UI.Users
 
         private void _ResetForm()
         {
-            _UsersTable = clUser.GetAllUsers();
+            _UsersTable = User.GetAllUsers();
             ctrlManageData1.RefreshRecords(_UsersTable.DefaultView);
         }
         private void _Initialize_dgv_RecordsColumns()
@@ -93,22 +93,22 @@ namespace DVLD.UI.Users
 
             int id = (int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value;
 
-            if (id == clGlobalUser.GlobalUser.ID)
+            if (id == Global.GlobalUser.ID)
             {
-                clUIMessages.ShowCannotDeleteCurrentUser();
+                UIMessages.ShowCannotDeleteCurrentUser();
                 return;
             }
 
-            if (clUIMessages.ShowConfirmDelete("User", id))
+            if (UIMessages.ShowConfirmDelete("User", id))
             {
-                if (clUser.Delete(id))
+                if (User.Delete(id))
                 {
-                    clUIMessages.ShowDeleteSuccess("User");
+                    UIMessages.ShowDeleteSuccess("User");
                     _ResetForm();
                 }
                 else
                 {
-                    clUIMessages.ShowDeleteFailedLinkedData("User");
+                    UIMessages.ShowDeleteFailedLinkedData("User");
                 }
             }
         }
@@ -118,6 +118,6 @@ namespace DVLD.UI.Users
 
             new frmChangePassword((int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["User ID"].Value).ShowDialog(this);
         }
-        private void FeatureNotImplemented_Click(object sender, EventArgs e) => clUIMessages.ShowFeatureNotImplemented();
+        private void FeatureNotImplemented_Click(object sender, EventArgs e) => UIMessages.ShowFeatureNotImplemented();
     }
 }

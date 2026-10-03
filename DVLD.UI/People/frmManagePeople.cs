@@ -11,21 +11,20 @@ namespace DVLD.UI
 {
     public partial class frmManagePeople : Form
     {
-        private DataTable _PeopleTable;
+        private DataTable _peopleTable;
 
         public frmManagePeople() => InitializeComponent();
 
         private void _ResetForm()
         {
-            _PeopleTable = clPerson.GetAllPeople();
-            ctrlManageData1.RefreshRecords(_PeopleTable.DefaultView);
+            _peopleTable = Person.GetAllPeople();
+            ctrlManageData1.RefreshRecords(_peopleTable.DefaultView);
         }
         private void _Initialize_dgv_RecordsColumns()
         {
             ctrlManageData1.dgv_RecordsColumns["National Number"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode =
-                ctrlManageData1.dgv_RecordsColumns["Email"].AutoSizeMode =
-                ctrlManageData1.dgv_RecordsColumns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ctrlManageData1.dgv_RecordsColumns["Full Name"].AutoSizeMode = ctrlManageData1.dgv_RecordsColumns["Email"].AutoSizeMode =
+            ctrlManageData1.dgv_RecordsColumns["Address"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             ctrlManageData1.dgv_RecordsColumns["Date Of Birth"].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
@@ -93,28 +92,28 @@ namespace DVLD.UI
             if (ctrlManageData1.dgv_RecordsCurrentRow == null) return;
 
             int id = (int)ctrlManageData1.dgv_RecordsCurrentRow.Cells["ID"].Value;
-            if (clUIMessages.ShowConfirmDelete("Person", id))
+            if (UIMessages.ShowConfirmDelete("Person", id))
             {
-                clPerson person = clPerson.Find(id);
+                Person person = Person.Find(id);
                 string imagePath = person?.ImagePath;
 
-                if (clPerson.Delete(id))
+                if (Person.Delete(id))
                 {
-                    clUIMessages.ShowDeleteSuccess("Person");
+                    UIMessages.ShowDeleteSuccess("Person");
 
                     if (!string.IsNullOrEmpty(imagePath))
                     {
-                        clFileHandler.HandleFileDelete(imagePath);
+                        FileHandler.HandleFileDelete(imagePath);
                     }
 
                     _ResetForm();
                 }
                 else
                 {
-                    clUIMessages.ShowDeleteFailedLinkedData("Person");
+                    UIMessages.ShowDeleteFailedLinkedData("Person");
                 }
             }
         }
-        private void FeatureNotImplemented_Click(object sender, EventArgs e) => clUIMessages.ShowFeatureNotImplemented();
+        private void FeatureNotImplemented_Click(object sender, EventArgs e) => UIMessages.ShowFeatureNotImplemented();
     }
 }

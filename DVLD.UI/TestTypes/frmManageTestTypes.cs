@@ -9,7 +9,7 @@ namespace DVLD.UI.TestTypes
     {
         public frmManageTestTypes() => InitializeComponent();
 
-        private void _ResetForm() => ctrlManageData1.RefreshRecords(clTestType.GetAllTestTypes().DefaultView);
+        private void _ResetForm() => ctrlManageData1.RefreshRecords(TestType.GetAllTestTypes().DefaultView);
 
         private void _Initialize_cms_dgv() => ctrlManageData1.cms_dgvItems.Add("Edit", Resources.EditTest, EditTestType_Click);
         private void _Initialize_dgv_RecordsColumns()

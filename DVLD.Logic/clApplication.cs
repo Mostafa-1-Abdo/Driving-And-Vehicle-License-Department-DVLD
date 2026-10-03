@@ -12,7 +12,7 @@ namespace DVLD.Logic
 
         private enMode _Mode = enMode.AddNew;
 
-        public int ID { get; set; } = -1;
+        public int ApplicationID { get; set; } = -1;
         public int PersonID { get; set; } = -1;
         public int ApplicationTypeID { get; set; } = -1;
         public DateTime Date { get; set; } = DateTime.Now;
@@ -21,16 +21,16 @@ namespace DVLD.Logic
         public DateTime LastStatusDate { get; set; } = DateTime.Now;
         public int UserID { get; set; } = -1;
 
-        public clPerson Person => PersonID != -1 ? clPerson.Find(PersonID) : null;
+        public Person Person => PersonID != -1 ? Person.Find(PersonID) : null;
 
-        private clApplicationDTO ApplicationDTO => new clApplicationDTO(ID, PersonID, ApplicationTypeID, Date, PaidFees, (byte)Status, LastStatusDate, UserID);
+        private clApplicationDTO ApplicationDTO => new clApplicationDTO(ApplicationID, PersonID, ApplicationTypeID, Date, PaidFees, (byte)Status, LastStatusDate, UserID);
 
         public clApplication() { }
         public clApplication(clApplicationDTO applicationDTO)
         {
             _Mode = enMode.Update;
 
-            ID = applicationDTO.ID;
+            ApplicationID = applicationDTO.ID;
             PersonID = applicationDTO.PersonID;
             ApplicationTypeID = applicationDTO.ApplicationTypeID;
             Date = applicationDTO.Date;
@@ -42,7 +42,7 @@ namespace DVLD.Logic
 
         public static clApplication Find(int id) => clApplicationData.Find(id) is clApplicationDTO ApplicationDTO ? new clApplication(ApplicationDTO) : null;
 
-        private bool _AddNew() => (ID = clApplicationData.AddNew(ApplicationDTO)) != -1;
+        private bool _AddNew() => (ApplicationID = clApplicationData.AddNew(ApplicationDTO)) != -1;
         public bool Save()
         {
             switch (_Mode)
@@ -62,7 +62,7 @@ namespace DVLD.Logic
 
         public bool Cancel()
         {
-            if (clApplicationData.UpdateStatus(ID, (byte)enStatus.Cancelled))
+            if (clApplicationData.UpdateStatus(ApplicationID, (byte)enStatus.Cancelled))
             {
                 Status = enStatus.Cancelled;
                 LastStatusDate = DateTime.Now;
@@ -72,7 +72,7 @@ namespace DVLD.Logic
         }
         public bool Complete()
         {
-            if (clApplicationData.UpdateStatus(ID, (byte)enStatus.Completed))
+            if (clApplicationData.UpdateStatus(ApplicationID, (byte)enStatus.Completed))
             {
                 Status = enStatus.Completed;
                 LastStatusDate = DateTime.Now;

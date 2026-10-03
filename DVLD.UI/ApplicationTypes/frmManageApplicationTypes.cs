@@ -9,7 +9,7 @@ namespace DVLD.UI.ApplicationTypes
     {
         public frmManageApplicationTypes() => InitializeComponent();
 
-        private void _ResetForm() => ctrlManageData1.RefreshRecords(clApplicationType.GetAllApplicationTypes().DefaultView);
+        private void _ResetForm() => ctrlManageData1.RefreshRecords(ApplicationType.GetAllApplicationTypes().DefaultView);
 
         private void _Initialize_cms_dgv() => ctrlManageData1.cms_dgvItems.Add("Edit", Resources.EditApplicationType, EditApplicationType_Click);
         private void _Initialize_dgv_RecordsColumns()

@@ -2,7 +2,7 @@
 
 namespace DVLD.Data.DTOs
 {
-    public class clUserDTO
+    public class UserDTO
     {
         public int ID { get; set; } = -1;
         public int PersonID { get; set; } = -1;
@@ -10,8 +10,8 @@ namespace DVLD.Data.DTOs
         public string Password { get; set; } = string.Empty;
         public bool IsActive { get; set; } = false;
 
-        public clUserDTO() { }
-        public clUserDTO(int id,int personID, string username, string password, bool isActive)
+        public UserDTO() { }
+        public UserDTO(int id,int personID, string username, string password, bool isActive)
         {
             ID = id;
             PersonID = personID;

@@ -8,29 +8,29 @@ namespace DVLD.UI.TestTypes
 {
     public partial class frmEditTestType : Form
     {
-        private clTestType _TestType;
-        private clTestType.enTestType _ID;
+        private TestType _testType;
+        private TestType.enTestType _id;
 
         public frmEditTestType(int id)
         {
             InitializeComponent();
 
-            _ID = (clTestType.enTestType)id;
+            _id = (TestType.enTestType)id;
         }
 
         private void _FillFormWithTestTypeInfo()
         {
-            lb_ID.Text = ((byte)_TestType.ID).ToString();
-            tb_Title.Text = _TestType.Title;
-            tb_Description.Text = _TestType.Description;
-            tb_Fees.Text = _TestType.Fees.ToString("0.00");
+            lb_ID.Text = ((byte)_testType.ID).ToString();
+            tb_Title.Text = _testType.Title;
+            tb_Description.Text = _testType.Description;
+            tb_Fees.Text = _testType.Fees.ToString("0.00");
         }
         private void _DesignForm()
         {
-            _TestType = clTestType.Find(_ID);
-            if (_TestType == null)
+            _testType = TestType.Find(_id);
+            if (_testType == null)
             {
-                clUIMessages.ShowNotFound("Test Type", (int)_ID);
+                UIMessages.ShowNotFound("Test Type", (int)_id);
                 Close();
                 return;
             }
@@ -43,21 +43,21 @@ namespace DVLD.UI.TestTypes
         {
             if (!this.IsValid(errorProvider1))
             {
-                clUIMessages.ShowValidationError();
+                UIMessages.ShowValidationError();
                 return;
             }
 
-            _TestType.Title = tb_Title.Text.Trim();
-            _TestType.Description = tb_Description.Text.Trim();
-            _TestType.Fees = Convert.ToDecimal(tb_Fees.Text.Trim());
+            _testType.Title = tb_Title.Text.Trim();
+            _testType.Description = tb_Description.Text.Trim();
+            _testType.Fees = Convert.ToDecimal(tb_Fees.Text.Trim());
 
-            if (_TestType.Save())
+            if (_testType.Save())
             {
-                clUIMessages.ShowSaveSuccess();
+                UIMessages.ShowSaveSuccess();
             }
             else
             {
-                clUIMessages.ShowSaveError();
+                UIMessages.ShowSaveError();
             }
         }
         private void btn_Close_Click(object sender, EventArgs e) => Close();
@@ -83,7 +83,7 @@ namespace DVLD.UI.TestTypes
             {
                 errorProvider1.SetError(tb_Fees, "Fees is required.");
             }
-            else if (!clUtil.IsValidMoney(fees))
+            else if (!Util.Validation.IsValidMoney(fees))
             {
                 errorProvider1.SetError(tb_Fees, "Invalid fees format! (e.g. 15 or 15.50).");
             }

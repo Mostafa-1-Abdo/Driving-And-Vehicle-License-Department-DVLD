@@ -4,19 +4,19 @@ using System.Data;
 
 namespace DVLD.Logic
 {
-    public class clCountry
+    public class Country
     {
         public int ID { get; private set; } = -1;
         public string Name { get; private set; } = string.Empty;
 
-        public clCountry(clCountryDTO countryDTO)
+        public Country(CountryDTO countryDTO)
         {
             ID = countryDTO.ID;
             Name = countryDTO.Name;
         }
 
-        public static clCountry Find(int id) => clCountryData.Find(id) is clCountryDTO CountryDTO ? new clCountry(CountryDTO) : null;
+        public static Country Find(int id) => CountryData.Find(id) is CountryDTO countryDTO ? new Country(countryDTO) : null;
 
-        static public DataTable GetAllCountries() =>  clCountryData.GetAllCountries();
+        static public DataTable GetAllCountries() => CountryData.GetAllCountries();
     }
 }

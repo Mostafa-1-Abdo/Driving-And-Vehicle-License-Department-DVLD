@@ -33,18 +33,18 @@ namespace DVLD.UI
         }
         private void btn_Login_Click(object sender, EventArgs e)
         {
-            var (Result, User) = clUser.Login(tb_Username.Text.Trim(), tb_Password.Text);
+            var (Result, User) = Logic.User.Login(tb_Username.Text.Trim(), tb_Password.Text);
 
-            if (Result == clUser.enLoginResults.UserNotFound || Result == clUser.enLoginResults.InvalidPassword)
+            if (Result == Logic.User.enLoginResult.UserNotFound || Result == Logic.User.enLoginResult.InvalidPassword)
                 MessageBox.Show("Invalid username or password. Please verify your credentials and try again.", "Invalid Credentials", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            else if (Result == clUser.enLoginResults.UserNotActive)
+            else if (Result == Logic.User.enLoginResult.UserNotActive)
                 MessageBox.Show("Your account is currently inactive. Please contact your system administrator.", "Account Deactivated", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             else
             {
                 DialogResult = DialogResult.OK;
-                clGlobalUser.GlobalUser = User;
+                Global.GlobalUser = User;
 
                 if (ckb_RememberMe.Checked)
                     SaveLoginInfo();

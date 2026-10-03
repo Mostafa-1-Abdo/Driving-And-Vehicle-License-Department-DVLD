@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace DVLD.UI.Util
 {
-    internal class clUIMessages
+    internal class UIMessages
     {
         public static void ShowFeatureNotImplemented() => MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!",
             MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -19,7 +14,7 @@ namespace DVLD.UI.Util
             MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         public static void ShowSaveError() => MessageBox.Show("Error: Data was not saved successfully.", "Error",
-           MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         public static void ShowImageProcessingError(string message) => MessageBox.Show(message, "Error",
             MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -31,10 +26,10 @@ namespace DVLD.UI.Util
             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         public static void ShowDeleteFailedLinkedData(string EntityName) => MessageBox.Show($"{EntityName} was not deleted because it has data linked to it.", "Error",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         public static bool ShowConfirmDelete(string EntityName, object ID) => MessageBox.Show($"Are you sure you want to delete {EntityName} [{ID}]?", "Confirm Delete",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK;
+            MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK;
 
         public static void ShowSelectPersonRequired() => MessageBox.Show("Please select or add a person first before proceeding to Login Information.", "Select Person Required",
             MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -49,6 +44,6 @@ namespace DVLD.UI.Util
             MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         public static void ShowCannotDeleteCurrentUser() => MessageBox.Show("You cannot delete the currently logged-in user.", "Action Not Allowed",
-    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }

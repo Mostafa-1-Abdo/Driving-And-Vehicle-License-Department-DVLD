@@ -12,7 +12,7 @@ namespace DVLD.UI.People
     {
         private enum enMode : byte { AddNew, Edit }
 
-        private clPerson _Person;
+        private Person _Person;
         private int _ID;
         private enMode _Mode;
 
@@ -22,7 +22,6 @@ namespace DVLD.UI.People
 
             _Mode = enMode.AddNew;
         }
-
         public frmAddEditPerson(int id)
         {
             InitializeComponent();
@@ -35,7 +34,7 @@ namespace DVLD.UI.People
         {
             cb_Country.DisplayMember = "Name";
             cb_Country.ValueMember = "ID";
-            cb_Country.DataSource = clCountry.GetAllCountries();
+            cb_Country.DataSource = Country.GetAllCountries();
         }
         private void _LoadPersonInfo()
         {
@@ -47,7 +46,7 @@ namespace DVLD.UI.People
             tb_NationalNumber.Text = _Person.NationalNumber;
             dtp_DateOfBirth.Value = _Person.DateOfBirth;
 
-            if (_Person.Gender == clPerson.enGender.Male)
+            if (_Person.Gender == Person.enGender.Male)
             {
                 rb_Male.Checked = true;
             }
@@ -75,16 +74,16 @@ namespace DVLD.UI.People
             if (_Mode == enMode.AddNew)
             {
                 Text = lb_Title.Text = "Add New Person";
-                _Person = new clPerson();
+                _Person = new Person();
             }
             else
             {
                 Text = lb_Title.Text = "Edit Person";
-                _Person = clPerson.Find(_ID);
+                _Person = Person.Find(_ID);
 
                 if (_Person == null)
                 {
-                    clUIMessages.ShowNotFound("Person", _ID);
+                    UIMessages.ShowNotFound("Person", _ID);
                     Close();
                     return;
                 }
@@ -153,9 +152,9 @@ namespace DVLD.UI.People
             {
                 errorProvider1.SetError(tb_NationalNumber, "National Number is required.");
             }
-            else if (clPerson.IsExist(nationalNumber))
+            else if (Person.IsExist(nationalNumber))
             {
-                errorProvider1.SetError(tb_NationalNumber, "National Number is already used by another person.");
+                errorProvider1.SetError(tb_NationalNumber, "National Number is already registered.");
             }
             else
             {
@@ -170,7 +169,7 @@ namespace DVLD.UI.People
             {
                 errorProvider1.SetError(tb_Email, null);
             }
-            else if (!clUtil.IsValidEmail(email))
+            else if (!Util.Validation.IsValidEmail(email))
             {
                 errorProvider1.SetError(tb_Email, "Invalid Email Address format! (e.g. user@example.com)");
             }
@@ -181,32 +180,32 @@ namespace DVLD.UI.People
         }
         private void tb_Phone_KeyPress(object sender, KeyPressEventArgs e) => e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
 
-        public event Action<clPerson> OnPersonSaved;
+        public event Action<Person> OnPersonSaved;
         private void btn_Save_Click(object sender, EventArgs e)
         {
             if (!this.IsValid(errorProvider1))
             {
-                clUIMessages.ShowValidationError();
+                UIMessages.ShowValidationError();
                 return;
             }
 
             string oldImagePath = _Person.ImagePath;
-            string newImagePath = pb_PersonImage.ImageLocation ?? string.Empty;
+            string newImagePath = pb_PersonImage.ImageLocation;
 
-            if (!clFileHandler.HandleImages(oldImagePath, ref newImagePath))
+            if (!FileHandler.HandleImages(oldImagePath, ref newImagePath))
             {
-                clUIMessages.ShowImageProcessingError("Failed to process person image.");
+                UIMessages.ShowImageProcessingError("Failed to process person image.");
                 return;
             }
 
             _Person.ImagePath = newImagePath;
-            _Person.Gender = rb_Male.Checked ? clPerson.enGender.Male : clPerson.enGender.Female;
+            _Person.Gender = rb_Male.Checked ? Person.enGender.Male : Person.enGender.Female;
             _Person.FirstName = tb_FirstName.Text.Trim();
             _Person.SecondName = tb_SecondName.Text.Trim();
             _Person.ThirdName = tb_ThirdName.Text.Trim();
             _Person.LastName = tb_LastName.Text.Trim();
             _Person.DateOfBirth = dtp_DateOfBirth.Value;
-            _Person.CountryID = cb_Country.SelectedIndex;
+            _Person.CountryID = (int)cb_Country.SelectedValue;
             _Person.NationalNumber = tb_NationalNumber.Text.Trim();
             _Person.Phone = tb_Phone.Text.Trim();
             _Person.Email = tb_Email.Text.Trim();
@@ -214,18 +213,18 @@ namespace DVLD.UI.People
 
             if (_Person.Save())
             {
-                clUIMessages.ShowSaveSuccess();
+                UIMessages.ShowSaveSuccess();
 
                 if (!string.IsNullOrEmpty(oldImagePath) && oldImagePath != newImagePath)
                 {
-                    clFileHandler.HandleFileDelete(oldImagePath);
+                    FileHandler.HandleFileDelete(oldImagePath);
                 }
 
-                Text = lb_Title.Text = "Edit Person";
                 _Mode = enMode.Edit;
+                Text = lb_Title.Text = "Edit Person";
 
-                lb_ID.Text = _Person.ID.ToString();
                 _ID = _Person.ID;
+                lb_ID.Text = _Person.ID.ToString();
 
                 tb_NationalNumber.Enabled = false;
 
@@ -233,12 +232,12 @@ namespace DVLD.UI.People
             }
             else
             {
-                clUIMessages.ShowSaveError();
+                UIMessages.ShowSaveError();
 
                 pb_PersonImage.ImageLocation = _Person.ImagePath = oldImagePath;
                 if (!string.IsNullOrEmpty(oldImagePath) && oldImagePath != newImagePath)
                 {
-                    clFileHandler.HandleFileDelete(newImagePath);
+                    FileHandler.HandleFileDelete(newImagePath);
                 }
             }
         }

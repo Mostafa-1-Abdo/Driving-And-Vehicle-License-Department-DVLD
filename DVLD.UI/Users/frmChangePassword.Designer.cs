@@ -197,6 +197,7 @@
             // 
             // errorProvider1
             // 
+            this.errorProvider1.BlinkRate = 1000;
             this.errorProvider1.ContainerControl = this;
             // 
             // ctrlUserCard1

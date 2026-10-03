@@ -42,12 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clApplication.cs" />
-    <Compile Include="clApplicationType.cs" />
-    <Compile Include="clCountry.cs" />
+    <Compile Include="ApplicationType.cs" />
+    <Compile Include="Country.cs" />
     <Compile Include="clLicenseClass.cs" />
-    <Compile Include="clPerson.cs" />
-    <Compile Include="clTestType.cs" />
-    <Compile Include="clUser.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="TestType.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

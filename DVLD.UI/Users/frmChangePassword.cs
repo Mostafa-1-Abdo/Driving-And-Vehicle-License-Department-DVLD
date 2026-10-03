@@ -20,7 +20,7 @@ namespace DVLD.UI.Users
         {
             if (!ctrlUserCard1.LoadUserInfo(_ID))
             {
-                clUIMessages.ShowNotFound("User", _ID);
+                UIMessages.ShowNotFound("User", _ID);
                 Close();
                 return;
             }
@@ -30,19 +30,19 @@ namespace DVLD.UI.Users
         {
             if (!this.IsValid(errorProvider1))
             {
-                clUIMessages.ShowValidationError();
+                UIMessages.ShowValidationError();
                 return;
             }
 
             if (ctrlUserCard1.User.ChangePassword(tb_NewPassword.Text))
             {
-                clUIMessages.ShowPasswordChangedSuccess();
+                UIMessages.ShowPasswordChangedSuccess();
 
                 Close();
             }
             else
             {
-                clUIMessages.ShowPasswordChangeFailed();
+                UIMessages.ShowPasswordChangeFailed();
             }
         }
         private void btn_Close_Click(object sender, EventArgs e) => Close();

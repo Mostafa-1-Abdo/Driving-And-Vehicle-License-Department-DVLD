@@ -8,12 +8,19 @@ namespace DVLD.UI.UserControls
 {
     public partial class ctrlPersonCardWithFilter : UserControl
     {
-        public clPerson SelectedPerson => ctrlPersonCard1.SelectedPerson;
+        public Person SelectedPerson => ctrlPersonCard1.SelectedPerson;
         public int SelectedPersonID => ctrlPersonCard1.SelectedPersonID;
 
         public bool gb_FilterEnabled { get => gb_Filters.Enabled; set => gb_Filters.Enabled = value; }
 
-        public void SearchSelect() => tb_Search.Select();
+        public void SearchSelect()
+        {
+            BeginInvoke((MethodInvoker)delegate
+            {
+                tb_Search.Select();
+                tb_Search.SelectAll();
+            });
+        }
 
         public ctrlPersonCardWithFilter()
         {
@@ -22,7 +29,7 @@ namespace DVLD.UI.UserControls
             cb_Filter.Text = "ID";
         }
 
-        public bool LoadPersonInfo(clPerson person)
+        public bool LoadPersonInfo(Person person)
         {
             if (person == null) return false;
 
@@ -55,13 +62,13 @@ namespace DVLD.UI.UserControls
                     isFailed = !ctrlPersonCard1.LoadPersonInfo(personID);
                     if (isFailed)
                     {
-                        clUIMessages.ShowNotFound("Person", personID);
+                        UIMessages.ShowNotFound("Person", personID);
                     }
                 }
                 else
                 {
                     isFailed = true;
-                    clUIMessages.ShowValidationError();
+                    UIMessages.ShowValidationError();
                 }
             }
             else if (cb_Filter.Text == "National Number")
@@ -69,14 +76,13 @@ namespace DVLD.UI.UserControls
                 isFailed = !ctrlPersonCard1.LoadPersonInfo(searchValue);
                 if (isFailed)
                 {
-                    clUIMessages.ShowNotFound("Person", searchValue);
+                    UIMessages.ShowNotFound("Person", searchValue);
                 }
             }
 
             if (isFailed)
             {
                 tb_Search.SelectAll();
-                tb_Search.Select();
                 OnSelectedPerson?.Invoke(-1);
             }
             else
@@ -86,7 +92,7 @@ namespace DVLD.UI.UserControls
         }
 
         public event Action<int> OnSavedPerson;
-        private void _OnPersonSaved(clPerson person)
+        private void _OnPersonSaved(Person person)
         {
             if (ctrlPersonCard1.LoadPersonInfo(person))
             {
@@ -126,6 +132,12 @@ namespace DVLD.UI.UserControls
             }
         }
 
-        private void cb_Filter_SelectedIndexChanged(object sender, EventArgs e) => tb_Search.Text = null;
+        private void cb_Filter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tb_Search.Text = null;
+            ctrlPersonCard1.ResetPersonCard();
+
+            tb_Search.Select();
+        }
     }
 }

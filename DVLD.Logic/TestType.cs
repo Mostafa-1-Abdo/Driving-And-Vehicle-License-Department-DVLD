@@ -4,7 +4,7 @@ using System.Data;
 
 namespace DVLD.Logic
 {
-    public class clTestType
+    public class TestType
     {
         public enum enTestType : byte { None = 0, VisionTest = 1, WrittenTest = 2, StreetTest = 3 }
 
@@ -13,10 +13,10 @@ namespace DVLD.Logic
         public string Description { get; set; } = string.Empty;
         public decimal Fees { get; set; } = decimal.Zero;
 
-        public clTestTypeDTO TestTypeDTO => new clTestTypeDTO((int)ID, Title, Description, Fees);
+        public TestTypeDTO TestTypeDTO => new TestTypeDTO((byte)ID, Title, Description, Fees);
 
-        public clTestType() { }
-        public clTestType(clTestTypeDTO testTypeDTO)
+        public TestType() { }
+        public TestType(TestTypeDTO testTypeDTO)
         {
             ID = (enTestType)testTypeDTO.ID;
             Title = testTypeDTO.Title;
@@ -24,11 +24,11 @@ namespace DVLD.Logic
             Fees = testTypeDTO.Fees;
         }
 
-        public static clTestType Find(enTestType id) => clTestTypeData.Find((int)id) is clTestTypeDTO TestTypeDTO ? new clTestType(TestTypeDTO) : null;
+        public static TestType Find(enTestType id) => TestTypeData.Find((int)id) is TestTypeDTO testTypeDTO ? new TestType(testTypeDTO) : null;
 
-        private bool _Update() => clTestTypeData.Update(TestTypeDTO);
+        private bool _Update() => TestTypeData.Update(TestTypeDTO);
         public bool Save() => _Update();
 
-        static public DataTable GetAllTestTypes() => clTestTypeData.GetAllTestTypes();
+        static public DataTable GetAllTestTypes() => TestTypeData.GetAllTestTypes();
     }
 }

@@ -1,14 +1,14 @@
 ﻿namespace DVLD.Data.DTOs
 {
-    public class clTestTypeDTO
+    public class TestTypeDTO
     {
-        public int ID { get; set; } = -1;
+        public byte ID { get; set; } = 0;
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public decimal Fees { get; set; } = 0;
+        public decimal Fees { get; set; } = decimal.Zero;
 
-        public clTestTypeDTO() { }
-        public clTestTypeDTO(int id, string title,string description,decimal fees)
+        public TestTypeDTO() { }
+        public TestTypeDTO(byte id, string title,string description,decimal fees)
         {
             ID = id;
             Title = title;

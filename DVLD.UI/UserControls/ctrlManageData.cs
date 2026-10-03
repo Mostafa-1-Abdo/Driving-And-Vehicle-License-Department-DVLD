@@ -36,7 +36,8 @@ namespace DVLD.UI
         private DataView _View;
 
         public ctrlManageData() => InitializeComponent();
-        
+
+        public void RefreshNumberOfRecords() => lb_NumberOfRecords.Text = dgv_Records.Rows.Count.ToString();
         public void RefreshRecords(DataView view)
         {
             _View = view;
@@ -46,12 +47,30 @@ namespace DVLD.UI
             cb_Filter.Text = "None";
         }
 
-        public void RefreshNumberOfRecords() => lb_NumberOfRecords.Text = dgv_Records.Rows.Count.ToString();
-
         private void btn_Close_Click(object sender, EventArgs e) => ParentForm?.Close();
 
         public event Action AddClicked;
         private void btn_Add_Click(object sender, EventArgs e) => AddClicked?.Invoke();
+
+        public event Action<string> OnFilterChanged;
+        private void cb_Filter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cb_Filter.Text == "None")
+            {
+                tb_Search.Visible = false;
+                cb_Search.Visible = false;
+
+                if (_View != null)
+                {
+                    _View.RowFilter = string.Empty;
+                    RefreshNumberOfRecords();
+                }
+
+                return;
+            }
+
+            OnFilterChanged?.Invoke(cb_Filter.Text);
+        }
 
         public class clFilterOption
         {
@@ -77,7 +96,6 @@ namespace DVLD.UI
             tb_Search.Visible = false;
             cb_Search.Visible = true;
         }
-
         public void SetTextFilter()
         {
             tb_Search.Clear();
@@ -86,77 +104,60 @@ namespace DVLD.UI
             tb_Search.Visible = true;
         }
 
-        public event Action<string> OnFilterChanged;
-        private void cb_Filter_SelectedIndexChanged(object sender, EventArgs e)
+        private bool _IsFilterColumnValid()
         {
-            if (cb_Filter.Text == "None")
-            {
-                tb_Search.Visible = false;
-                cb_Search.Visible = false;
-
-                if (_View != null)
-                {
-                    _View.RowFilter = string.Empty;
-                    RefreshNumberOfRecords();
-                }
-
-                return;
-            }
-
-            OnFilterChanged?.Invoke(cb_Filter.Text);
+            if (_View == null || _View.Table == null) return false;
+            
+            return _View.Table.Columns.Contains(cb_Filter.Text);
         }
-
         private void tb_Search_TextChanged(object sender, EventArgs e)
         {
-            if (_View == null || _View.Table == null) return;
+            if (!_IsFilterColumnValid()) return;
 
-            string filterColumn = cb_Filter.Text.Trim();
             string searchValue = tb_Search.Text.Trim();
 
-            if (string.IsNullOrEmpty(searchValue) || !_View.Table.Columns.Contains(filterColumn))
+            if (string.IsNullOrEmpty(searchValue))
             {
                 _View.RowFilter = string.Empty;
                 RefreshNumberOfRecords();
                 return;
             }
 
-            Type columnType = _View.Table.Columns[filterColumn].DataType;
+            Type columnType = _View.Table.Columns[cb_Filter.Text].DataType;
 
             if (columnType == typeof(byte) || columnType == typeof(short) || columnType == typeof(int) ||
                 columnType == typeof(long))
             {
                 _View.RowFilter = long.TryParse(searchValue, out long number)
-                    ? $"[{filterColumn}] = {number}"
-                    : $"[{filterColumn}] = -1";
+                    ? $"[{cb_Filter.Text}] = {number}"
+                    : $"[{cb_Filter.Text}] = -1";
             }
             else
             {
                 string safeSearchValue = searchValue.Replace("'", "''");
-                _View.RowFilter = $"[{filterColumn}] LIKE '%{safeSearchValue}%'";
+                _View.RowFilter = $"[{cb_Filter.Text}] LIKE '%{safeSearchValue}%'";
             }
 
             RefreshNumberOfRecords();
         }
         private void cb_Search_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_View == null || _View.Table == null) return;
+            if (!_IsFilterColumnValid()) return;
 
-            string filterColumn = cb_Filter.Text.Trim();
-
-            if (cb_Search.SelectedValue == null || !_View.Table.Columns.Contains(filterColumn))
+            if (cb_Search.SelectedValue == null)
             {
                 _View.RowFilter = null;
                 RefreshNumberOfRecords();
                 return;
             }
 
-            if (cb_Search.SelectedValue is string stringValue)
+            if (cb_Search.SelectedValue is string searchValue)
             {
-                _View.RowFilter = $"[{filterColumn}] = '{stringValue.Replace("'", "''")}'";
+                _View.RowFilter = $"[{cb_Filter.Text}] = '{searchValue.Replace("'", "''")}'";
             }
             else
             {
-                _View.RowFilter = $"[{filterColumn}] = {cb_Search.SelectedValue}";
+                _View.RowFilter = $"[{cb_Filter.Text}] = {cb_Search.SelectedValue}";
             }
 
             RefreshNumberOfRecords();
@@ -164,8 +165,7 @@ namespace DVLD.UI
 
         private void tb_Search_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (_View == null || _View.Table == null || !_View.Table.Columns.Contains(cb_Filter.Text.Trim())) return;
-
+            if (!_IsFilterColumnValid()) return;
             Type columnType = _View.Table.Columns[cb_Filter.Text].DataType;
 
             if (columnType == typeof(byte) || columnType == typeof(short) || columnType == typeof(int) ||

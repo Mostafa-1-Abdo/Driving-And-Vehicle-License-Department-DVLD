@@ -19,7 +19,7 @@ namespace DVLD.UI.People
         {
             if (!ctrlPersonCard1.LoadPersonInfo(_ID))
             {
-                clUIMessages.ShowNotFound("Person", _ID);
+                UIMessages.ShowNotFound("Person", _ID);
                 Close();
                 return;
             }

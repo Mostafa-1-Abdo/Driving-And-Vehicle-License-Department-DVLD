@@ -119,7 +119,7 @@
             this.llb_RemoveImage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.llb_RemoveImage.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.llb_RemoveImage.LinkColor = System.Drawing.Color.Crimson;
-            this.llb_RemoveImage.Location = new System.Drawing.Point(822, 311);
+            this.llb_RemoveImage.Location = new System.Drawing.Point(822, 305);
             this.llb_RemoveImage.Name = "llb_RemoveImage";
             this.llb_RemoveImage.Size = new System.Drawing.Size(54, 15);
             this.llb_RemoveImage.TabIndex = 112;

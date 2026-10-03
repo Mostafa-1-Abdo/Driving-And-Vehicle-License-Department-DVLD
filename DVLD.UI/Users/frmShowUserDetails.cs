@@ -6,20 +6,20 @@ namespace DVLD.UI.Users
 {
     public partial class frmShowUserDetails : Form
     {
-        private int _ID;
+        private int _id;
 
         public frmShowUserDetails(int id)
         {
             InitializeComponent();
 
-            _ID = id;
+            _id = id;
         }
 
         private void frmShowUserDetails_Load(object sender, EventArgs e)
         {
-            if (!ctrlUserCard1.LoadUserInfo(_ID))
+            if (!ctrlUserCard1.LoadUserInfo(_id))
             {
-                clUIMessages.ShowNotFound("User", _ID);
+                UIMessages.ShowNotFound("User", _id);
                 Close();
                 return;
             }

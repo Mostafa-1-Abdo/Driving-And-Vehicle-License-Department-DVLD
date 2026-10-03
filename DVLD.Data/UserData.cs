@@ -5,11 +5,11 @@ using static DVLD.Data.clDataAccessSettings;
 
 namespace DVLD.Data
 {
-    public static class clUserData
+    public static class UserData
     {
-        public static clUserDTO Find(int id)
+        public static UserDTO Find(int id)
         {
-            clUserDTO userDTO = null;
+            UserDTO userDTO = null;
 
             try
             {
@@ -28,7 +28,7 @@ namespace DVLD.Data
                         {
                             if (reader.Read())
                             {
-                                userDTO = new clUserDTO
+                                userDTO = new UserDTO
                                 {
                                     ID = (int)reader["ID"],
                                     PersonID = (int)reader["PersonID"],
@@ -48,9 +48,9 @@ namespace DVLD.Data
 
             return userDTO;
         }
-        public static clUserDTO Find(string username)
+        public static UserDTO Find(string username)
         {
-            clUserDTO userDTO = null;
+            UserDTO userDTO = null;
 
             try
             {
@@ -69,7 +69,7 @@ namespace DVLD.Data
                         {
                             if (reader.Read())
                             {
-                                userDTO = new clUserDTO
+                                userDTO = new UserDTO
                                 {
                                     ID = (int)reader["ID"],
                                     PersonID = (int)reader["PersonID"],
@@ -108,7 +108,9 @@ namespace DVLD.Data
                         connection.Open();
 
                         if (command.ExecuteScalar() != null)
+                        {
                             isFound = true;
+                        }
                     }
                 }
             }
@@ -137,7 +139,9 @@ namespace DVLD.Data
                         connection.Open();
 
                         if (command.ExecuteScalar() != null)
+                        {
                             isFound = true;
+                        }
                     }
                 }
             }
@@ -148,7 +152,7 @@ namespace DVLD.Data
 
             return isFound;
         }
-        public static bool IsExistForPersonID(int personID)
+        public static bool IsExistByPersonID(int personID)
         {
             bool isFound = false;
 
@@ -166,7 +170,9 @@ namespace DVLD.Data
                         connection.Open();
 
                         if (command.ExecuteScalar() != null)
+                        {
                             isFound = true;
+                        }
                     }
                 }
             }
@@ -178,7 +184,7 @@ namespace DVLD.Data
             return isFound;
         }
 
-        public static int AddNew(clUserDTO userDTO)
+        public static int AddNew(UserDTO userDTO)
         {
             int id = -1;
 
@@ -186,9 +192,9 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"insert into Users(PersonID,Username,Password,IsActive)
+                    string sql = @"insert into Users(PersonID, Username, Password, IsActive)
                                    values
-                                   (@PersonID,@Username,@Password,@IsActive)
+                                   (@PersonID, @Username, @Password, @IsActive)
                                    select SCOPE_IDENTITY()";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -215,7 +221,7 @@ namespace DVLD.Data
             return id;
         }
 
-        public static bool Update(clUserDTO userDTO)
+        public static bool Update(UserDTO userDTO)
         {
             int rowsAffected = 0;
 
@@ -310,7 +316,7 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"select * from ManageUsers_View";
+                    string sql = @"select [User ID], [Person ID], [Full Name], [Username], [Is Active] from ManageUsers_View;";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {

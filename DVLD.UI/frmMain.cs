@@ -26,13 +26,13 @@ namespace DVLD.UI
 
         private void msi_CurrentUserInfo_Click(object sender, EventArgs e)
         {
-            frmShowUserDetails Form = new frmShowUserDetails(clGlobalUser.GlobalUser.ID);
+            frmShowUserDetails Form = new frmShowUserDetails(Global.GlobalUser.ID);
             Form.ShowDialog(this);
         }
 
         private void msi_ChangePassword_Click(object sender, EventArgs e)
         {
-            frmChangePassword Form = new frmChangePassword(clGlobalUser.GlobalUser.ID);
+            frmChangePassword Form = new frmChangePassword(Global.GlobalUser.ID);
             Form.ShowDialog(this);
         }
 
@@ -49,7 +49,7 @@ namespace DVLD.UI
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            clGlobalUser.GlobalUser = null;
+            Global.GlobalUser = null;
         }
 
         private void msi_ManageTestTypes_Click(object sender, EventArgs e)

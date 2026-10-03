@@ -6,11 +6,11 @@ using static DVLD.Data.clDataAccessSettings;
 
 namespace DVLD.Data
 {
-    public static class clPersonData
+    public static class PersonData
     {
-        public static clPersonDTO Find(int id)
+        public static PersonDTO Find(int id)
         {
-            clPersonDTO personDTO = null;
+            PersonDTO personDTO = null;
 
             try
             {
@@ -30,7 +30,7 @@ namespace DVLD.Data
                         {
                             if (reader.Read())
                             {
-                                personDTO = new clPersonDTO
+                                personDTO = new PersonDTO
                                 {
                                     ID = (int)reader["ID"],
                                     Gender = (byte)reader["Gender"],
@@ -58,9 +58,9 @@ namespace DVLD.Data
 
             return personDTO;
         }
-        public static clPersonDTO Find(string nationalNumber)
+        public static PersonDTO Find(string nationalNumber)
         {
-            clPersonDTO personDTO = null;
+            PersonDTO personDTO = null;
 
             try
             {
@@ -80,7 +80,7 @@ namespace DVLD.Data
                         {
                             if (reader.Read())
                             {
-                                personDTO = new clPersonDTO
+                                personDTO = new PersonDTO
                                 {
                                     ID = (int)reader["ID"],
                                     Gender = (byte)reader["Gender"],
@@ -127,7 +127,9 @@ namespace DVLD.Data
                         connection.Open();
 
                         if (command.ExecuteScalar() != null)
+                        {
                             isFound = true;
+                        }
                     }
                 }
             }
@@ -156,7 +158,9 @@ namespace DVLD.Data
                         connection.Open();
 
                         if (command.ExecuteScalar() != null)
+                        {
                             isFound = true;
+                        }
                     }
                 }
             }
@@ -168,7 +172,7 @@ namespace DVLD.Data
             return isFound;
         }
 
-        public static int AddNew(clPersonDTO personDTO)
+        public static int AddNew(PersonDTO personDTO)
         {
             int id = -1;
 
@@ -176,9 +180,11 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"insert into People(Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth, CountryID, NationalNumber, Address, Phone, Email, ImagePath)
+                    string sql = @"insert into People(Gender, FirstName, SecondName, ThirdName, LastName, DateOfBirth, CountryID, NationalNumber,
+                                   Address, Phone, Email, ImagePath)
                                    values
-                                   (@Gender, @FirstName, @SecondName, @ThirdName, @LastName, @DateOfBirth, @CountryID, @NationalNumber, @Address, @Phone, @Email, @ImagePath)
+                                   (@Gender, @FirstName, @SecondName, @ThirdName, @LastName, @DateOfBirth, @CountryID, @NationalNumber,
+                                   @Address, @Phone, @Email, @ImagePath)
                                    select SCOPE_IDENTITY()";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -213,7 +219,7 @@ namespace DVLD.Data
             return id;
         }
 
-        public static bool Update(clPersonDTO personDTO)
+        public static bool Update(PersonDTO personDTO)
         {
             int rowsAffected = 0;
 
@@ -221,7 +227,9 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"update People set Gender = @Gender, FirstName = @FirstName, SecondName = @SecondName, ThirdName = @ThirdName, LastName = @LastName, DateOfBirth = @DateOfBirth, CountryID = @CountryID, NationalNumber = @NationalNumber, Address = @Address, Phone = @Phone, Email = @Email, ImagePath = @ImagePath
+                    string sql = @"update People set Gender = @Gender, FirstName = @FirstName, SecondName = @SecondName, ThirdName = @ThirdName,
+                                   LastName = @LastName, DateOfBirth = @DateOfBirth, CountryID = @CountryID, NationalNumber = @NationalNumber,
+                                   Address = @Address, Phone = @Phone, Email = @Email, ImagePath = @ImagePath
                                    where ID = @ID";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -289,8 +297,8 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"select * from ManagePeople_View";
-
+                    string sql = @"select ID, [National Number], [Full Name], Gender, [Date Of Birth], Country, Phone, Email, Address
+                                   from ManagePeople_View;";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         connection.Open();

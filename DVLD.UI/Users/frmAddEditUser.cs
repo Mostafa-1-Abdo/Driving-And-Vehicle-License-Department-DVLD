@@ -11,38 +11,38 @@ namespace DVLD.UI.Users
     {
         private enum enMode : byte { AddNew, Edit }
 
-        private clUser _User;
-        private int _ID;
-        private enMode _Mode;
+        private User _user;
+        private int _id;
+        private enMode _mode;
 
         public frmAddEditUser()
         {
             InitializeComponent();
 
-            _Mode = enMode.AddNew;
+            _mode = enMode.AddNew;
         }
 
         public frmAddEditUser(int id)
         {
             InitializeComponent();
 
-            _Mode = enMode.Edit;
-            _ID = id;
+            _mode = enMode.Edit;
+            _id = id;
         }
 
         private void _FillFormWithUserInfo()
         {
-            if (!ctrlPersonCardWithFilter1.LoadPersonInfo(_User.Person))
+            if (!ctrlPersonCardWithFilter1.LoadPersonInfo(_user.Person))
             {
-                clUIMessages.ShowNotFound("User", _ID);
+                UIMessages.ShowNotFound("User", _id);
                 Close();
                 return;
             }
 
-            lb_ID.Text = _User.ID.ToString();
-            tb_Username.Text = _User.Username;
-            tb_Password.Text = tb_ConfirmPassword.Text = _User.Password;
-            ckb_IsActive.Checked = _User.IsActive;
+            lb_ID.Text = _user.ID.ToString();
+            tb_Username.Text = _user.Username;
+            tb_Password.Text = tb_ConfirmPassword.Text = _user.Password;
+            ckb_IsActive.Checked = _user.IsActive;
         }
         private void _EditModeSettings()
         {
@@ -57,17 +57,19 @@ namespace DVLD.UI.Users
         }
         private void _DesignForm()
         {
-            if (_Mode == enMode.AddNew)
+            if (_mode == enMode.AddNew)
             {
                 Text = lb_Title.Text = "Add New User";
-                _User = new clUser();
+                _user = new User();
+
+                ctrlPersonCardWithFilter1.SearchSelect();
             }
             else
             {
-                _User = clUser.Find(_ID);
-                if (_User == null)
+                _user = User.Find(_id);
+                if (_user == null)
                 {
-                    clUIMessages.ShowNotFound("User", _ID);
+                    UIMessages.ShowNotFound("User", _id);
                     Close();
                     return;
                 }
@@ -84,11 +86,6 @@ namespace DVLD.UI.Users
         private void btn_Next_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tp_LoginInformation;
-
-            if (tabControl1.SelectedTab == tp_PersonalInformation)
-            {
-                ctrlPersonCardWithFilter1.SearchSelect();
-            }
         }
         private void btn_Previous_Click(object sender, EventArgs e) => tabControl1.SelectedTab = tp_PersonalInformation;
 
@@ -98,12 +95,12 @@ namespace DVLD.UI.Users
             {
                 if (ctrlPersonCardWithFilter1.SelectedPerson == null)
                 {
-                    clUIMessages.ShowSelectPersonRequired();
+                    UIMessages.ShowSelectPersonRequired();
                     e.Cancel = true;
                 }
-                else if (_Mode == enMode.AddNew && clUser.IsExistForPersonID(ctrlPersonCardWithFilter1.SelectedPerson.ID))
+                else if (_mode == enMode.AddNew && User.IsExistForPersonID(ctrlPersonCardWithFilter1.SelectedPerson.ID))
                 {
-                    clUIMessages.ShowDuplicateUserAccount();
+                    UIMessages.ShowDuplicateUserAccount();
                     e.Cancel = true;
                 }
 
@@ -112,6 +109,8 @@ namespace DVLD.UI.Users
                     btn_Save.Enabled = false;
                     btn_Save.FlatAppearance.BorderSize = 1;
                     AcceptButton = null;
+
+                    ctrlPersonCardWithFilter1.SearchSelect();
                 }
                 else
                 {
@@ -129,7 +128,7 @@ namespace DVLD.UI.Users
 
         private void tb_Username_Validating(object sender, CancelEventArgs e)
         {
-            if (_Mode == enMode.Edit) return;
+            if (_mode == enMode.Edit) return;
 
             string username = tb_Username.Text.Trim();
 
@@ -137,7 +136,7 @@ namespace DVLD.UI.Users
             {
                 errorProvider1.SetError(tb_Username, "Username is required.");
             }
-            else if (clUser.IsExist(username))
+            else if (User.IsExist(username))
             {
                 errorProvider1.SetError(tb_Username, "Username is already used by another person.");
             }
@@ -148,7 +147,7 @@ namespace DVLD.UI.Users
         }
         private void tb_Password_Validating(object sender, CancelEventArgs e)
         {
-            if (_Mode == enMode.Edit) return;
+            if (_mode == enMode.Edit) return;
 
             string password = tb_Password.Text;
 
@@ -167,7 +166,7 @@ namespace DVLD.UI.Users
         }
         private void tb_ConfirmPassword_Validating(object sender, CancelEventArgs e)
         {
-            if (_Mode == enMode.Edit) return;
+            if (_mode == enMode.Edit) return;
 
             string confrimPassword = tb_ConfirmPassword.Text;
 
@@ -187,39 +186,39 @@ namespace DVLD.UI.Users
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            if (_Mode == enMode.AddNew && ctrlPersonCardWithFilter1.SelectedPersonID == -1)
+            if (_mode == enMode.AddNew && ctrlPersonCardWithFilter1.SelectedPersonID == -1)
             {
-                clUIMessages.ShowSelectPersonRequired();
+                UIMessages.ShowSelectPersonRequired();
                 return;
             }
 
             if (!this.IsValid(errorProvider1))
             {
-                clUIMessages.ShowValidationError();
+                UIMessages.ShowValidationError();
                 return;
             }
 
-            if (_Mode == enMode.AddNew)
+            if (_mode == enMode.AddNew)
             {
-                _User.PersonID = ctrlPersonCardWithFilter1.SelectedPersonID;
+                _user.PersonID = ctrlPersonCardWithFilter1.SelectedPersonID;
 
-                _User.Username = tb_Username.Text.Trim();
-                _User.Password = tb_Password.Text;
+                _user.Username = tb_Username.Text.Trim();
+                _user.Password = tb_Password.Text;
             }
 
-            _User.IsActive = ckb_IsActive.Checked;
+            _user.IsActive = ckb_IsActive.Checked;
 
-            if (_User.Save())
+            if (_user.Save())
             {
-                lb_ID.Text = _User.ID.ToString();
-                clUIMessages.ShowSaveSuccess();
+                lb_ID.Text = _user.ID.ToString();
+                UIMessages.ShowSaveSuccess();
 
                 _EditModeSettings();
-                _Mode = enMode.Edit;
+                _mode = enMode.Edit;
             }
             else
             {
-                clUIMessages.ShowSaveError();
+                UIMessages.ShowSaveError();
             }
         }
         private void btn_Close_Click(object sender, EventArgs e) => Close();

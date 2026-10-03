@@ -5,17 +5,17 @@ using static DVLD.Data.clDataAccessSettings;
 
 namespace DVLD.Data
 {
-    public static class clApplicationTypeData
+    public static class ApplicationTypeData
     {
-        public static clApplicationTypeDTO Find(int id)
+        public static ApplicationTypeDTO Find(int id)
         {
-            clApplicationTypeDTO applicationTypeDTO = null;
+            ApplicationTypeDTO applicationTypeDTO = null;
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = @"select * from ApplicationTypes
+                    string sql = @"select ID, Title, Fees from ApplicationTypes
                                    where ID = @ID";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
@@ -28,9 +28,9 @@ namespace DVLD.Data
                         {
                             if (reader.Read())
                             {
-                                applicationTypeDTO = new clApplicationTypeDTO
+                                applicationTypeDTO = new ApplicationTypeDTO
                                 {
-                                    ID = (int)reader["ID"],
+                                    ID = (byte)reader["ID"],
                                     Title = (string)reader["Title"],
                                     Fees = (decimal)reader["Fees"]
                                 };
@@ -47,7 +47,7 @@ namespace DVLD.Data
             return applicationTypeDTO;
         }
 
-        public static bool Update(clApplicationTypeDTO applicationTypeDTO)
+        public static bool Update(ApplicationTypeDTO applicationTypeDTO)
         {
             int rowsAffected = 0;
 
@@ -85,7 +85,7 @@ namespace DVLD.Data
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string sql = "select * from ApplicationTypes";
+                    string sql = "select ID, Title, Fees from ApplicationTypes";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {

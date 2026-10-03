@@ -42,22 +42,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clApplicationData.cs" />
-    <Compile Include="clApplicationTypeData.cs" />
-    <Compile Include="clCountryData.cs" />
+    <Compile Include="ApplicationTypeData.cs" />
+    <Compile Include="CountryData.cs" />
     <Compile Include="clDataAccessSettings.cs" />
     <Compile Include="clLicenseClassData.cs" />
     <Compile Include="clLocalLicenseApplicationData.cs" />
-    <Compile Include="clPersonData.cs" />
-    <Compile Include="clTestTypeData.cs" />
-    <Compile Include="clUserData.cs" />
+    <Compile Include="PersonData.cs" />
+    <Compile Include="TestTypeData.cs" />
+    <Compile Include="UserData.cs" />
     <Compile Include="DTOs\clApplicationDTO.cs" />
-    <Compile Include="DTOs\clApplicationTypeDTO.cs" />
-    <Compile Include="DTOs\clCountryDTO.cs" />
+    <Compile Include="DTOs\ApplicationTypeDTO.cs" />
+    <Compile Include="DTOs\CountryDTO.cs" />
     <Compile Include="DTOs\clLocalLicenseApplicationDTO.cs" />
-    <Compile Include="DTOs\clPersonDTO.cs" />
+    <Compile Include="DTOs\PersonDTO.cs" />
     <Compile Include="DTOs\clTestDTO.cs" />
-    <Compile Include="DTOs\clTestTypeDTO.cs" />
-    <Compile Include="DTOs\clUserDTO.cs" />
+    <Compile Include="DTOs\TestTypeDTO.cs" />
+    <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

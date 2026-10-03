@@ -5,9 +5,9 @@ namespace DVLD.UI.UserControls
 {
     public partial class ctrlUserCard : UserControl
     {
-        private clUser _User;
+        private User _User;
 
-        public clUser User { get => _User; }
+        public User User { get => _User; }
 
         public ctrlUserCard() => InitializeComponent();
 
@@ -18,7 +18,6 @@ namespace DVLD.UI.UserControls
             lb_Username.Text = "[???]";
             lb_IsActive.Text = "[???]";
         }
-
         private void _FillCardWithPersonInfo()
         {
             ctrlPersonCard1.LoadPersonInfo(_User.Person);
@@ -26,10 +25,9 @@ namespace DVLD.UI.UserControls
             lb_Username.Text = _User.Username;
             lb_IsActive.Text = _User.IsActive ? "Active" : "Inactive";
         }
-
         public bool LoadUserInfo(int ID)
         {
-            _User = clUser.Find(ID);
+            _User = User.Find(ID);
 
             if (_User == null)
             {

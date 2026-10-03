@@ -2,7 +2,7 @@
 
 namespace DVLD.UI
 {
-    public static class clFormValidationExtensions
+    public static class FormValidationExtensions
     {
         private static bool ValidateControls(Control control, ErrorProvider errorProvider)
         {

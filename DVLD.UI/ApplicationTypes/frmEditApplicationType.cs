@@ -8,28 +8,28 @@ namespace DVLD.UI.ApplicationTypes
 {
     public partial class frmEditApplicationType : Form
     {
-        private clApplicationType _ApplicationType;
-        private clApplicationType.enApplicationType _ID;
+        private ApplicationType _applicationType;
+        private ApplicationType.enApplicationType _id;
 
         public frmEditApplicationType(int id)
         {
             InitializeComponent();
 
-            _ID = (clApplicationType.enApplicationType)id;
+            _id = (ApplicationType.enApplicationType)id;
         }
 
         private void _FillFormWithApplicationTypeInfo()
         {
-            lb_ID.Text = ((byte)_ApplicationType.ID).ToString();
-            tb_Title.Text = _ApplicationType.Title;
-            tb_Fees.Text = _ApplicationType.Fees.ToString("0.00");
+            lb_ID.Text = ((byte)_applicationType.ID).ToString();
+            tb_Title.Text = _applicationType.Title;
+            tb_Fees.Text = _applicationType.Fees.ToString("0.00");
         }
         private void _DesignForm()
         {
-            _ApplicationType = clApplicationType.Find(_ID);
-            if (_ApplicationType == null)
+            _applicationType = ApplicationType.Find(_id);
+            if (_applicationType == null)
             {
-                clUIMessages.ShowNotFound("Application Type", (int)_ID);
+                UIMessages.ShowNotFound("Application Type", (int)_id);
                 Close();
                 return;
             }
@@ -42,20 +42,20 @@ namespace DVLD.UI.ApplicationTypes
         {
             if (!this.IsValid(errorProvider1))
             {
-                clUIMessages.ShowValidationError();
+                UIMessages.ShowValidationError();
                 return;
             }
 
-            _ApplicationType.Title = tb_Title.Text.Trim();
-            _ApplicationType.Fees = Convert.ToDecimal(tb_Fees.Text.Trim());
+            _applicationType.Title = tb_Title.Text.Trim();
+            _applicationType.Fees = Convert.ToDecimal(tb_Fees.Text.Trim());
 
-            if (_ApplicationType.Save())
+            if (_applicationType.Save())
             {
-                clUIMessages.ShowSaveSuccess();
+                UIMessages.ShowSaveSuccess();
             }
             else
             {
-                clUIMessages.ShowSaveError();
+                UIMessages.ShowSaveError();
             }
         }
         private void btn_Close_Click(object sender, EventArgs e) => Close();
@@ -81,7 +81,7 @@ namespace DVLD.UI.ApplicationTypes
             {
                 errorProvider1.SetError(tb_Fees, "Fees is required.");
             }
-            else if (!clUtil.IsValidMoney(fees))
+            else if (!Util.Validation.IsValidMoney(fees))
             {
                 errorProvider1.SetError(tb_Fees, "Invalid fees format! (e.g. 15 or 15.50).");
             }
